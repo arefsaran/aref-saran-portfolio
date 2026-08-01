@@ -1,0 +1,17 @@
+{
+  "name": "aref-saran-portfolio",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Aref Saran's static quality engineering portfolio",
+  "type": "module",
+  "scripts": {
+    "serve": "node tests/server.mjs",
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.12.1",
+    "@playwright/test": "^1.62.1"
+  }
+}

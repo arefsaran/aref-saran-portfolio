@@ -4,7 +4,7 @@ Production-ready static portfolio for `arefsaran.ir`, served by Nginx in a small
 
 ## Architecture decision
 
-Version one deliberately uses semantic HTML and CSS instead of a JavaScript framework. The site has no dynamic application state, authentication, API, database, or content-management requirement. A zero-build static implementation gives you:
+The site deliberately uses semantic HTML, CSS, and a small progressive-enhancement script instead of a JavaScript framework. It has no authentication, API, database, or content-management requirement. A zero-build static implementation gives you:
 
 - fewer dependencies and supply-chain risks;
 - faster builds and smaller images;
@@ -33,6 +33,17 @@ python -m http.server 8080
 ```
 
 Open `http://localhost:8080`.
+
+## Automated UI quality checks
+
+Development-only Playwright and axe checks cover the core page load, the interactive automation demo, keyboard navigation, WCAG A/AA issues, reduced-motion behavior, and horizontal overflow from 320px through desktop widths.
+
+```bash
+npm install
+npm test
+```
+
+The local suite uses an installed Chrome browser. CI installs its own isolated Chromium runtime before running the same checks.
 
 ## Test with Docker
 
@@ -112,6 +123,8 @@ DNS changes can take several minutes or hours to propagate.
 
 - Page content: `index.html`
 - Visual styling: `styles.css`
+- Progressive interactions: `script.js`
+- Browser quality suite: `tests/portfolio.spec.mjs`
 - Nginx and security headers: `nginx.conf`
 - Hamravesh container: `Dockerfile`
 
