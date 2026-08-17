@@ -11,7 +11,7 @@ test.describe('portfolio experience', () => {
     await page.goto('/');
 
     await expect(page).toHaveTitle(/Aref Saran/);
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('Engineering confidence');
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('safer to change');
     await expect(page.getByText('Open to thoughtful collaborations')).toBeVisible();
     await expect(page.locator('.portrait-card img')).toHaveJSProperty('complete', true);
     await expect(page.locator('html')).toHaveAttribute('data-enhanced', 'true');
@@ -47,9 +47,19 @@ test.describe('portfolio experience', () => {
     await expect(menu).toBeFocused();
 
     await menu.click();
-    await page.getByRole('link', { name: 'Automation lab' }).click();
-    await expect(page).toHaveURL(/#lab$/);
+    await page.getByRole('link', { name: 'Quality system' }).click();
+    await expect(page).toHaveURL(/#quality-system$/);
     await expect(menu).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  test('switches and persists the visual theme', async ({ page }) => {
+    await page.goto('/');
+    const toggle = page.locator('[data-theme-toggle]');
+    await toggle.click();
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+    await expect(toggle).toHaveAttribute('aria-pressed', 'true');
+    await page.reload();
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   });
 
   for (const width of [320, 375, 768, 1024, 1440]) {

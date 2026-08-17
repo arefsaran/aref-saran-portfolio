@@ -5,6 +5,7 @@
   "description": "Aref Saran's static quality engineering portfolio",
   "type": "module",
   "scripts": {
+    "build": "node tests/build-check.mjs",
     "serve": "node tests/server.mjs",
     "test": "playwright test",
     "test:headed": "playwright test --headed",
