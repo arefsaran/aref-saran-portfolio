@@ -5,11 +5,14 @@
   "description": "Aref Saran's static quality engineering portfolio",
   "type": "module",
   "scripts": {
-    "build": "node tests/build-check.mjs",
-    "serve": "node tests/server.mjs",
+    "build": "node scripts/build.mjs && node tests/build-check.mjs",
+    "serve": "npm run build && node tests/server.mjs",
+    "format:check": "node tests/format-check.mjs",
+    "lint": "node --check theme-init.js && node --check script.js && node --check content/portfolio.mjs && node --check src/html.mjs && node --check src/components.mjs && node --check src/render-page.mjs && node --check scripts/build.mjs && node --check tests/build-check.mjs && node --check tests/format-check.mjs",
     "test": "playwright test",
     "test:headed": "playwright test --headed",
-    "test:report": "playwright show-report"
+    "test:report": "playwright show-report",
+    "quality": "npm run format:check && npm run lint && npm run build && npm test"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.12.1",

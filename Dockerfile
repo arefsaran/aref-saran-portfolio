@@ -1,7 +1,15 @@
+FROM node:24-alpine AS build
+WORKDIR /site
+COPY content ./content
+COPY src ./src
+COPY scripts ./scripts
+COPY assets ./assets
+COPY styles.css script.js theme-init.js favicon.svg robots.txt sitemap.xml og-card.jpg ./
+RUN node scripts/build.mjs
+
 FROM nginx:1.28-alpine
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY index.html styles.css script.js favicon.svg robots.txt sitemap.xml og-card-v2.png /usr/share/nginx/html/
-COPY assets /usr/share/nginx/html/assets
+COPY --from=build /site/dist /usr/share/nginx/html
 EXPOSE 80
 HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
   CMD wget -q -O /dev/null http://127.0.0.1/ || exit 1

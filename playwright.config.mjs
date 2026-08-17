@@ -5,7 +5,7 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 2 : undefined,
+  workers: 2,
   reporter: process.env.CI ? [['line'], ['html', { open: 'never' }]] : 'list',
   use: {
     baseURL: 'http://127.0.0.1:4173',
@@ -14,7 +14,7 @@ export default defineConfig({
     screenshot: 'only-on-failure'
   },
   webServer: {
-    command: 'node tests/server.mjs',
+    command: 'npm run build && node tests/server.mjs',
     url: 'http://127.0.0.1:4173',
     reuseExistingServer: !process.env.CI,
     timeout: 15_000

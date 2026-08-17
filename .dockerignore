@@ -2,6 +2,10 @@
 .github
 .vscode
 .idea
+node_modules
+dist
+playwright-report
+test-results
 *.log
 .DS_Store
 *.zip
