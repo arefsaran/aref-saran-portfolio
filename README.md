@@ -4,6 +4,36 @@ Production portfolio for [arefsaran.ir](https://arefsaran.ir/). It positions Are
 
 The implementation is intentionally static: structured JavaScript content is rendered to semantic HTML at build time, CSS supplies the complete responsive design system, and a small progressive-enhancement script handles themes, navigation, reveals, and the deterministic Release Confidence Lab. The public site has no framework runtime, API, database, CMS, analytics, remote font, or third-party request.
 
+## Production architecture
+
+The production image has two responsibilities on the same domain:
+
+```text
+Darkube ingress
+    |
+    v
+Nginx :80
+   | \
+   |  \\ VPN WebSocket path
+   |   \
+Portfolio  ->  V2Ray internal port
+```
+
+The Dockerfile builds this repository’s portfolio and derives the deployment image from `alphacodinghub/v2ray-nginx:latest`. That parent supplies V2Ray, Nginx, Supervisor, `/entrypoint.sh`, and the runtime configuration substitution for `LISTENING_PORT`, `CLIENT_ID`, `CLIENT_ALTERID`, and `CLIENT_WSPATH`. The inherited entrypoint and Supervisor command are intentionally not overridden.
+
+The generated site is copied to `/opt/portfolio`, not the parent image’s `/var/www/html` volume. This ensures a Darkube build from this repository packages the portfolio into the derived image.
+
+Required environment variable names are:
+
+```text
+LISTENING_PORT
+CLIENT_ID
+CLIENT_ALTERID
+CLIENT_WSPATH
+```
+
+Values must be configured as deployment secrets/environment variables; do not commit them. The V2Ray listening port is internal and should not normally be exposed publicly. Darkube should expose container port `80`, while HTTPS terminates at the platform/ingress layer unless the existing deployment architecture requires otherwise.
+
 ## Local setup
 
 Requirements: Node.js 24+ and npm. Chrome or Playwright Chromium is required for browser tests.
@@ -40,20 +70,39 @@ npm run quality       # complete local quality gate
 - `scripts/build.mjs` — deterministic production build.
 - `tests/build-check.mjs` — build manifest, link, metadata, JSON-LD, inline-script, and asset-budget validation.
 - `tests/portfolio.spec.mjs` — browser behavior, keyboard, theme, responsive overflow, reduced motion, semantic structure, and WCAG checks.
-- `Dockerfile` and `nginx.conf` — multi-stage production image and hardened static serving.
+- `Dockerfile` and `nginx.conf` — multi-stage derived production image, hardened portfolio serving, and the V2Ray WebSocket proxy.
 - `docs/` — baseline audit, design-system reference, and evidence-backed implementation report.
 
 To change portfolio copy, edit `content/portfolio.mjs`. To add or change a section’s structure, edit `src/components.mjs` and compose it in `src/render-page.mjs`. Run `npm run quality` before publishing.
 
-## GitLab CI and Hamravesh
+## CI and Darkube deployment
 
 `.gitlab-ci.yml` runs the full quality gate in GitLab and retains the generated site and browser reports as job artifacts. A merge or default-branch deployment should only proceed after the `portfolio-quality` job passes.
 
-For Hamravesh, connect the GitLab repository and use the included `Dockerfile` as the build source. The container listens on port `80`; use `/` as the health path. No runtime environment variables, database, persistent volume, or start-command override is required. Point `arefsaran.ir` to the Hamravesh service and enable the platform’s TLS/HTTPS option. The same image can be checked locally:
+Configure Darkube to build the repository rather than directly running the upstream parent image:
+
+```text
+Source: Git repository
+Repository: this portfolio repository
+Branch: main
+Build: Dockerfile from repository root
+Dockerfile: Dockerfile
+Application/container port: 80
+Health path: /
+```
+
+Keep the existing V2Ray environment variable values configured in Darkube under the names documented above. Kubernetes should run the derived image produced by this build. If pod events still show only `alphacodinghub/v2ray-nginx:latest` as the deployed image, the platform is bypassing this repository’s Dockerfile and the portfolio files will not be present.
+
+The same derived image can be checked locally:
 
 ```bash
 docker build -t aref-saran-portfolio .
-docker run --rm -p 8080:80 aref-saran-portfolio
+docker run --rm -p 8080:80 \
+  -e LISTENING_PORT=3456 \
+  -e CLIENT_ID=11111111-1111-4111-8111-111111111111 \
+  -e CLIENT_ALTERID=64 \
+  -e CLIENT_WSPATH=/__codex_vpn_ws_test__ \
+  aref-saran-portfolio
 ```
 
 Then open `http://127.0.0.1:8080`.
