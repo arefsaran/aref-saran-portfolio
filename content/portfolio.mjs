@@ -1,24 +1,25 @@
 const portfolio = {
   site: {
     url: 'https://arefsaran.ir/',
-    title: 'Aref Saran — Quality Engineer',
-    description: 'Aref Saran is a Quality Engineer designing resilient test automation, API coverage, and quality systems for complex fintech products.',
-    socialDescription: 'Test automation architecture, risk-based API testing, and quality systems for software that needs to ship with confidence.',
-    socialImage: 'og-card.jpg',
+    title: 'Aref Saran — Senior Test Engineer',
+    description: 'Aref Saran is a Senior Test Engineer who designs test automation and quality systems for complex fintech, API, and BPMN/Camunda workflows.',
+    socialDescription: 'Senior Test Engineer designing quality systems across APIs, databases, BPMN workflows, external providers, performance, and CI/CD.',
+    socialImage: 'og-card-senior.jpg',
     language: 'en',
+    lastModified: '2026-08-24',
     themeColors: { light: '#f4f1eb', dark: '#0d1822' }
   },
   profile: {
     name: 'Aref Saran',
-    role: 'Quality Engineer',
-    specialization: 'Test Automation & Quality Systems Engineer',
+    role: 'Senior Test Engineer',
+    specialization: 'Test Automation & Quality Systems',
     location: 'Tehran',
     portrait: {
       webp: 'assets/aref-saran-profile.webp',
       fallback: 'assets/aref-saran-profile.png',
       width: 735,
       height: 861,
-      alt: 'Portrait of Aref Saran'
+      alt: 'Portrait of Aref Saran, Senior Test Engineer'
     },
     email: 'arefsaran@gmail.com',
     education: 'Lorestan University',
@@ -29,191 +30,228 @@ const portfolio = {
   },
   navigation: [
     { label: 'Work', href: '#work' },
-    { label: 'How I help', href: '#help' },
-    { label: 'Quality system', href: '#quality-system' },
+    { label: 'Systems', href: '#systems' },
+    { label: 'Capabilities', href: '#capabilities' },
     { label: 'Experience', href: '#experience' },
-    { label: 'About', href: '#about' }
+    { label: 'Contact', href: '#contact' }
   ],
   hero: {
-    eyebrow: 'Quality Engineer · Automation · Complex Systems',
-    headline: 'I engineer confidence into complex software.',
-    lead: 'I help teams make software safer to change, faster to validate, and easier to trust—through quality architecture, automation, risk-based testing, and fast engineering feedback.',
-    primaryCta: { label: 'Explore my work', href: '#work' },
-    secondaryCta: { label: 'Let’s talk', href: 'mailto:arefsaran@gmail.com' },
-    availability: 'Open to thoughtful collaborations'
-  },
-  qualitySignal: {
-    title: 'release-confidence',
-    label: 'Portfolio visualization · not live infrastructure',
-    state: 'Evidence ready',
-    signals: [
-      { label: 'Critical journeys', state: 'Mapped' },
-      { label: 'API contracts', state: 'Checked' },
-      { label: 'Integration state', state: 'Observed' },
-      { label: 'Performance budget', state: 'Defined' },
-      { label: 'Release evidence', state: 'Compiled' }
-    ]
+    eyebrow: 'Aref Saran',
+    roleLine: 'Senior Test Engineer · Test Automation & Quality Systems',
+    headline: 'Engineering confidence into complex software systems.',
+    lead: 'I design test strategies and automation systems that connect APIs, databases, BPMN workflows, external providers, performance testing, and CI/CD into reliable engineering evidence.',
+    primaryCta: { label: 'Explore engineering work', href: '#work' },
+    secondaryCta: { label: 'View quality systems', href: '#systems' },
+    availability: 'Open to thoughtful collaborations',
+    domains: ['Fintech correctness', 'BPMN / Camunda', 'API & integration', 'CI quality gates']
   },
   metrics: [
-    { value: '2,300+', label: 'API & integration automated checks maintained' },
-    { value: '39h → 2h', label: 'Regression feedback cycle' },
-    { value: '≈95%', label: 'Shorter regression execution time' },
+    { value: '2,300+', label: 'API and integration automated checks maintained' },
+    { value: '39h → 2h', label: 'Regression feedback cycle', note: 'approximately 95% shorter' },
     { value: '4 layers', label: 'API · Integration · E2E · Performance' }
   ],
-  help: [
+  outcomes: [
     {
-      number: '01', title: 'Quality strategy & risk', tone: 'blue',
-      problem: 'Critical workflows can carry very different consequences while receiving equal testing attention.',
-      intervention: 'Map product risk, expose failure modes, and choose coverage that matches consequence.',
-      outcome: 'A clearer release decision built on the scenarios that matter most.',
-      evidence: ['Risk-based testing', 'Exploratory thinking', 'Testability']
+      number: '01', action: 'Build', title: 'Quality systems from zero',
+      body: 'Design the strategy, repository architecture, automation layers, test data, evidence, documentation, and CI integration needed for a system teams can adopt and evolve.',
+      evidence: ['Strategy', 'Architecture', 'Team adoption']
     },
     {
-      number: '02', title: 'Automation architecture', tone: 'mint',
-      problem: 'Large suites become slow, coupled, duplicated, and difficult to diagnose.',
-      intervention: 'Design reusable automation layers, independent data, useful diagnostics, and safe parallel execution.',
-      outcome: 'Maintainable automation and materially faster trustworthy feedback.',
-      evidence: ['Robot Framework', 'Python', 'Suite design']
+      number: '02', action: 'Stabilize', title: 'Deterministic engineering evidence',
+      body: 'Control data, sessions, environments, external providers, polling, and failure paths so automation remains repeatable and diagnosable.',
+      evidence: ['Mock servers', 'DB oracles', 'Diagnostics']
     },
     {
-      number: '03', title: 'Systems & integration quality', tone: 'amber',
-      problem: 'A successful response can hide incorrect state, side effects, or provider behavior.',
-      intervention: 'Validate contracts, state transitions, idempotency, databases, and controlled failure paths.',
-      outcome: 'Confidence across service boundaries, not merely at the HTTP layer.',
-      evidence: ['API & integration', 'MySQL / MongoDB', 'Service virtualization']
+      number: '03', action: 'Protect', title: 'Workflow and financial state',
+      body: 'Find process, money-movement, retry, callback, and idempotency failures that an HTTP status alone cannot reveal.',
+      evidence: ['BPMN state', 'Financial invariants', 'Risk analysis']
     },
     {
-      number: '04', title: 'Delivery & performance', tone: 'rose',
-      problem: 'Late or noisy feedback makes quality a release bottleneck instead of a decision system.',
-      intervention: 'Create CI quality gates, layered suites, performance baselines, and actionable evidence.',
-      outcome: 'Faster engineering feedback without trading away repeatability.',
-      evidence: ['GitLab CI', 'Docker', 'k6']
+      number: '04', action: 'Accelerate', title: 'Feedback close to the change',
+      body: 'Move fast, risk-based validation into feature branches and merge requests while preserving deeper regression, nightly, and performance evidence.',
+      evidence: ['MR smoke', 'GitLab CI', 'Performance gates']
     }
   ],
+  architecture: {
+    title: 'A quality system connects risk to release evidence.',
+    description: 'Automation is one layer. Confidence comes from connecting product risk, test design, system boundaries, deterministic infrastructure, diagnostics, and delivery decisions.',
+    layers: [
+      { label: 'Business risk', detail: 'Probability × impact', tone: 'risk' },
+      { label: 'Test strategy', detail: 'Scenarios · boundaries · negative paths', tone: 'strategy' },
+      { label: 'Business behavior', detail: 'Features · workflows · reusable steps', tone: 'behavior' },
+      { label: 'Execution boundaries', detail: 'Choose the most useful observable layer', tone: 'execution', nodes: ['API', 'UI', 'DB'] },
+      { label: 'Services & infrastructure', detail: 'Auth · data · mocking · polling · providers', tone: 'infrastructure' },
+      { label: 'Evidence & diagnostics', detail: 'State · side effects · logs · reports', tone: 'evidence' },
+      { label: 'CI/CD decision', detail: 'Timely, explicit, traceable quality gates', tone: 'delivery' }
+    ],
+    deliveryTitle: 'Reduce the distance between introducing risk and detecting it.',
+    deliveryStages: ['Feature branch', 'Fast validation', 'API / contract', 'Risk-based smoke', 'MR quality gate', 'Merge', 'Targeted regression', 'Nightly / performance']
+  },
+  workflow: {
+    title: 'BPMN testing goes beyond the endpoint.',
+    description: 'A workflow is a state machine with business consequences. The test must follow process transitions, external behavior, persistence, retries, and the final financial effect together.',
+    flow: [
+      { label: 'Request', type: 'event' },
+      { label: 'Process start', type: 'event' },
+      { label: 'Gateway', type: 'gateway' },
+      { label: 'Service task / provider', type: 'task' },
+      { label: 'Timer · retry · callback', type: 'event' },
+      { label: 'Financial operation', type: 'risk' },
+      { label: 'Process complete', type: 'complete' }
+    ],
+    oracles: [
+      'API response',
+      'Camunda process instance',
+      'Active or current task',
+      'Business request state',
+      'Database state',
+      'Provider interaction',
+      'Retry and callback idempotency',
+      'Final financial effect'
+    ],
+    concepts: ['BPMN', 'Camunda', 'Gateways', 'Timers', 'Boundary events', 'Message events', 'Retries', 'Process history']
+  },
+  fintech: {
+    title: 'HTTP success is not financial correctness.',
+    description: 'A purchase can return 200 while the wrong account, transaction, process state, or financial side effect is persisted. Correctness requires evidence across the entire chain.',
+    chain: ['HTTP result', 'Ticket', 'Account / credit', 'Transaction', 'BPMN state', 'Financial invariant'],
+    checks: [
+      'Correct ticket and customer',
+      'Correct account or credit affected',
+      'Correct amount and transaction persisted',
+      'Expected workflow transition',
+      'Expected ledger and business state',
+      'No forbidden or duplicate side effect'
+    ],
+    idempotency: {
+      title: 'Callback replay must remain safe.',
+      first: { label: 'Callback #1', result: 'Transaction created once' },
+      replay: { label: 'Callback #2', result: 'Replay detected · no duplicate debit or refund' }
+    },
+    risks: ['Duplicate debit', 'Duplicate refund', 'Lost callback', 'Incorrect settlement', 'Retry side effects', 'Process inconsistency']
+  },
   caseStudies: [
     {
-      id: 'regression-architecture', number: '01', category: 'Automation at scale', eyebrow: 'Regression architecture',
+      id: 'regression-architecture', number: '01', category: 'Automation at scale',
       title: 'From 39 hours to a two-hour signal.',
       summary: 'A large API and integration suite had become too slow for useful release feedback. The response was architectural: isolate execution, segment intent, and preserve evidence.',
-      tags: ['Parallel execution', 'Suite segmentation', 'CI feedback'],
-      visual: { type: 'metric', label: 'Outcome', value: '≈95%', detail: 'shorter execution across 2,300+ checks' },
+      tags: ['2,300+ checks', 'Parallel execution', 'CI feedback'],
+      proof: '≈95% shorter regression',
       story: {
         Context: 'More than 2,300 API and integration checks protected transaction-heavy workflows.',
-        Problem: 'A complete regression cycle took approximately 39 hours, making the signal too late for routine release decisions.',
-        Constraints: 'The suite still needed deterministic data, readable failures, safe reruns, and useful evidence for engineers.',
-        Diagnosis: 'Execution time was not only a test-count problem. Suite coupling, shared data, and undifferentiated execution layers limited safe parallelism.',
-        'Engineering decision': 'Separate feedback by purpose and make execution boundaries independent before increasing concurrency.',
+        Risk: 'A complete regression cycle took approximately 39 hours, making the signal too late for routine release decisions.',
+        Constraints: 'The suite still needed deterministic data, readable failures, safe reruns, and useful engineering evidence.',
+        Approach: 'Separate feedback by purpose and make execution boundaries independent before increasing concurrency.',
         Implementation: 'Introduce smoke, targeted regression, and nightly layers; isolate test data; parallelize only safe suites; publish evidence through CI.',
-        'Quality safeguards': 'Keep failures diagnosable, avoid hiding instability behind retries, and retain an intentional comprehensive layer.',
+        Verification: 'Keep failures diagnosable, avoid hiding instability behind retries, and retain an intentional comprehensive layer.',
         Outcome: 'Regression execution fell from approximately 39 hours to approximately two hours—about 95% shorter.',
-        Lessons: 'Fast feedback stays trustworthy when isolation, observability, and suite intent are designed together.'
+        Lesson: 'Fast feedback stays trustworthy when isolation, observability, and suite intent are designed together.'
       }
     },
     {
-      id: 'provider-virtualization', number: '02', category: 'Deterministic testing', eyebrow: 'Service virtualization',
+      id: 'automation-from-zero', number: '02', category: 'Quality system architecture',
+      title: 'Build the system, not only the scripts.',
+      summary: 'Starting from zero requires strategy, layering, data, environment control, reusable business behavior, diagnostics, CI gates, documentation, and a path for team adoption.',
+      tags: ['Robot Framework', 'Python', 'Architecture'],
+      proof: 'Zero → maintainable system',
+      story: {
+        Context: 'Complex products need an automation foundation that can grow without turning every new scenario into duplicated implementation.',
+        Risk: 'A script-first approach couples tests to endpoints and environments, making the suite expensive to scale and difficult to trust.',
+        Constraints: 'The system must support multiple test layers, controlled data, authentication, external dependencies, CI execution, and readable evidence.',
+        Approach: 'Design around business scenarios, reusable layers, explicit boundaries, independent data, and observable failure modes.',
+        Implementation: 'Establish repository structure, API and UI abstractions, business steps, DB evidence, mocking, diagnostics, reporting, quality gates, and documentation.',
+        Verification: 'Review maintainability, isolation, failure clarity, execution purpose, and whether another engineer can safely extend the system.',
+        Outcome: 'A production-ready automation system that can be adopted, maintained, and scaled over time.',
+        Lesson: 'Architecture creates leverage only when the team can understand and evolve it.'
+      }
+    },
+    {
+      id: 'workflow-correctness', number: '03', category: 'BPMN & fintech quality',
+      title: 'Test workflow state, not merely endpoints.',
+      summary: 'Financial workflows are validated across API results, Camunda state, business state, databases, provider behavior, retries, callbacks, and final side effects.',
+      tags: ['Camunda', 'DB oracles', 'Idempotency'],
+      proof: 'State + side effects',
+      story: {
+        Context: 'Credit, purchase, refund, settlement, repayment, and billing workflows cross services, providers, process state, and persistent financial state.',
+        Risk: 'A successful response can hide an incorrect gateway path, stale task, duplicate effect, lost callback, or inconsistent business state.',
+        Constraints: 'Public evidence must remain generalized and avoid exposing private systems, production data, or proprietary architecture.',
+        Approach: 'Model the workflow as a state machine and define synchronized oracles for each important transition and failure path.',
+        Implementation: 'Correlate endpoint results with process instances, tasks, history, DB state, provider interactions, timers, retries, callbacks, and financial invariants.',
+        Verification: 'Assert intended effects, forbidden effects, retry behavior, and replay safety before accepting the final business state.',
+        Outcome: 'Evidence describes whether the business operation is correct, not simply whether an endpoint responded.',
+        Lesson: 'Workflow quality lives in the agreement between every observable state.'
+      }
+    },
+    {
+      id: 'provider-virtualization', number: '04', category: 'Deterministic dependencies',
       title: 'Make external failure repeatable.',
-      summary: 'Provider behavior was brought under test control so success and failure paths could be exercised on demand without relying on unpredictable third parties.',
-      tags: ['Mock servers', 'Failure paths', 'Repeatability'],
-      visual: { type: 'matrix', label: 'Controlled provider scenarios', scenarios: ['Success', 'Timeout', 'Retry', 'Invalid response', 'Partial failure'] },
+      summary: 'Provider behavior is brought under test control so success, timeout, retry, malformed response, callback, and partial-failure paths can run on demand.',
+      tags: ['Mock servers', 'Failure injection', 'Repeatability'],
+      proof: 'Controlled provider states',
       story: {
         Context: 'Critical workflows depended on external-provider responses that were not reliably reproducible in test environments.',
-        Problem: 'Timeout, retry, malformed response, and partial-failure paths could not be exercised consistently.',
-        Constraints: 'The test double needed explicit behavior without pretending to reproduce confidential provider architecture.',
-        Diagnosis: 'Uncontrolled dependencies made failures intermittent and reduced confidence in both negative-path coverage and reruns.',
-        'Engineering decision': 'Move provider behavior behind deterministic mock-server scenarios with explicit response contracts.',
-        Implementation: 'Model success, timeout, retry, invalid-response, and partial-failure scenarios; connect each state to targeted assertions and evidence.',
-        'Quality safeguards': 'Keep scenarios named, isolated, contract-focused, and clearly separate from live production behavior.',
-        Outcome: 'External failure paths became repeatable, diagnosable, and available whenever the suite needed them.',
-        Lessons: 'A deterministic failure is more useful than an occasional realistic one when the goal is dependable validation.'
+        Risk: 'Timeout, retry, invalid payload, delayed callback, duplicate callback, and partial-failure paths could not be exercised consistently.',
+        Constraints: 'The test double must model explicit contracts without pretending to reproduce confidential provider architecture.',
+        Approach: 'Move provider behavior behind deterministic scenarios with named inputs, outputs, timing, and failure semantics.',
+        Implementation: 'Model success, timeout, connection failure, 4xx, 5xx, invalid or partial responses, delay, retry, callback replay, and business rejection.',
+        Verification: 'Connect each controlled state to targeted assertions, provider-interaction evidence, business state, and rerun safety.',
+        Outcome: 'External failure paths become repeatable, diagnosable, and available whenever the suite needs them.',
+        Lesson: 'A deterministic failure is more useful than an occasional realistic one when dependable validation is the goal.'
       }
     },
     {
-      id: 'financial-workflows', number: '03', category: 'Risk-based quality', eyebrow: 'Financial journeys',
-      title: 'Protect the moments where mistakes matter most.',
-      summary: 'Risk-based coverage combined API, state, and end-to-end evidence across purchase, refund, settlement, billing, coupon, and credit workflows.',
-      tags: ['Idempotency', 'State validation', 'Risk coverage'],
-      visual: { type: 'risk', label: 'Validation model', value: 'State + side effects', detail: 'negative paths · boundaries · idempotency' },
-      story: {
-        Context: 'Transaction workflows cross services, providers, and persistent business state.',
-        Problem: 'A successful endpoint response alone cannot prove that balances, status transitions, or downstream effects are correct.',
-        Constraints: 'Coverage must remain privacy-safe and avoid exposing production data or proprietary architecture.',
-        Diagnosis: 'The highest risk sits in boundaries, repeated requests, partial progress, and disagreement between response and stored state.',
-        'Engineering decision': 'Design scenarios around business risk and state transitions rather than endpoint count.',
-        Implementation: 'Combine negative paths, boundary analysis, idempotency checks, state validation, database evidence, and critical end-to-end journeys.',
-        'Quality safeguards': 'Assert both intended effects and forbidden side effects while keeping test data controlled and independent.',
-        Outcome: 'Release evidence covered the financial journey as a stateful system rather than a sequence of isolated calls.',
-        Lessons: 'Confidence comes from proving what changed, what did not, and what happens when the same request arrives again.'
-      }
-    },
-    {
-      id: 'ecommerce-quality', number: '04', category: 'Web & e-commerce quality', eyebrow: 'Customer journeys',
+      id: 'ecommerce-quality', number: '05', category: 'Web & e-commerce quality',
       title: 'Connect storefront behavior to order confidence.',
-      summary: 'Responsive and cross-browser validation covered storefront setup, checkout, payments, order lifecycle, provider integrations, and administrative workflows.',
+      summary: 'Responsive and cross-browser validation connects storefront setup, checkout, payments, order lifecycle, provider integrations, and administrative workflows.',
       tags: ['Responsive testing', 'Cross-browser', 'Order lifecycle'],
-      visual: { type: 'journey', label: 'Journey coverage', scenarios: ['Storefront', 'Checkout', 'Payment', 'Order', 'Admin'] },
+      proof: 'UI + business state',
       story: {
         Context: 'E-commerce quality spans customer-facing interfaces, transaction flows, external providers, and administrative operations.',
-        Problem: 'A journey can appear correct in one browser or viewport while failing later in payment, order state, or administration.',
-        Constraints: 'The public case study must stay generalized and avoid disclosing private systems or customer data.',
-        Diagnosis: 'Confidence required both presentation coverage and validation of the full order lifecycle.',
-        'Engineering decision': 'Treat the storefront and operational back office as one connected customer journey.',
+        Risk: 'A journey can appear correct in one browser or viewport while failing later in payment, order state, or administration.',
+        Constraints: 'The public case study remains generalized and excludes private systems and customer data.',
+        Approach: 'Treat the storefront and operational back office as one connected customer journey.',
         Implementation: 'Exercise responsive and cross-browser behavior alongside checkout, payment, order, provider, and admin scenarios.',
-        'Quality safeguards': 'Use representative viewports, meaningful journey boundaries, and evidence beyond visual completion.',
-        Outcome: 'Coverage demonstrated quality engineering beyond banking APIs while retaining a systems view of the product.',
-        Lessons: 'Web quality is strongest when interface behavior and business state are validated as one journey.'
+        Verification: 'Use representative viewports, meaningful journey boundaries, and evidence beyond visual completion.',
+        Outcome: 'Coverage demonstrates web quality while retaining a systems view of the product.',
+        Lesson: 'Interface behavior and business state should be validated as one journey.'
       }
     }
   ],
-  qualitySystem: [
-    { title: 'Product risk', detail: 'Identify what could hurt the user or the business.' },
-    { title: 'Test design', detail: 'Select the evidence that can reveal that risk.' },
-    { title: 'Business scenarios', detail: 'Translate intent into positive, negative, and boundary paths.' },
-    { title: 'Automation orchestration', detail: 'Choose layers, data, isolation, and execution strategy.' },
-    { title: 'API · UI · services', detail: 'Exercise behavior at the most useful system boundary.' },
-    { title: 'System & database evidence', detail: 'Verify state, side effects, and observable outcomes.' },
-    { title: 'CI quality gate', detail: 'Make evidence timely, repeatable, and visible.' },
-    { title: 'Release decision', detail: 'Turn results into an explicit engineering signal.' },
-    { title: 'Engineering feedback', detail: 'Use failures to improve product and testability.' }
-  ],
-  lab: {
-    title: 'Release Confidence Lab',
-    description: 'A deterministic portfolio simulation of how evidence moves from preparation to a release decision.',
-    stages: [
-      { id: 'prepare', title: 'Prepare', detail: 'Test data & environment', evidence: 'Independent data prepared' },
-      { id: 'contract', title: 'Contract', detail: 'API schema & boundaries', evidence: 'Contracts and boundaries checked' },
-      { id: 'integrate', title: 'Integrate', detail: 'Services & provider states', evidence: 'Integration states observed' },
-      { id: 'journey', title: 'Critical journey', detail: 'Financial flow & side effects', evidence: 'Critical journey verified' },
-      { id: 'performance', title: 'Performance', detail: 'Baseline & budget', evidence: 'Performance budget reviewed' },
-      { id: 'evidence', title: 'Evidence', detail: 'Diagnostics & traceability', evidence: 'Decision evidence compiled' },
-      { id: 'decision', title: 'Decision', detail: 'Release quality gate', evidence: 'Release signal ready' }
-    ]
+  aiAugmented: {
+    title: 'AI accelerates analysis. Evidence remains authoritative.',
+    description: 'AI-augmented quality engineering helps connect repository structure, product risk, tests, CI failures, and documentation. It supports engineering judgment rather than replacing it.',
+    responsibilities: [
+      'Repository and architecture analysis',
+      'Test-gap and risk discovery',
+      'Backend, frontend, and BPMN correlation',
+      'Robot Framework and code review assistance',
+      'CI failure diagnosis',
+      'Reusable QA knowledge and documentation'
+    ],
+    authorities: ['Source code', 'Contracts', 'Deterministic tests', 'Databases', 'Runtime evidence']
   },
-  principles: [
-    { title: 'Test risk, not vanity metrics.', body: 'More checks do not automatically create more confidence. Coverage should follow consequence.' },
-    { title: 'Evidence before assumptions.', body: 'An HTTP success code is a starting point, not proof that business state is correct.' },
-    { title: 'Fast feedback must stay trustworthy.', body: 'Speed is an improvement only when execution remains deterministic and diagnosable.' },
-    { title: 'External failure should be reproducible.', body: 'Critical validation should not depend on the availability or mood of a third-party provider.' },
-    { title: 'Testability is an engineering property.', body: 'Important behavior should be observable and controllable by design, not only after a failure.' }
-  ],
   capabilities: [
-    { title: 'Quality engineering', items: ['Risk-based testing', 'Exploratory testing', 'E2E testing', 'Integration testing', 'API testing', 'Responsive / cross-browser'] },
-    { title: 'Automation', items: ['Robot Framework', 'Python', 'JavaScript', 'Service virtualization', 'Mock servers'] },
-    { title: 'Delivery', items: ['GitLab CI', 'Docker execution', 'Quality gates', 'Test evidence'] },
-    { title: 'Performance & data', items: ['k6', 'MySQL', 'MongoDB', 'State and side-effect validation'] }
+    { title: 'Quality systems', items: ['Test strategy', 'Risk analysis', 'Test architecture', 'Test data strategy', 'Evidence & diagnostics', 'Team adoption'] },
+    { title: 'Workflow engineering', items: ['BPMN', 'Camunda', 'State machines', 'Gateways', 'Timers', 'Async events', 'Retries'] },
+    { title: 'Fintech correctness', items: ['Credit', 'Purchase', 'Refund', 'Settlement', 'Repayment', 'Billing', 'Financial idempotency'] },
+    { title: 'Automation & integration', items: ['Robot Framework', 'Python', 'JavaScript', 'REST APIs', 'E2E automation', 'Contract verification'] },
+    { title: 'Delivery & reliability', items: ['GitLab CI', 'Docker', 'Feature-branch testing', 'Quality gates', 'k6', 'Performance baselines'] },
+    { title: 'Data & dependencies', items: ['MySQL', 'MongoDB', 'Redis', 'DB validation', 'Mock servers', 'Service virtualization'] },
+    { title: 'AI-augmented QA', items: ['QA-agent workflows', 'Repository analysis', 'Test-gap analysis', 'Assisted test design', 'Review assistance', 'Knowledge systems'] }
   ],
   experience: [
-    { period: '2023 — Present', scope: 'Fintech quality engineering', role: 'Software Test Engineer', outcome: 'Automation architecture, API and integration coverage, performance testing, quality gates, and deterministic validation across complex credit and banking workflows.' },
+    { period: '2023 — Present', scope: 'Fintech quality engineering', role: 'Software Test Engineer', outcome: 'Automation architecture, API and integration coverage, BPMN workflow validation, performance testing, quality gates, and deterministic evidence across complex credit and banking workflows.' },
     { period: '2021 — 2023', scope: 'E-commerce quality', role: 'Software Test Engineer', outcome: 'Quality coverage connected storefront setup, checkout, payments, orders, responsive UI, provider integrations, and release readiness.' },
     { period: '2017 — 2022', scope: 'Lorestan University', role: 'B.Sc. in Computer Engineering', outcome: 'The technical foundation behind a career built around systems thinking, careful investigation, and dependable software.' }
   ],
-  about: [
+  perspective: [
     'I’m most useful where software has meaningful state, external dependencies, and a cost to getting the answer wrong.',
-    'My work sits between product intent and system evidence: asking how a feature can fail, making that failure observable, then shaping automation that helps a team learn quickly without losing trust in the signal.',
-    'That means collaborating with product and development early, improving testability, documenting engineering decisions, and treating quality as a property of the system rather than a final inspection step.'
+    'My work sits between product intent and system evidence: identify how a feature can fail, make that failure observable, and build feedback the team can trust.',
+    'Quality is treated as an engineering property of the system—not a final inspection step.'
   ],
   contact: {
     title: 'Have a quality problem worth solving?',
-    body: 'Let’s talk about test automation architecture, quality-engineering roles, fintech quality, API and integration strategy, performance testing, CI quality gates, or engineering-quality collaboration.',
+    body: 'Let’s talk about quality-system architecture, fintech and BPMN workflow testing, API and integration strategy, deterministic dependencies, performance engineering, or CI quality gates.',
     primaryLabel: 'Start a conversation',
     resumeNote: 'A current public résumé is available by email.'
   }

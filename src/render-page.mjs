@@ -1,17 +1,42 @@
 import portfolio from '../content/portfolio.mjs';
-import { About, CapabilityMap, Contact, Experience, Footer, Header, Hero, HowIHelp, Principles, ProofStrip, QualitySystem, ReleaseLab, Work } from './components.mjs';
+import { AiAugmented, CapabilityMap, Contact, Experience, FintechCorrectness, Footer, Header, Hero, OutcomeMap, ProofBar, SystemArchitecture, WorkflowEngineering, Work } from './components.mjs';
 
 const structuredData = {
   '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: portfolio.profile.name,
-  url: portfolio.site.url,
-  image: new URL(portfolio.profile.portrait.fallback, portfolio.site.url).href,
-  jobTitle: portfolio.profile.role,
-  email: `mailto:${portfolio.profile.email}`,
-  sameAs: portfolio.profile.socialLinks.map((link) => link.href),
-  alumniOf: { '@type': 'CollegeOrUniversity', name: portfolio.profile.education },
-  knowsAbout: ['Software quality engineering', 'Test automation architecture', 'Robot Framework', 'API testing', 'Integration testing', 'Performance testing', 'Fintech quality engineering']
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${portfolio.site.url}#website`,
+      url: portfolio.site.url,
+      name: `${portfolio.profile.name} — ${portfolio.profile.role}`,
+      description: portfolio.site.description,
+      inLanguage: portfolio.site.language
+    },
+    {
+      '@type': 'ProfilePage',
+      '@id': `${portfolio.site.url}#profile`,
+      url: portfolio.site.url,
+      name: portfolio.site.title,
+      description: portfolio.site.description,
+      inLanguage: portfolio.site.language,
+      isPartOf: { '@id': `${portfolio.site.url}#website` },
+      mainEntity: { '@id': `${portfolio.site.url}#person` },
+      dateModified: portfolio.site.lastModified
+    },
+    {
+      '@type': 'Person',
+      '@id': `${portfolio.site.url}#person`,
+      name: portfolio.profile.name,
+      url: portfolio.site.url,
+      image: new URL(portfolio.profile.portrait.fallback, portfolio.site.url).href,
+      jobTitle: portfolio.profile.role,
+      description: portfolio.site.description,
+      email: `mailto:${portfolio.profile.email}`,
+      sameAs: portfolio.profile.socialLinks.map((link) => link.href),
+      alumniOf: { '@type': 'CollegeOrUniversity', name: portfolio.profile.education },
+      knowsAbout: ['Software quality engineering', 'Test automation architecture', 'Robot Framework', 'API testing', 'Integration testing', 'BPMN testing', 'Camunda testing', 'Fintech quality engineering', 'Performance testing', 'GitLab CI']
+    }
+  ]
 };
 
 export const renderPage = () => `<!doctype html>
@@ -30,20 +55,21 @@ export const renderPage = () => `<!doctype html>
   <link rel="stylesheet" href="./styles.css">
   <script defer src="./script.js"></script>
   <meta property="og:type" content="profile">
+  <meta property="og:locale" content="en_US">
   <meta property="og:title" content="${portfolio.site.title}">
   <meta property="og:description" content="${portfolio.site.socialDescription}">
   <meta property="og:url" content="${portfolio.site.url}">
-  <meta property="og:site_name" content="Aref Saran — Quality Engineering">
+  <meta property="og:site_name" content="Aref Saran — Senior Test Engineer">
   <meta property="og:image" content="${new URL(portfolio.site.socialImage, portfolio.site.url).href}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:type" content="image/jpeg">
-  <meta property="og:image:alt" content="Aref Saran, Quality Engineer — engineering confidence into complex software">
+  <meta property="og:image:alt" content="Aref Saran, Senior Test Engineer — engineering confidence into complex software">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${portfolio.site.title}">
   <meta name="twitter:description" content="${portfolio.site.socialDescription}">
   <meta name="twitter:image" content="${new URL(portfolio.site.socialImage, portfolio.site.url).href}">
-  <meta name="twitter:image:alt" content="Aref Saran, Quality Engineer — engineering confidence into complex software">
+  <meta name="twitter:image:alt" content="Aref Saran, Senior Test Engineer — engineering confidence into complex software">
   <title>${portfolio.site.title}</title>
   <script type="application/ld+json">${JSON.stringify(structuredData)}</script>
 </head>
@@ -52,15 +78,15 @@ export const renderPage = () => `<!doctype html>
   ${Header(portfolio)}
   <main id="main">
     ${Hero(portfolio)}
-    ${ProofStrip(portfolio)}
-    ${HowIHelp(portfolio)}
+    ${ProofBar(portfolio)}
+    ${OutcomeMap(portfolio)}
+    ${SystemArchitecture(portfolio)}
+    ${WorkflowEngineering(portfolio)}
+    ${FintechCorrectness(portfolio)}
     ${Work(portfolio)}
-    ${QualitySystem(portfolio)}
-    ${ReleaseLab(portfolio)}
-    ${Principles(portfolio)}
+    ${AiAugmented(portfolio)}
     ${CapabilityMap(portfolio)}
     ${Experience(portfolio)}
-    ${About(portfolio)}
     ${Contact(portfolio)}
   </main>
   ${Footer(portfolio)}

@@ -12,7 +12,7 @@ portfolio-quality:
   stage: quality
   before_script:
     - npm ci --cache .npm --prefer-offline
-    - npx playwright install --with-deps chromium
+    - npx playwright install --with-deps chromium firefox webkit
   script:
     - npm run format:check
     - npm run lint

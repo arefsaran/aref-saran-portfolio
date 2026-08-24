@@ -1,84 +1,72 @@
-# Portfolio Audit
+# Portfolio Audit — 2026-08-24
 
-## Scope and method
+## Repository assessment
 
-The audit covered the committed repository, production-serving configuration, content, interaction model, images, metadata, accessibility tests, and deployment path before the rebuild. Baseline commands were run before implementation so the report distinguishes what already worked from what was missing.
+The repository is a framework-free Node.js static generator. Structured content in `content/portfolio.mjs` is rendered by pure component functions into semantic HTML, then copied with local CSS, JavaScript, metadata, and images into a deterministic `dist/` artifact.
 
-## Original repository
+The architecture was already appropriate for the product. It had no client framework, remote font, analytics, CMS, API, authentication, or third-party runtime request. Playwright and axe supplied a strong browser-quality baseline; GitHub and GitLab pipelines, Docker, Nginx, CSP, and security headers covered release concerns.
 
-The original project was a framework-free static site with `index.html`, `styles.css`, and `script.js`, plus Playwright/axe tests, a Docker/Nginx deployment, and a GitHub Actions quality workflow. Its small runtime footprint and semantic direction were appropriate for a portfolio, so a framework migration was not justified.
+## What remained strong
 
-The existing build script was a marker check rather than a production build: the source root was served directly and no clean, deployable output directory was created. Content and presentation were tightly coupled in one HTML file. The site also had two stale social cards that described Aref as a “Software Test Engineer,” while the intended positioning was Quality Engineer / Test Automation & Quality Systems Engineer.
+- Static delivery and a small browser runtime.
+- Centralized factual content and privacy-safe case studies.
+- Verified proof: 2,300+ checks, 39h → 2h regression, approximately 95% shorter execution, and four test layers.
+- Local portrait, favicon, and social assets.
+- Working light/dark themes, keyboard navigation, reduced motion, and responsive CSS.
+- Deterministic production build and hardened deployment configuration.
+- Automated link, heading, structured-data, asset, keyboard, viewport, and WCAG checks.
 
-## What was already strong
+## Gaps found before this refactor
 
-- Static delivery with no backend, database, authentication, analytics, or runtime dependency.
-- A clear visual direction, portrait asset, responsive CSS, progressive interaction, and a working Docker/Nginx path.
-- Existing Playwright and axe dependencies with a useful initial browser suite.
-- Real contact routes and public professional-profile links.
-- A factual foundation: 2,300+ automated checks, regression reduced from 39 hours to about two hours, financial-workflow quality, service virtualization, CI gates, and layered API/integration/E2E/performance work.
+### Positioning
 
-## Gaps found
+- Primary copy and metadata said “Quality Engineer,” not “Senior Test Engineer.”
+- Aref’s name and role were not both visible in the first mobile viewport.
+- BPMN/Camunda, feature-branch quality, and AI-augmented QA were absent.
+- Fintech state validation was present only as a generalized case study rather than a clear professional differentiator.
+- The quality-system visualization did not show execution boundaries, infrastructure, evidence, and delivery as one architecture.
 
-### Positioning and evidence
+### UX and content
 
-- The original narrative did not consistently express the outcome “safer to change, faster to validate, easier to trust.”
-- Case studies were short summaries rather than complete context → problem → constraints → diagnosis → decision → implementation → safeguards → outcome → lessons narratives.
-- “How I help” cards were tool-oriented and did not explicitly connect problem, intervention, and outcome.
-- The quality-system flow, Release Confidence Lab, and principles sections did not contain all requested stages and principles.
-- The quality visualization needed an explicit disclosure that it was a portfolio illustration rather than live infrastructure telemetry.
+- How-I-help cards, principles, the quality flow, the capability map, and the interactive lab repeated similar ideas.
+- The deterministic Release Confidence Lab resembled simulated operational UI but added little technical substance.
+- Case studies were useful but did not represent automation-from-zero or BPMN workflow quality.
+- The page was approximately 16,866px tall at 390px despite missing several required capabilities.
+- Small labels and oversized headings reduced practical reading comfort.
 
-### Architecture and maintainability
+### Maintainability and resilience
 
-- Portfolio content, document structure, metadata, and components lived in one root HTML file.
-- `npm run build` did not create a production artifact.
-- There was no content model, component layer, or generated-output boundary.
-- No GitLab pipeline existed for the user’s GitLab/Hamravesh workflow.
+- `styles.css` ended with a second override layer containing duplicated and dead selectors.
+- Unused content fields remained in the content model.
+- Scroll-reveal styles hid content until JavaScript and IntersectionObserver state were applied.
+- Mobile navigation was unavailable without JavaScript.
 
-### Theme and accessibility
+### SEO and verification
 
-- Theme initialization relied on executable inline scripts, forcing a weaker Content Security Policy.
-- Manual theme behavior did not fully model OS preference, manual override, persistence, and system changes.
-- Automated coverage did not test both themes, six target widths, unique IDs, heading progression, all internal targets, external-link safety, the complete lab, or keyboard-operated case-study details.
-- Light/dark color responsibilities were coupled: theme-dependent `--navy`/`--white` tokens were also used by intentionally dark components. Expanded axe checks exposed the resulting contrast failures, which were fixed by separating fixed dark surfaces from theme neutrals.
+- Title, descriptions, social text, image copy, and Person job title reflected the old role.
+- Structured data did not model the page as a `ProfilePage` within a `WebSite`.
+- The sitemap modification date was stale.
+- Responsive tests omitted 390, 430, and 1280px.
+- Browser automation covered Chrome/Chromium only.
+- GitHub Actions used Node 22 while the documented and deployment runtime used Node 24.
 
-### SEO, social, security, and release
+## Refactor decisions
 
-- Social-preview assets used obsolete positioning and one was over 1 MB.
-- The server policy allowed inline scripts and lacked some useful isolation/resource policies.
-- The Docker image copied source files directly instead of a validated production build.
-- No implementation, audit, or design-system documentation existed.
-- There was no measured Lighthouse record.
-
-## Content decisions
-
-The implementation uses only claims supplied in the repository and directive. Case studies are generalized around the verified themes of regression architecture, service virtualization, financial workflows, and multi-layer commerce quality. No employer, client, private endpoint, repository, credential, testimonial, certification, award, team size, or unsupported metric was added.
-
-The current role is presented without naming the employer. The résumé remains available on request because no verified public résumé artifact was supplied.
+1. Preserve the static generator, content/component boundary, portrait, themes, verified metrics, case-study evidence, CI, and deployment architecture.
+2. Rebuild the information architecture around Senior Test Engineer positioning, quality systems, BPMN/Camunda, fintech correctness, and engineering evidence.
+3. Replace simulated dashboard/lab UI with semantic HTML/CSS system diagrams.
+4. Remove JavaScript-controlled content reveals and keep enhancement limited to navigation, themes, section state, and back-to-top behavior.
+5. Group capabilities by engineering domain and retain technical depth behind native case-study disclosures.
+6. Add focused cross-browser smoke coverage rather than tripling the entire detailed suite.
+7. Keep every existing number unchanged and add no employer, client, volume, certification, award, or confidential architecture claim.
 
 ## Image audit
 
-| Asset | Dimensions | Source size | Decision |
-| --- | ---: | ---: | --- |
-| `assets/aref-saran-profile.webp` | 735 × 861 | 40,718 bytes | Primary portrait; retained for efficient delivery. |
-| `assets/aref-saran-profile.png` | 735 × 861 | 756,960 bytes | Compatibility fallback; retained under the 1 MB asset budget. |
-| `og-card.jpg` | 1200 × 630 | 135,708 bytes | New role-accurate social card; generated from the supplied portrait and optimized as JPEG. |
-| `favicon.svg` | Vector | 338 bytes in build | Simplified to the portfolio’s navy/cobalt/white identity. |
-| `og-card.png` | 1200 × 630 | 354,896 bytes | Deleted because its role text was stale. Recoverable from Git history. |
-| `og-card-v2.png` | 1200 × 630 | 1,217,974 bytes | Deleted because its role text was stale and it exceeded the asset budget. Recoverable from Git history. |
+| Asset | Dimensions | Role |
+| --- | ---: | --- |
+| `assets/aref-saran-profile.webp` | 735 × 861 | Primary efficient portrait. |
+| `assets/aref-saran-profile.png` | 735 × 861 | Compatibility fallback. |
+| `og-card-senior.jpg` | 1200 × 630 | Role-accurate social preview with the original portrait preserved. |
+| `favicon.svg` | Vector | Local AS identity mark. |
 
-All production images are local. The page makes no third-party runtime request.
-
-## Decisions and rationale
-
-1. Preserve static architecture, because the content and interactions do not require a client framework.
-2. Add a build-time content/component layer, because it separates truth, structure, and presentation without increasing browser complexity.
-3. Generate a clean `dist/`, because CI and Docker need a deterministic release artifact.
-4. Keep the Release Confidence Lab deterministic and explicitly labeled, because a portfolio should demonstrate thinking without simulating real telemetry.
-5. Use native `<details>` for engineering breakdowns, because it is resilient and keyboard accessible without custom disclosure logic.
-6. Keep all assets local and avoid analytics, because that improves speed, privacy, and policy simplicity.
-7. Add GitLab CI and retain GitHub Actions, because the repository may be mirrored while Hamravesh tracks GitLab.
-
-## Audit conclusion
-
-The original codebase was a sound static foundation but not a complete production system for the supplied brief. The rebuild keeps its appropriate low-complexity architecture while adding structured content, richer proof, deterministic builds, both-theme accessibility, hardened serving, GitLab/Hamravesh readiness, and evidence-backed documentation.
+The production page makes no third-party request and exposes no private credentials, endpoints, repositories, customer data, or deployment-secret values.

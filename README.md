@@ -1,8 +1,8 @@
-# Aref Saran — Quality Engineering Portfolio
+# Aref Saran — Senior Test Engineer Portfolio
 
-Production portfolio for [arefsaran.ir](https://arefsaran.ir/). It positions Aref Saran as a Quality Engineer and Test Automation & Quality Systems Engineer who makes complex software safer to change, faster to validate, and easier to trust.
+Production portfolio for [arefsaran.ir](https://arefsaran.ir/). It positions Aref Saran as a Senior Test Engineer who designs test automation and quality systems for complex fintech products, APIs, BPMN/Camunda workflows, external providers, performance, and CI/CD.
 
-The implementation is intentionally static: structured JavaScript content is rendered to semantic HTML at build time, CSS supplies the complete responsive design system, and a small progressive-enhancement script handles themes, navigation, reveals, and the deterministic Release Confidence Lab. The public site has no framework runtime, API, database, CMS, analytics, remote font, or third-party request.
+The implementation is intentionally static: structured JavaScript content is rendered to semantic HTML at build time, CSS supplies the responsive design system and accessible engineering diagrams, and a small progressive-enhancement script handles themes, navigation state, and back-to-top behavior. The public site has no framework runtime, API, database, CMS, analytics, remote font, or third-party request.
 
 ## Production architecture
 
@@ -36,11 +36,11 @@ Values must be configured as deployment secrets/environment variables; do not co
 
 ## Local setup
 
-Requirements: Node.js 24+ and npm. Chrome or Playwright Chromium is required for browser tests.
+Requirements: Node.js 24+ and npm. Chrome, Playwright Firefox, and Playwright WebKit are required for the complete browser suite; local Windows runs also use Edge when available.
 
 ```bash
 npm ci
-npx playwright install chromium
+npx playwright install chromium firefox webkit
 npm run serve
 ```
 
@@ -52,7 +52,8 @@ Open `http://127.0.0.1:4173`.
 npm run format:check  # final newline and trailing-whitespace checks
 npm run lint          # JavaScript syntax validation
 npm run build         # generate and validate dist/
-npm test              # Playwright interaction, responsive, and axe checks
+npm run test:chromium # detailed interaction, responsive, and axe checks
+npm test              # detailed Chrome plus Firefox/WebKit/Edge smoke checks
 npm run quality       # complete local quality gate
 ```
 
@@ -60,16 +61,17 @@ npm run quality       # complete local quality gate
 
 ## Architecture and editing
 
-- `content/portfolio.mjs` — single source of truth for profile details, proof points, capabilities, case studies, quality-system stages, lab stages, principles, experience, and contact copy.
+- `content/portfolio.mjs` — single source of truth for profile details, proof, outcomes, system architecture, BPMN/fintech models, case studies, AI-augmented QA, capabilities, experience, and contact copy.
 - `src/components.mjs` — functional HTML components for every page section.
 - `src/render-page.mjs` — document shell, metadata, JSON-LD, and component composition.
 - `src/html.mjs` — escaping and small rendering helpers.
 - `styles.css` — Engineering Editorial × Quality Control System tokens, themes, components, breakpoints, and reduced-motion behavior.
 - `theme-init.js` — pre-paint OS-theme detection and persisted manual preference.
-- `script.js` — progressive enhancement for navigation, theme controls, reveals, active sections, and the Release Confidence Lab.
+- `script.js` — progressive enhancement for navigation, themes, active sections, and back-to-top behavior. Core content never depends on JavaScript visibility changes.
 - `scripts/build.mjs` — deterministic production build.
-- `tests/build-check.mjs` — build manifest, link, metadata, JSON-LD, inline-script, and asset-budget validation.
-- `tests/portfolio.spec.mjs` — browser behavior, keyboard, theme, responsive overflow, reduced motion, semantic structure, and WCAG checks.
+- `tests/build-check.mjs` — build manifest, link, positioning, metadata, JSON-LD graph, inline-script, and asset-budget validation.
+- `tests/portfolio.spec.mjs` — detailed Chrome behavior, keyboard, theme, exact responsive widths, reduced motion, semantic structure, and WCAG checks.
+- `tests/cross-browser.spec.mjs` — focused Chromium/Chrome, Firefox, WebKit, and Edge smoke coverage.
 - `Dockerfile` and `nginx.conf` — multi-stage derived production image, hardened portfolio serving, and the V2Ray WebSocket proxy.
 - `docs/` — baseline audit, design-system reference, and evidence-backed implementation report.
 

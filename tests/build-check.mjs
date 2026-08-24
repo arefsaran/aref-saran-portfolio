@@ -4,7 +4,7 @@ import portfolio from '../content/portfolio.mjs';
 
 const root = resolve(import.meta.dirname, '..');
 const output = resolve(root, 'dist');
-const requiredFiles = ['index.html', 'styles.css', 'script.js', 'theme-init.js', 'favicon.svg', 'robots.txt', 'sitemap.xml', 'og-card.jpg', 'assets/aref-saran-profile.webp', 'assets/aref-saran-profile.png'];
+const requiredFiles = ['index.html', 'styles.css', 'script.js', 'theme-init.js', 'favicon.svg', 'robots.txt', 'sitemap.xml', 'og-card-senior.jpg', 'assets/aref-saran-profile.webp', 'assets/aref-saran-profile.png'];
 const missing = requiredFiles.filter((file) => !existsSync(resolve(output, file)));
 if (missing.length) throw new Error(`Missing production files: ${missing.join(', ')}`);
 
@@ -18,14 +18,22 @@ const missingTargets = internalLinks.filter((target) => !ids.includes(target));
 if (missingTargets.length) throw new Error(`Internal links without targets: ${[...new Set(missingTargets)].join(', ')}`);
 
 const jsonLd = html.match(/<script type="application\/ld\+json">(.+?)<\/script>/s)?.[1];
-if (!jsonLd) throw new Error('Missing Person JSON-LD.');
-const person = JSON.parse(jsonLd);
-if (person['@type'] !== 'Person' || person.name !== portfolio.profile.name) throw new Error('Person JSON-LD does not match the content model.');
+if (!jsonLd) throw new Error('Missing structured data.');
+const structuredData = JSON.parse(jsonLd);
+const graph = structuredData['@graph'];
+if (!Array.isArray(graph)) throw new Error('Structured data must use an @graph.');
+const person = graph.find((item) => item['@type'] === 'Person');
+const profilePage = graph.find((item) => item['@type'] === 'ProfilePage');
+const website = graph.find((item) => item['@type'] === 'WebSite');
+if (person?.name !== portfolio.profile.name || person?.jobTitle !== portfolio.profile.role) throw new Error('Person JSON-LD does not match the content model.');
+if (!profilePage || !website) throw new Error('ProfilePage or WebSite structured data is missing.');
 
 const executableInlineScripts = [...html.matchAll(/<script(?![^>]*type="application\/ld\+json")[^>]*>(.*?)<\/script>/gs)].filter((match) => match[1].trim());
 if (executableInlineScripts.length) throw new Error('Executable inline script found; production CSP requires external scripts.');
 if (!html.includes(`content="${portfolio.site.title}"`) || !html.includes(`content="${new URL(portfolio.site.socialImage, portfolio.site.url).href}"`)) throw new Error('Social metadata does not match the content model.');
-if (!html.includes('Portfolio visualization · not live infrastructure')) throw new Error('Quality signal disclosure is missing.');
+for (const requiredCopy of ['Senior Test Engineer', 'BPMN testing goes beyond the endpoint.', 'HTTP success is not financial correctness.', 'AI accelerates analysis. Evidence remains authoritative.']) {
+  if (!html.includes(requiredCopy)) throw new Error(`Required positioning is missing: ${requiredCopy}`);
+}
 
 const oversized = requiredFiles.filter((file) => statSync(resolve(output, file)).size > 1_000_000);
 if (oversized.length) throw new Error(`Production assets exceed 1 MB: ${oversized.join(', ')}`);
