@@ -74,6 +74,32 @@ test.describe('portfolio experience', () => {
     await expect(menu).toHaveAttribute('aria-expanded', 'false');
   });
 
+  for (const width of [320, 375]) {
+    test(`keeps the mobile portrait loaded and its face clear at ${width}px`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto('/');
+
+      const image = page.locator('.portrait-card img');
+      await expect(image).toHaveJSProperty('complete', true);
+      expect(await image.evaluate((element) => element.naturalWidth)).toBeGreaterThan(0);
+
+      const layout = await page.evaluate(() => {
+        const rectangle = (selector) => {
+          const { top, right, bottom, left, width, height } = document.querySelector(selector).getBoundingClientRect();
+          return { top, right, bottom, left, width, height };
+        };
+        return {
+          portrait: rectangle('.portrait-card'),
+          badge: rectangle('.speed-badge'),
+          evidence: rectangle('.quality-card')
+        };
+      });
+      const faceSafeBottom = layout.portrait.top + (layout.portrait.height * .72);
+      expect(layout.badge.top).toBeGreaterThanOrEqual(faceSafeBottom);
+      expect(layout.evidence.top).toBeGreaterThanOrEqual(layout.portrait.bottom);
+    });
+  }
+
   test('follows system color preference and persists a manual choice', async ({ page }) => {
     await page.emulateMedia({ colorScheme: 'dark' });
     await page.goto('/');
