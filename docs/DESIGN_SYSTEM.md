@@ -1,88 +1,67 @@
-# Engineering Editorial × Quality Control System
+# Engineering Editorial × Quality Systems
 
 ## Positioning
 
-The visual system presents a Quality Engineer who makes complex software safer to change, faster to validate, and easier to trust. “Engineering editorial” provides calm hierarchy and readable long-form proof; “quality control system” contributes status cues, evidence flows, stages, and release-decision language.
+The visual system presents Aref Saran as a Senior Test Engineer who designs quality systems for complex software and fintech products. Editorial hierarchy makes the professional story easy to scan; system diagrams expose the engineering relationships behind the claims.
 
-The interface avoids stock dashboard theater. Metrics are limited to verified proof, the quality signal is labeled as a portfolio visualization, and the Release Confidence Lab states that its evidence is deterministic demonstration data.
+The intended impression is “this person designs systems,” not “this person customized a portfolio template.”
 
-## Visual principles
+## Principles
 
-1. **Evidence before decoration.** Every metric, badge, stage, and state supports a concrete claim or explanation.
-2. **Editorial rhythm.** Large headings, narrow reading measures, generous sections, and ruled dividers make technical depth approachable.
-3. **Operational clarity.** Labels, stage numbers, progress, and status colors resemble quality-system artifacts without pretending to be live infrastructure.
-4. **Controlled color.** Warm paper, navy, cobalt, mint, amber, and rose have clear roles; there are no gradients.
-5. **Progressive enhancement.** The content and native disclosures work before JavaScript. Motion, navigation state, themes, and the lab enhance the baseline.
+1. **Identity before tools.** Name, role, specialization, outcome, and evidence appear before technology brands.
+2. **Evidence before decoration.** Numbers, state chains, diagrams, and case-study details support a concrete claim.
+3. **Technical depth through progressive disclosure.** Recruiters can scan headings and diagrams; technical readers can open engineering breakdowns.
+4. **Diagrams remain content.** Architecture, BPMN, fintech, and delivery flows are semantic ordered lists styled with CSS, with readable linear mobile fallbacks.
+5. **Motion is optional.** No section is hidden for animation. Interaction is limited to useful hover, focus, navigation, and theme feedback.
+6. **Controlled color.** Warm paper, navy, cobalt, mint, amber, and rose have defined roles in both themes.
 
 ## Tokens
 
-The canonical tokens live at the top of `styles.css`.
+Canonical tokens live at the top of `styles.css`.
 
-### Color
+- `--paper`, `--paper-deep`, `--surface`, `--surface-strong`: page and content hierarchy.
+- `--ink`, `--ink-soft`, `--ink-faint`: primary, supporting, and metadata text.
+- `--accent`, `--accent-soft`: links, focus, active states, and system emphasis.
+- `--success`, `--success-soft`: validated state and authoritative evidence.
+- `--warning-soft`: financial risk and high-consequence behavior.
+- `--line`, `--line-strong`: architecture, dividers, and boundaries.
+- `--dark-panel`, `--dark-panel-raised`, `--dark-text`, `--dark-muted`: fixed technical surfaces that retain contrast in both themes.
 
-- `--paper`, `--paper-deep`, and `--surface`: page and card hierarchy.
-- `--ink`, `--ink-soft`, and `--ink-faint`: primary, supporting, and metadata text.
-- `--navy` and `--navy-2`: high-emphasis controls and identity surfaces.
-- `--blue` and `--blue-soft`: links, focus, active navigation, and selected evidence.
-- `--mint` and `--mint-strong`: positive status and systems-quality emphasis.
-- `--amber`: timing/risk emphasis.
-- `--rose`: alternate capability-card grouping.
-- `--line` and `--line-strong`: structural rules and borders.
+The typography uses local system fonts only. Headings use tight tracking and compact leading; body text uses relaxed leading; small labels are kept at readable sizes and never carry the only instance of essential information.
 
-Intentionally dark evidence surfaces use fixed dark colors and light text instead of theme-reversible tokens. This preserves their meaning and contrast in both themes.
+## Page components
 
-### Typography
+- **Header:** name, Senior Test Engineer label, five concise navigation links, theme control, and keyboard-safe mobile menu.
+- **Hero:** name, role, outcome-led headline, system-level statement, two internal CTAs, profiles, portrait, and four domain signals.
+- **Proof bar:** three verified proof groups, with 39h → 2h and approximately 95% combined instead of duplicated.
+- **Outcome map:** BUILD, STABILIZE, PROTECT, and ACCELERATE.
+- **Quality-system architecture:** seven layers from business risk to CI/CD, plus an eight-stage feature-branch delivery model.
+- **BPMN/Camunda:** generalized workflow path and eight synchronized test oracles.
+- **Fintech correctness:** six-state correctness chain, invariant checklist, callback replay example, and risk priorities.
+- **Selected work:** five generalized case studies with native `<details>` breakdowns.
+- **AI-augmented QA:** accelerated analysis beside explicit sources of truth.
+- **Capability map:** seven engineering-domain groups.
+- **Experience:** delivery history plus a concise engineering perspective.
+- **Contact:** one primary CTA and direct professional channels.
 
-The system stack is `Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`. No font is downloaded. Headings use tight tracking and compact leading; body content uses relaxed leading. Labels use small, bold, uppercase text with increased tracking. Responsive type is controlled with `clamp()`.
+## Responsive behavior
 
-### Space, shape, depth, and motion
+Structural transitions occur at 1100, 900, 720, 430, and 360px. Diagrams become full-width stacks rather than horizontally scrolling canvases. Capability groups remain compact two-column cards where readable and become one column at the smallest width.
 
-- Spacing: `--space-1` through `--space-5`, supplemented by fluid section spacing.
-- Radius: `--radius-sm`, `--radius-md`, and `--radius-pill`.
-- Depth: `--shadow-sm` and `--shadow-lg`, used sparingly for floating/interactive surfaces.
-- Motion: `--duration-fast`, `--duration-base`, and `--ease-out`.
-- Layout: `--max-width: 1200px` with fluid side gutters.
-
-## Themes
-
-Light mode uses warm paper and dark ink. Dark mode uses deep blue-black neutrals and higher-luminance text/accent values.
-
-`theme-init.js` executes before the stylesheet to prevent a visible wrong-theme frame. It follows `prefers-color-scheme` unless a valid manual preference exists in `localStorage`. The theme control exposes its state with `aria-pressed`, persists manual choices, and the page resumes following OS changes only while the source remains `system`.
-
-Both themes declare the relevant `color-scheme`, update the browser theme-color metadata, and pass automated WCAG A/AA scans.
-
-## Components
-
-- **Header:** fixed translucent shell, clear brand, section navigation, contact route, theme control, and keyboard-safe mobile menu.
-- **Hero:** outcome-led statement, verified positioning copy, two real calls to action, professional links, portrait, disclosed quality signal, and the verified ≈95% reduction badge.
-- **Proof strip:** three compact verified outcomes.
-- **How I help:** four cards with explicit problem, intervention, outcome, and evidence.
-- **Case studies:** four generalized proof narratives with native, keyboard-operable engineering breakdowns.
-- **Quality system:** nine linked stages from product risk to learning loop.
-- **Release Confidence Lab:** seven deterministic stages, accessible progress state, evidence updates, and explicit release decision.
-- **Principles:** five engineering principles, including testability.
-- **Capability map:** tools grouped by quality outcome rather than brand display.
-- **Experience, About, Contact:** privacy-aware career scope, professional viewpoint, and real email/profile routes.
+Automated overflow coverage runs at 320, 375, 390, 430, 768, 1024, 1280, 1440, and 1920px. Focused browser-engine smoke coverage also verifies the 390px layout.
 
 ## Accessibility rules
 
 - One H1 followed by logical H2/H3 progression.
-- Semantic landmarks and section labels.
-- A keyboard-visible skip link and consistent `:focus-visible` treatment.
-- Controls and primary links have at least a 44 px minimum target dimension where relevant.
-- Native button, link, progressbar, navigation, and details semantics.
-- Menu state uses `aria-expanded`; lab state uses `aria-live`, `aria-atomic`, and progress values.
-- Decorative marks are hidden from assistive technology.
-- Essential information is never represented by color alone.
-- Reduced-motion users get instant reveals, non-smooth scrolling, and an instant deterministic lab completion.
-- Both themes are automatically checked with axe against WCAG A/AA tags, including WCAG 2.2 AA rules available in the installed axe version.
+- Semantic landmarks, section labels, figures, captions, ordered flows, and native disclosures.
+- Skip link, visible focus, 44px primary control targets, and keyboard-operable navigation.
+- Decorative marks hidden from assistive technology.
+- Meaning never depends on color, shape, or motion alone.
+- Content is visible without the enhancement script.
+- Mobile navigation remains available without JavaScript; JavaScript converts it into a controlled menu.
+- `prefers-reduced-motion` removes smooth scrolling and transition duration.
+- Light and dark themes are scanned with axe using WCAG 2.0/2.1/2.2 A and AA tags.
 
-## Responsive behavior
+## Content integrity
 
-The design is fluid rather than device-specific. Main structural transitions occur at 1080, 840, 620, and 380 px. Navigation becomes a controlled menu below 840 px. Multi-column content collapses progressively, case-study visuals move below narratives, and the nine-stage system moves from three to two to one column.
-
-Automated overflow checks cover 320, 375, 768, 1024, 1440, and 1920 px. The minimum supported page width is 320 px.
-
-## Content and interaction voice
-
-Copy is direct, concrete, and evidence-led. It avoids unsupported seniority, company claims, generic “passionate tester” language, and decorative numbers. Interactions explain state and outcome: “Ready,” “Running,” “Passed,” and “Release confidence: high” are attached to a disclosed deterministic demo, not presented as production telemetry.
+Only supplied or previously verified professional facts are public. Senior Test Engineer, BPMN/Camunda, fintech workflows, automation-from-zero, feature-branch quality, deterministic dependencies, and AI-augmented QA come from the supplied professional brief. Existing quantitative results remain unchanged. Public copy excludes employer/client identities, private endpoints, credentials, production data, and proprietary implementation details.

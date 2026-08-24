@@ -5,7 +5,6 @@
   const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
   let savedTheme = null;
 
-  root.classList.add('js');
   try { savedTheme = localStorage.getItem('aref-theme'); } catch (error) { /* Storage is optional. */ }
 
   const theme = savedTheme === 'dark' || savedTheme === 'light'

@@ -22,10 +22,26 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
+      testMatch: [/portfolio\.spec\.mjs/, /cross-browser\.spec\.mjs/],
       use: {
         browserName: 'chromium',
         ...(process.env.CI ? {} : { channel: 'chrome' })
       }
-    }
+    },
+    {
+      name: 'firefox-smoke',
+      testMatch: /cross-browser\.spec\.mjs/,
+      use: { browserName: 'firefox' }
+    },
+    {
+      name: 'webkit-smoke',
+      testMatch: /cross-browser\.spec\.mjs/,
+      use: { browserName: 'webkit' }
+    },
+    ...(process.platform === 'win32' && !process.env.CI ? [{
+      name: 'edge-smoke',
+      testMatch: /cross-browser\.spec\.mjs/,
+      use: { browserName: 'chromium', channel: 'msedge' }
+    }] : [])
   ]
 });
