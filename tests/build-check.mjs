@@ -9,6 +9,8 @@ const missing = requiredFiles.filter((file) => !existsSync(resolve(output, file)
 if (missing.length) throw new Error(`Missing production files: ${missing.join(', ')}`);
 
 const html = readFileSync(resolve(output, 'index.html'), 'utf8');
+const dockerfile = readFileSync(resolve(root, 'Dockerfile'), 'utf8');
+if (!dockerfile.includes(portfolio.site.socialImage)) throw new Error(`Dockerfile does not copy the configured social image: ${portfolio.site.socialImage}`);
 const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]);
 const duplicates = ids.filter((id, index) => ids.indexOf(id) !== index);
 if (duplicates.length) throw new Error(`Duplicate HTML ids: ${[...new Set(duplicates)].join(', ')}`);

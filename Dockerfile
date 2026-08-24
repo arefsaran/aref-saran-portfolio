@@ -4,7 +4,7 @@ COPY content ./content
 COPY src ./src
 COPY scripts ./scripts
 COPY assets ./assets
-COPY styles.css script.js theme-init.js favicon.svg robots.txt sitemap.xml og-card.jpg ./
+COPY styles.css script.js theme-init.js favicon.svg robots.txt sitemap.xml og-card-senior.jpg ./
 RUN node scripts/build.mjs
 
 FROM alphacodinghub/v2ray-nginx:latest
