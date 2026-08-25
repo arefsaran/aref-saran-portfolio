@@ -1,72 +1,69 @@
-# Portfolio Audit — 2026-08-24
+# Portfolio Audit — 2026-08-25
 
-## Repository assessment
+## Baseline
 
-The repository is a framework-free Node.js static generator. Structured content in `content/portfolio.mjs` is rendered by pure component functions into semantic HTML, then copied with local CSS, JavaScript, metadata, and images into a deterministic `dist/` artifact.
+The repository entered the redesign as a clean `main` branch synchronized with `origin/main`. `npm ci` completed with zero reported vulnerabilities, and the original `npm run quality` baseline passed 28 browser/build checks across Chrome, Firefox, WebKit, and Edge.
 
-The architecture was already appropriate for the product. It had no client framework, remote font, analytics, CMS, API, authentication, or third-party runtime request. Playwright and axe supplied a strong browser-quality baseline; GitHub and GitLab pipelines, Docker, Nginx, CSP, and security headers covered release concerns.
+The architecture was already appropriate: a framework-free Node.js static generator, centralized content, pure render functions, local assets, progressive JavaScript, Playwright and axe coverage, Docker/Nginx packaging, security headers, metadata, sitemap, and JSON-LD.
 
-## What remained strong
+## What was strong and preserved
 
-- Static delivery and a small browser runtime.
-- Centralized factual content and privacy-safe case studies.
-- Verified proof: 2,300+ checks, 39h → 2h regression, approximately 95% shorter execution, and four test layers.
-- Local portrait, favicon, and social assets.
-- Working light/dark themes, keyboard navigation, reduced motion, and responsive CSS.
-- Deterministic production build and hardened deployment configuration.
-- Automated link, heading, structured-data, asset, keyboard, viewport, and WCAG checks.
+- Static delivery with no client framework or hydration cost.
+- `content/portfolio.mjs` as the factual source of truth.
+- Semantic HTML, skip navigation, keyboard access, reduced motion, and visible focus.
+- Verified evidence: 2,300+ checks, 39h → 2h feedback, approximately 95% shorter regression, and API/Integration/E2E/Performance layers.
+- Privacy-safe case-study material, real portrait, favicon, and social preview.
+- Canonical, OpenGraph, Twitter/X, robots, sitemap, and `WebSite`/`ProfilePage`/`Person` structured data.
+- Deterministic production generation and hardened Docker/Nginx deployment path.
+- Chromium detail coverage plus Firefox, WebKit, and Edge smoke coverage.
 
-## Gaps found before this refactor
+## Rejected presentation found
 
-### Positioning
+- Dark/navy-first visual language and a full OS/manual theme state machine.
+- Eleven visually separate homepage chapters with numbered report labels.
+- Standalone BPMN, fintech, architecture, and AI sections competing with the portfolio story.
+- Oversized headings, very large section padding, and excessive full-page length.
+- Documentation-like diagrams, repeated engineering taxonomies, and dense default case-study content.
+- Large mobile navigation treatment, dominant portrait framing, dark panels, and dashboard cues.
+- Five primary case studies and redundant capability/card systems.
+- Theme-specific tests that protected functionality explicitly rejected by the product brief.
 
-- Primary copy and metadata said “Quality Engineer,” not “Senior Test Engineer.”
-- Aref’s name and role were not both visible in the first mobile viewport.
-- BPMN/Camunda, feature-branch quality, and AI-augmented QA were absent.
-- Fintech state validation was present only as a generalized case study rather than a clear professional differentiator.
-- The quality-system visualization did not show execution boundaries, infrastructure, evidence, and delivery as one architecture.
+## Keep / change / remove / add
 
-### UX and content
+### Keep
 
-- How-I-help cards, principles, the quality flow, the capability map, and the interactive lab repeated similar ideas.
-- The deterministic Release Confidence Lab resembled simulated operational UI but added little technical substance.
-- Case studies were useful but did not represent automation-from-zero or BPMN workflow quality.
-- The page was approximately 16,866px tall at 390px despite missing several required capabilities.
-- Small labels and oversized headings reduced practical reading comfort.
+The static generator, content/presentation boundary, verified content, portrait, metadata, structured data, accessibility foundations, tests, Docker/Nginx path, security headers, and deployment secrets contract.
 
-### Maintainability and resilience
+### Change
 
-- `styles.css` ended with a second override layer containing duplicated and dead selectors.
-- Unused content fields remained in the content model.
-- Scroll-reveal styles hid content until JavaScript and IntersectionObserver state were applied.
-- Mobile navigation was unavailable without JavaScript.
+The information architecture, content grouping, components, complete CSS system, navigation, hero composition, case-study hierarchy, responsive behavior, favicon, regression coverage, and documentation.
 
-### SEO and verification
+### Remove
 
-- Title, descriptions, social text, image copy, and Person job title reflected the old role.
-- Structured data did not model the page as a `ProfilePage` within a `WebSite`.
-- The sitemap modification date was stale.
-- Responsive tests omitted 390, 430, and 1280px.
-- Browser automation covered Chrome/Chromium only.
-- GitHub Actions used Node 22 while the documented and deployment runtime used Node 24.
+`theme-init.js`, theme controls, persisted theme state, dark tokens, standalone technical chapters, numbered section architecture, complex ordered diagrams, scroll-to-top UI, and obsolete tests/selectors/content entries.
 
-## Refactor decisions
+### Add
 
-1. Preserve the static generator, content/component boundary, portrait, themes, verified metrics, case-study evidence, CI, and deployment architecture.
-2. Rebuild the information architecture around Senior Test Engineer positioning, quality systems, BPMN/Camunda, fintech correctness, and engineering evidence.
-3. Replace simulated dashboard/lab UI with semantic HTML/CSS system diagrams.
-4. Remove JavaScript-controlled content reveals and keep enhancement limited to navigation, themes, section state, and back-to-top behavior.
-5. Group capabilities by engineering domain and retain technical depth behind native case-study disclosures.
-6. Add focused cross-browser smoke coverage rather than tripling the entire detailed suite.
-7. Keep every existing number unchanged and add no employer, client, volume, certification, award, or confidential architecture claim.
+A 60px mobile header, seven-area portfolio structure, four outcome-led service cards, three scannable primary case studies, a five-step risk-to-release approach, compact experience/capability columns, an integrated AI-assisted practice note, geometry regressions, asset budgets, and Docker input validation.
 
-## Image audit
+## Adversarial review and revision
+
+The initial simplification risked becoming a generic minimal portfolio. The revised design prevents that in four ways:
+
+1. Verified proof appears in the hero and immediately following proof area.
+2. Selected Work is the visual center and preserves deeper evidence through native disclosures.
+3. Fintech, BPMN/Camunda, database state, provider behavior, retries, and idempotency remain specific in services, case studies, the quality approach, and capabilities.
+4. AI is present only as a supporting engineering workflow with explicit authoritative evidence.
+
+The page avoids manufacturing technical depth through decoration. Strong typography, concise reasoning, and verified evidence carry the professional positioning.
+
+## Asset audit
 
 | Asset | Dimensions | Role |
 | --- | ---: | --- |
 | `assets/aref-saran-profile.webp` | 735 × 861 | Primary efficient portrait. |
 | `assets/aref-saran-profile.png` | 735 × 861 | Compatibility fallback. |
-| `og-card-senior.jpg` | 1200 × 630 | Role-accurate social preview with the original portrait preserved. |
-| `favicon.svg` | Vector | Local AS identity mark. |
+| `og-card-senior.jpg` | 1200 × 630 | Existing light social preview with the real portrait. |
+| `favicon.svg` | Vector | Updated single-theme AS identity mark. |
 
-The production page makes no third-party request and exposes no private credentials, endpoints, repositories, customer data, or deployment-secret values.
+No external imagery, font, analytics, script, or runtime request was introduced.

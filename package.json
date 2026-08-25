@@ -11,7 +11,7 @@
     "build": "node scripts/build.mjs && node tests/build-check.mjs",
     "serve": "npm run build && node tests/server.mjs",
     "format:check": "node tests/format-check.mjs",
-    "lint": "node --check theme-init.js && node --check script.js && node --check content/portfolio.mjs && node --check src/html.mjs && node --check src/components.mjs && node --check src/render-page.mjs && node --check scripts/build.mjs && node --check playwright.config.mjs && node --check tests/build-check.mjs && node --check tests/format-check.mjs && node --check tests/portfolio.spec.mjs && node --check tests/cross-browser.spec.mjs",
+    "lint": "node --check script.js && node --check content/portfolio.mjs && node --check src/html.mjs && node --check src/components.mjs && node --check src/render-page.mjs && node --check scripts/build.mjs && node --check playwright.config.mjs && node --check tests/build-check.mjs && node --check tests/format-check.mjs && node --check tests/portfolio.spec.mjs && node --check tests/cross-browser.spec.mjs",
     "test": "playwright test",
     "test:chromium": "playwright test --project=chromium",
     "test:cross-browser": "playwright test tests/cross-browser.spec.mjs",

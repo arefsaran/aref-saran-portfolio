@@ -11,7 +11,7 @@ if (!outputDirectory.startsWith(`${projectRoot}${sep}`) || basename(outputDirect
 await rm(outputDirectory, { recursive: true, force: true });
 await mkdir(outputDirectory, { recursive: true });
 
-const files = ['styles.css', 'script.js', 'theme-init.js', 'favicon.svg', 'robots.txt', 'sitemap.xml', 'og-card-senior.jpg'];
+const files = ['styles.css', 'script.js', 'favicon.svg', 'robots.txt', 'sitemap.xml', 'og-card-senior.jpg'];
 await Promise.all(files.map((file) => cp(resolve(projectRoot, file), resolve(outputDirectory, file))));
 await cp(resolve(projectRoot, 'assets'), resolve(outputDirectory, 'assets'), { recursive: true });
 await writeFile(resolve(outputDirectory, 'index.html'), renderPage(), 'utf8');

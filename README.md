@@ -1,38 +1,22 @@
 # Aref Saran — Senior Test Engineer Portfolio
 
-Production portfolio for [arefsaran.ir](https://arefsaran.ir/). It positions Aref Saran as a Senior Test Engineer who designs test automation and quality systems for complex fintech products, APIs, BPMN/Camunda workflows, external providers, performance, and CI/CD.
+Production portfolio for [arefsaran.ir](https://arefsaran.ir/). It presents Aref Saran as a Senior Test Engineer who builds automation and quality systems for complex fintech, API, integration, and BPMN/Camunda workflows.
 
-The implementation is intentionally static: structured JavaScript content is rendered to semantic HTML at build time, CSS supplies the responsive design system and accessible engineering diagrams, and a small progressive-enhancement script handles themes, navigation state, and back-to-top behavior. The public site has no framework runtime, API, database, CMS, analytics, remote font, or third-party request.
+The implementation is intentionally static. Structured JavaScript content is rendered to semantic HTML at build time, a single light-first CSS system provides the complete responsive presentation, and a small progressive-enhancement script handles only mobile navigation, sticky-header state, and active navigation. The public page has no framework runtime, API, database, CMS, analytics, remote font, or third-party request.
 
-## Production architecture
+## Product structure
 
-The production image has two responsibilities on the same domain:
+The homepage has seven major areas:
 
-```text
-Darkube ingress
-    |
-    v
-Nginx :80
-   | \
-   |  \\ VPN WebSocket path
-   |   \
-Portfolio  ->  V2Ray internal port
-```
+1. Hero
+2. Proof
+3. How I Help
+4. Selected Work
+5. Quality Engineering Approach
+6. Experience + Capabilities
+7. Contact
 
-The Dockerfile builds this repository’s portfolio and derives the deployment image from `alphacodinghub/v2ray-nginx:latest`. That parent supplies V2Ray, Nginx, Supervisor, `/entrypoint.sh`, and the runtime configuration substitution for `LISTENING_PORT`, `CLIENT_ID`, `CLIENT_ALTERID`, and `CLIENT_WSPATH`. The inherited entrypoint and Supervisor command are intentionally not overridden.
-
-The generated site is copied to `/opt/portfolio`, not the parent image’s `/var/www/html` volume. This ensures a Darkube build from this repository packages the portfolio into the derived image.
-
-Required environment variable names are:
-
-```text
-LISTENING_PORT
-CLIENT_ID
-CLIENT_ALTERID
-CLIENT_WSPATH
-```
-
-Values must be configured as deployment secrets/environment variables; do not commit them. The V2Ray listening port is internal and should not normally be exposed publicly. Darkube should expose container port `80`, while HTTPS terminates at the platform/ingress layer unless the existing deployment architecture requires otherwise.
+Three generalized case studies provide scannable problem, decision, and outcome summaries. Native `<details>` disclosures preserve deeper technical evidence without turning the default page into documentation.
 
 ## Local setup
 
@@ -49,53 +33,50 @@ Open `http://127.0.0.1:4173`.
 ## Commands
 
 ```bash
-npm run format:check  # final newline and trailing-whitespace checks
+npm run format:check  # final-newline and trailing-whitespace checks
 npm run lint          # JavaScript syntax validation
 npm run build         # generate and validate dist/
-npm run test:chromium # detailed interaction, responsive, and axe checks
-npm test              # detailed Chrome plus Firefox/WebKit/Edge smoke checks
-npm run quality       # complete local quality gate
+npm run test:chromium # detailed interaction, responsive, performance, and axe checks
+npm test              # Chrome plus Firefox/WebKit/Edge smoke coverage
+npm run quality       # complete quality gate
 ```
 
-`npm run build` recreates `dist/` from the source files. Do not edit generated files in `dist/` directly.
+`npm run build` recreates `dist/` from allow-listed source files. Do not edit generated files in `dist/` directly.
 
-## Architecture and editing
+## Source architecture
 
-- `content/portfolio.mjs` — single source of truth for profile details, proof, outcomes, system architecture, BPMN/fintech models, case studies, AI-augmented QA, capabilities, experience, and contact copy.
-- `src/components.mjs` — functional HTML components for every page section.
+- `content/portfolio.mjs` — factual source of truth for profile, proof, services, three case studies, quality approach, experience, capabilities, AI-assisted practice, and contact content.
+- `src/components.mjs` — pure semantic HTML render functions for the header, seven major areas, and footer.
 - `src/render-page.mjs` — document shell, metadata, JSON-LD, and component composition.
-- `src/html.mjs` — escaping and small rendering helpers.
-- `styles.css` — Engineering Editorial × Quality Control System tokens, themes, components, breakpoints, and reduced-motion behavior.
-- `theme-init.js` — pre-paint OS-theme detection and persisted manual preference.
-- `script.js` — progressive enhancement for navigation, themes, active sections, and back-to-top behavior. Core content never depends on JavaScript visibility changes.
-- `scripts/build.mjs` — deterministic production build.
-- `tests/build-check.mjs` — build manifest, link, positioning, metadata, JSON-LD graph, inline-script, and asset-budget validation.
-- `tests/portfolio.spec.mjs` — detailed Chrome behavior, keyboard, theme, exact responsive widths, reduced motion, semantic structure, and WCAG checks.
+- `src/html.mjs` — output escaping and small rendering helpers.
+- `styles.css` — single-theme editorial design system, component layouts, intentional breakpoints, focus states, and reduced-motion handling.
+- `script.js` — progressive enhancement for the compact mobile menu, sticky-header state, and active navigation.
+- `scripts/build.mjs` — deterministic production artifact generation.
+- `tests/build-check.mjs` — production manifest, Docker input, link, section-count, metadata, JSON-LD, theme-removal, script, sitemap, and asset-budget verification.
+- `tests/portfolio.spec.mjs` — detailed Chrome behavior, keyboard access, target viewport geometry, spacing, collision, accessibility, performance, and semantic coverage.
 - `tests/cross-browser.spec.mjs` — focused Chromium/Chrome, Firefox, WebKit, and Edge smoke coverage.
-- `Dockerfile` and `nginx.conf` — multi-stage derived production image, hardened portfolio serving, and the V2Ray WebSocket proxy.
-- `docs/` — baseline audit, design-system reference, and evidence-backed implementation report.
+- `Dockerfile` and `nginx.conf` — multi-stage derived production image, hardened portfolio serving, and the existing V2Ray WebSocket proxy.
 
-To change portfolio copy, edit `content/portfolio.mjs`. To add or change a section’s structure, edit `src/components.mjs` and compose it in `src/render-page.mjs`. Run `npm run quality` before publishing.
+Copy changes belong in `content/portfolio.mjs`. Structural changes belong in `src/components.mjs` and `src/render-page.mjs`. Run `npm run quality` before publishing.
 
-## CI and Darkube deployment
+## Production architecture
 
-`.gitlab-ci.yml` runs the full quality gate in GitLab and retains the generated site and browser reports as job artifacts. A merge or default-branch deployment should only proceed after the `portfolio-quality` job passes.
-
-Configure Darkube to build the repository rather than directly running the upstream parent image:
+The production image preserves the existing same-domain portfolio and VPN routing:
 
 ```text
-Source: Git repository
-Repository: this portfolio repository
-Branch: main
-Build: Dockerfile from repository root
-Dockerfile: Dockerfile
-Application/container port: 80
-Health path: /
+Darkube ingress
+    |
+    v
+Nginx :80
+   | \
+   |  \ VPN WebSocket path
+   |   \
+Portfolio  ->  V2Ray internal port
 ```
 
-Keep the existing V2Ray environment variable values configured in Darkube under the names documented above. Kubernetes should run the derived image produced by this build. If pod events still show only `alphacodinghub/v2ray-nginx:latest` as the deployed image, the platform is bypassing this repository’s Dockerfile and the portfolio files will not be present.
+The Dockerfile builds the portfolio and derives from `alphacodinghub/v2ray-nginx:latest`. The parent supplies V2Ray, Nginx, Supervisor, `/entrypoint.sh`, and runtime substitution for `LISTENING_PORT`, `CLIENT_ID`, `CLIENT_ALTERID`, and `CLIENT_WSPATH`. The inherited entrypoint and Supervisor command are intentionally not overridden.
 
-The same derived image can be checked locally:
+Generated files are copied to `/opt/portfolio`. Darkube must build this repository’s Dockerfile, expose container port `80`, and keep the four existing runtime values in deployment secrets/environment configuration. Do not commit those values.
 
 ```bash
 docker build -t aref-saran-portfolio .
@@ -103,19 +84,19 @@ docker run --rm -p 8080:80 \
   -e LISTENING_PORT=3456 \
   -e CLIENT_ID=11111111-1111-4111-8111-111111111111 \
   -e CLIENT_ALTERID=64 \
-  -e CLIENT_WSPATH=/__codex_vpn_ws_test__ \
+  -e CLIENT_WSPATH=/__portfolio_vpn_ws_test__ \
   aref-saran-portfolio
 ```
 
-Then open `http://127.0.0.1:8080`.
+If deployment events show only the upstream parent image, the platform is bypassing this repository’s Dockerfile and the portfolio artifact will not be present.
 
-## Content, privacy, and claims
+## CI, security, and privacy
 
-Professional claims are restricted to the supplied, verified material. The current employer and client systems remain unnamed; identifiers, private endpoints, credentials, production data, and proprietary implementation details are excluded. The résumé is offered by email instead of published until its public wording is current.
+`.gitlab-ci.yml` installs the supported browsers and runs the full quality gate. Nginx retains CSP, HSTS, MIME-sniffing, frame, referrer, permissions, COOP, and CORP protections.
 
-Do not add employer or customer names, private repository links, certifications, testimonials, awards, years of experience, or new metrics without a verifiable source and explicit approval.
+Professional claims are restricted to supplied, verified material. Employer and client identifiers, private endpoints, credentials, production data, and proprietary implementation details are excluded. The résumé remains available by email until a verified public file is supplied.
 
-## More documentation
+## Documentation
 
 - [Portfolio audit](docs/PORTFOLIO_AUDIT.md)
 - [Design system](docs/DESIGN_SYSTEM.md)

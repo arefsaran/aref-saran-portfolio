@@ -1,133 +1,152 @@
-# Portfolio Implementation Report — 2026-08-24
+# Portfolio Implementation Report — 2026-08-25
 
-## Result
+## Summary
 
-The portfolio now positions Aref Saran as a Senior Test Engineer who designs test automation and quality systems for complex software and fintech products. The static architecture remains intact; the content model, page hierarchy, visual system, metadata, tests, and documentation were selectively refactored.
+The rejected dashboard/documentation presentation was replaced with a contemporary, light-first personal engineering portfolio. The result leads with professional value, establishes verified proof immediately, makes three selected case studies the technical center, and keeps deeper engineering detail optional.
 
-The first viewport now communicates name, role, specialization, engineering outcome, supporting statement, evidence routes, and contact availability. Technical depth follows through dedicated quality-system, BPMN/Camunda, fintech, case-study, AI-augmented QA, capability, and experience sections.
-
-## Delivered scope
-
-- Senior Test Engineer hero and metadata positioning.
-- Three-group proof bar preserving 2,300+, 39h → 2h, approximately 95%, and four-layer evidence.
-- BUILD / STABILIZE / PROTECT / ACCELERATE outcome model.
-- Seven-layer quality-system architecture and eight-stage feature-branch quality flow.
-- BPMN/Camunda workflow model with eight synchronized test oracles.
-- Fintech correctness chain, invariant checklist, callback-replay example, and risk priorities.
-- Five generalized engineering case studies, including automation from zero and BPMN/financial correctness.
-- Credibility-bounded AI-Augmented Quality Engineering section.
-- Seven domain-grouped capability areas.
-- Consolidated experience and professional perspective.
-- Updated contact CTA, social metadata, social card, sitemap, and structured data.
+Aref remains positioned as a Senior Test Engineer with Test Automation & Quality Systems specialization. Fintech correctness, BPMN/Camunda workflow testing, deterministic dependencies, API/integration coverage, performance, delivery gates, and AI-assisted workflow remain visible without becoming standalone homepage chapters.
 
 ## Architecture
 
-`content/portfolio.mjs` remains the factual source of truth. Pure render functions in `src/components.mjs` create the semantic sections; `src/render-page.mjs` composes metadata, the JSON-LD graph, and document structure. `scripts/build.mjs` recreates only the validated project `dist/` directory and copies an allow-listed production asset set.
+The framework-free static architecture was preserved:
 
-The diagrams use ordered lists, figures, captions, and CSS. They become linear or compact grids on small screens and require no diagram or animation dependency.
+- `content/portfolio.mjs` remains the single factual source.
+- Pure functions in `src/components.mjs` render semantic section markup.
+- `src/render-page.mjs` owns document composition, metadata, and JSON-LD.
+- `scripts/build.mjs` recreates an allow-listed `dist/` artifact.
+- Vanilla CSS and 2.3KB of progressive JavaScript provide the complete interface.
+- Docker/Nginx, security headers, sitemap, robots, structured data, and the V2Ray routing contract remain intact.
 
-The browser receives:
+No framework, CSS toolkit, font, animation library, diagram dependency, runtime package, analytics, API, or contact backend was introduced.
 
-| Asset | Size |
+## Removed
+
+- Manual/system theme toggle and persistence.
+- `theme-init.js` and its production/Docker/build references.
+- Dark-mode tokens, selectors, media branches, and theme tests.
+- Numbered report-style section labels.
+- Standalone quality-system architecture, BPMN, fintech, and AI chapters.
+- Complex architecture stacks, boundary nodes, workflow diagrams, and custom numeric flows.
+- Scroll-to-top control and obsolete interaction code.
+- Two secondary case studies from the primary homepage set.
+- Legacy `og-card.jpg`; the verified `og-card-senior.jpg` remains canonical.
+- The complete rejected stylesheet rather than layering overrides beneath it.
+
+## New design system
+
+### Color
+
+Warm off-white `#f7f7f5`, white surfaces, near-black `#111214`, AA-compliant gray supporting text, one cobalt accent `#315cf6`, and a pale accent surface `#edf1ff`.
+
+### Typography
+
+System-first local fonts, 44–56px mobile hero type, up to 94px desktop hero type, 32–64px section headings, 16px mobile body, 17px desktop body, bounded reading measure, restrained weight, and no remote font request.
+
+### Spacing
+
+96–128px desktop major-section space, 88px tablet space, and 76px mobile space. No viewport-height sections, arbitrary minimum heights, or inherited desktop sticky spacing.
+
+### Components
+
+Compact header, text-led hero, typographic proof strip, four problem/action/outcome service cards, one featured plus two supporting case studies, native disclosures, five-step quality approach, compact experience/capability columns, integrated AI practice note, contact panel, and minimal footer.
+
+## Information architecture
+
+1. Hero
+2. Proof
+3. How I Help
+4. Selected Work
+5. Quality Engineering Approach
+6. Experience + Capabilities
+7. Contact
+
+## Responsive fixes
+
+- Mobile header is 60px high with a 44px icon trigger and safe-area support.
+- The open menu is an absolute compact panel, so it does not enlarge or cover the header.
+- Hero content follows headline → summary → CTAs → proof → portrait on small screens.
+- Portrait is capped at 420px on tablet and 400px on phone layouts.
+- Proof becomes a deliberate 2×2 mobile composition.
+- Service cards, case-study decision summaries, approach flow, experience, capabilities, and contact all receive explicit stacked layouts.
+- The quality approach uses no custom numbers and has collision tests at 375px and 1440px.
+- Automated geometry tests cover 375×667, 390×844, 430×932, 768×1024, 1024×768, and 1440×900.
+- Final full-page screenshots were reviewed at all six target viewports; no overlap, clipping, horizontal overflow, giant whitespace, or hidden sticky-header target was found.
+
+## Accessibility
+
+- One H1 and a logical H2/H3/H4 hierarchy.
+- Skip link, landmarks, semantic lists/definition lists, native `<details>`, meaningful portrait text, and safe external-link semantics.
+- Visible focus, 44px targets, keyboard menu control, Escape close, and focus return.
+- Content remains available without JavaScript and with all motion disabled.
+- Forced-colors support and reduced-motion rules remain.
+- Axe scanned 390px and 1440px layouts against WCAG 2.0/2.1/2.2 A/AA tags with zero detected violations.
+
+## Performance
+
+Production artifact sizes:
+
+| Asset | Bytes |
 | --- | ---: |
-| Generated HTML | 34,069 bytes |
-| CSS | 34,738 bytes |
-| Progressive JavaScript | 3,502 bytes |
-| Pre-paint theme initializer | 612 bytes |
-| Primary WebP portrait | 40,718 bytes |
-| Social card | 134,910 bytes |
+| Generated HTML | 23,307 |
+| CSS | 27,701 |
+| Progressive JavaScript | 2,318 |
+| Primary WebP portrait | 40,718 |
+| Social card | 134,910 |
 
-Compared with the baseline, progressive JavaScript fell from 6,844 to 3,502 bytes and CSS fell from 36,981 to 34,738 bytes despite the additional technical sections.
+A local Chrome lab run at 390×844 measured five requests, 94,417 encoded bytes for the loaded page, 268ms first contentful paint, 268ms largest contentful paint, and zero cumulative layout shift. These are local lab results, not field Core Web Vitals or a production-network claim.
 
-## Accessibility and responsive verification
-
-The implementation provides semantic landmarks and figures, one H1, logical headings, a skip link, visible focus, native details controls, keyboard navigation, safe external links, meaningful portrait text, theme state, reduced motion, and content that does not depend on JavaScript-driven reveal state.
-
-The detailed suite verifies no horizontal overflow at:
-
-```text
-320 · 375 · 390 · 430 · 768 · 1024 · 1280 · 1440 · 1920
-```
-
-The final Playwright run passed 28/28 tests in 47.3 seconds:
-
-- detailed Chrome/Chromium interaction, keyboard, theme, responsive, metadata, structure, and asset checks;
-- axe scans with zero automatically detectable WCAG A/AA violations in light and dark modes;
-- focused Firefox, WebKit, and Edge positioning and 390px layout smoke checks.
-
-## Lighthouse measurement
-
-Lighthouse ran against the generated production site on localhost using mobile emulation.
-
-| Category or metric | Result |
-| --- | ---: |
-| Performance | 99 / 100 |
-| Accessibility | 100 / 100 |
-| Best Practices | 100 / 100 |
-| SEO | 100 / 100 |
-| First Contentful Paint | 1.6 s |
-| Largest Contentful Paint | 1.6 s |
-| Speed Index | 3.0 s |
-| Total Blocking Time | 0 ms |
-| Cumulative Layout Shift | 0 |
-| Time to Interactive | 1.6 s |
-| Requests | 6 |
-| Transferred | 115,214 bytes |
-
-INP is not produced by a local lab run and no field-performance claim is made. Lighthouse wrote and parsed a valid report; its Windows temporary-profile cleanup returned an `EPERM` warning after measurement completed.
+The browser suite enforces six-or-fewer initial requests, a 250KB loaded-page budget, CLS ≤ 0.1, explicit portrait dimensions, and a bounded local LCP sanity threshold. The build gate separately enforces HTML, CSS, JavaScript, portrait, and social-image budgets.
 
 ## SEO
 
-- Role-accurate title, description, OpenGraph, and Twitter/X metadata.
-- Local 1200 × 630 Senior Test Engineer social preview.
-- Canonical URL, robots, sitemap, theme color, favicon, and descriptive social-image text.
-- Valid JSON-LD `@graph` containing `WebSite`, `ProfilePage`, and `Person` with explicit relationships.
-- Natural coverage of Senior Test Engineer, Quality Engineering, Test Automation, BPMN, Camunda, Fintech Testing, Robot Framework, API Testing, Performance Testing, GitLab CI, and Quality Systems without keyword stuffing.
+- Preserved canonical, robots, sitemap, favicon, title, description, OpenGraph, Twitter/X, and 1200×630 social image.
+- Updated positioning descriptions and the sitemap modification date.
+- Preserved the JSON-LD `WebSite`, `ProfilePage`, and `Person` graph with verified name, role, education, profiles, portrait, and expertise.
+- Kept one semantic H1 and natural terminology without keyword stuffing.
+- Added build-time sitemap/content-model consistency checks.
 
-## Performance and resilience
+## Testing
 
-- Removed the interactive demo lab, stage timers, progress mutations, and scroll-reveal observer.
-- Removed perpetual decorative animation.
-- Content remains visible before progressive enhancement.
-- Mobile navigation remains present without JavaScript and becomes a controlled menu with JavaScript.
-- No framework, remote font, analytics, diagram library, animation library, or new runtime dependency was added.
-- Existing image preload, explicit dimensions, local assets, CSP, cache policy, and gzip configuration remain.
-
-## Social image
-
-The built-in image-editing draft correctly changed the role text but altered identity details, so it was rejected. The final `og-card-senior.jpg` was produced by deterministically editing only the role band of the existing 1200 × 630 card; the original portrait pixels remain unchanged.
-
-The built-in edit prompt requested the exact text `SENIOR TEST ENGINEER`, preservation of the original portrait and composition, and no additional text, logos, or decorative changes.
-
-## CI and release
-
-- Node 24 is now consistent across package metadata, GitHub Actions, GitLab CI, documentation, and Docker build.
-- CI installs Chromium, Firefox, and WebKit and runs the full quality gate.
-- Local Windows runs add an Edge smoke project when Edge is available.
-- The production build contains ten allow-listed files and validates required positioning, 29 unique IDs, internal links, JSON-LD relationships, social metadata, executable inline-script absence, JavaScript syntax, and asset budgets.
-
-## Commands executed
+Baseline before editing:
 
 ```text
-npm install --package-lock-only --ignore-scripts
-npm run format:check
-npm run lint
-npm run build
-npm run test:chromium
-npx playwright install firefox webkit
-npm test
-npx --yes lighthouse http://127.0.0.1:4173/ ...
+npm ci             → 5 packages, 0 vulnerabilities
+npm run quality    → 28/28 checks passed
 ```
 
-## Security and privacy
+Final verification:
 
-- No secrets, credentials, private endpoints, private repository URLs, client names, production data, trackers, cookies, or contact-form collection were added.
-- External links retain `noopener noreferrer`.
-- The build continues to reject executable inline scripts and oversized required assets.
-- Nginx continues to apply CSP, HSTS, MIME-sniffing, frame, referrer, permissions, COOP, and CORP protections.
+```text
+npm run format:check                                      → passed
+npm run lint                                              → passed
+npm run build                                             → 9 production files verified
+npm test                                                  → 27/27 passed in 23.1s
+npx playwright screenshot (six target viewports)          → rendered and reviewed
+local Chrome performance probe at 390×844                 → 5 requests, 94,417 bytes, CLS 0
+containerized current dist + rendered nginx.conf runtime  → HTTP 200, current H1, social image, CSP/security headers
+```
 
-## Known limitations
+Detailed Chrome coverage includes runtime errors, failed/third-party requests, seven-area IA, internal links, CTA scroll position, compact navigation, theme removal, disclosure keyboard behavior, target geometry, spacing, overflow, portrait bounds, approach collisions, duplicate numbering, reduced motion, runtime budgets, headings/IDs/JSON-LD, and Axe. Firefox, WebKit, and Edge run focused positioning and 390px overflow smoke coverage.
 
-1. Real INP and field Core Web Vitals require deployed HTTPS traffic.
-2. A verified public résumé was not supplied, so the site continues to offer it by email.
-3. No production deployment, DNS change, Git push, or external platform state change was performed.
+## Deployment verification
+
+The generated production artifact and current rendered Nginx configuration were served together in a local container. The runtime returned HTTP 200, served the new headline and 134,910-byte social image, and returned the configured CSP and security headers.
+
+The exact multi-stage `docker build` was also attempted twice after starting Docker Desktop. Docker Hub token negotiation failed before either public base image could be resolved (`Post https://auth.docker.io/token: EOF`); a direct `docker pull node:24-alpine` and host TLS probe failed at the same external network boundary. This did not expose a Dockerfile or site-build failure, but the final derived image could not be assembled locally. `tests/build-check.mjs` now verifies every required Docker build input, including the configured social image, to prevent the previous missing-copy regression.
+
+## Significant changed files
+
+- `content/portfolio.mjs` — seven-area content model and three primary case studies.
+- `src/components.mjs` — complete semantic component refactor.
+- `src/render-page.mjs`, `src/html.mjs` — new composition and helper contract.
+- `styles.css` — complete visual-system replacement.
+- `script.js` — navigation/header-only progressive enhancement.
+- `tests/portfolio.spec.mjs`, `tests/cross-browser.spec.mjs`, `tests/build-check.mjs` — revised and expanded verification.
+- `scripts/build.mjs`, `Dockerfile`, `package.json` — theme-file removal and corrected allow-lists.
+- `favicon.svg`, `sitemap.xml` — new identity and current modification date.
+- `README.md`, `docs/PORTFOLIO_AUDIT.md`, `docs/DESIGN_SYSTEM.md` — implementation-aligned documentation.
+- Deleted: `theme-init.js`, `og-card.jpg`.
+
+## Remaining issue
+
+The local machine could not authenticate to public Docker Hub because its TLS/token connection ended with EOF. The deployment environment must be able to resolve `node:24-alpine` and `alphacodinghub/v2ray-nginx:latest` to assemble the final image. No other implementation, accessibility, responsive, content, performance-budget, SEO, or source-build issue remains known.

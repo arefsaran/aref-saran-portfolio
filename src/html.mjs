@@ -12,10 +12,10 @@ export const externalLink = ({ label, href }, className = '') => {
   return `<a${classAttribute} href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(label)} profile, opens in a new tab">${escapeHtml(label)} <span aria-hidden="true">↗</span></a>`;
 };
 
-export const sectionHeading = ({ kicker, title, description, id }) => `
-  <div class="section-heading" data-reveal="up">
+export const sectionHeading = ({ eyebrow, title, description, id }) => `
+  <div class="section-heading">
     <div>
-      <p class="section-kicker">${escapeHtml(kicker)}</p>
+      <p class="eyebrow">${escapeHtml(eyebrow)}</p>
       <h2 id="${escapeHtml(id)}">${escapeHtml(title)}</h2>
     </div>
     <p>${escapeHtml(description)}</p>

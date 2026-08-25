@@ -1,5 +1,5 @@
 import portfolio from '../content/portfolio.mjs';
-import { AiAugmented, CapabilityMap, Contact, Experience, FintechCorrectness, Footer, Header, Hero, OutcomeMap, ProofBar, SystemArchitecture, WorkflowEngineering, Work } from './components.mjs';
+import { Contact, ExperienceCapabilities, Footer, Header, Hero, HowIHelp, Proof, QualityApproach, SelectedWork } from './components.mjs';
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -44,14 +44,13 @@ export const renderPage = () => `<!doctype html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="${portfolio.site.themeColors.light}" data-theme-color data-light="${portfolio.site.themeColors.light}" data-dark="${portfolio.site.themeColors.dark}">
+  <meta name="theme-color" content="${portfolio.site.themeColor}">
   <meta name="description" content="${portfolio.site.description}">
   <meta name="author" content="${portfolio.profile.name}">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="${portfolio.site.url}">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <link rel="preload" href="./${portfolio.profile.portrait.webp}" as="image" type="image/webp">
-  <script src="./theme-init.js"></script>
   <link rel="stylesheet" href="./styles.css">
   <script defer src="./script.js"></script>
   <meta property="og:type" content="profile">
@@ -78,15 +77,11 @@ export const renderPage = () => `<!doctype html>
   ${Header(portfolio)}
   <main id="main">
     ${Hero(portfolio)}
-    ${ProofBar(portfolio)}
-    ${OutcomeMap(portfolio)}
-    ${SystemArchitecture(portfolio)}
-    ${WorkflowEngineering(portfolio)}
-    ${FintechCorrectness(portfolio)}
-    ${Work(portfolio)}
-    ${AiAugmented(portfolio)}
-    ${CapabilityMap(portfolio)}
-    ${Experience(portfolio)}
+    ${Proof(portfolio)}
+    ${HowIHelp(portfolio)}
+    ${SelectedWork(portfolio)}
+    ${QualityApproach(portfolio)}
+    ${ExperienceCapabilities(portfolio)}
     ${Contact(portfolio)}
   </main>
   ${Footer(portfolio)}

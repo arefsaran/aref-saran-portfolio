@@ -1,67 +1,94 @@
-# Engineering Editorial × Quality Systems
+# Contemporary Engineering Portfolio Design System
 
-## Positioning
+## Direction
 
-The visual system presents Aref Saran as a Senior Test Engineer who designs quality systems for complex software and fintech products. Editorial hierarchy makes the professional story easy to scan; system diagrams expose the engineering relationships behind the claims.
+The interface is a single-theme, light-first personal portfolio: editorial, restrained, human, and technically credible without resembling documentation, a dashboard, or a SaaS template.
 
-The intended impression is “this person designs systems,” not “this person customized a portfolio template.”
+The hierarchy is deliberate:
 
-## Principles
+```text
+Identity → Value → Proof → Work → Approach → Experience → Contact
+```
 
-1. **Identity before tools.** Name, role, specialization, outcome, and evidence appear before technology brands.
-2. **Evidence before decoration.** Numbers, state chains, diagrams, and case-study details support a concrete claim.
-3. **Technical depth through progressive disclosure.** Recruiters can scan headings and diagrams; technical readers can open engineering breakdowns.
-4. **Diagrams remain content.** Architecture, BPMN, fintech, and delivery flows are semantic ordered lists styled with CSS, with readable linear mobile fallbacks.
-5. **Motion is optional.** No section is hidden for animation. Interaction is limited to useful hover, focus, navigation, and theme feedback.
-6. **Controlled color.** Warm paper, navy, cobalt, mint, amber, and rose have defined roles in both themes.
+Engineering credibility comes from factual content, case-study decisions, and evidence. Decorative technical diagrams are not part of the visual language.
+
+## Core principles
+
+1. **Evidence before taxonomy.** Proof and selected work appear before the broad capability inventory.
+2. **Typography before decoration.** Scale, measure, and rhythm establish hierarchy; cards do not carry the entire design.
+3. **Depth is optional.** Case-study problem, decision, and outcome remain visible; implementation detail uses native `<details>`.
+4. **One accent, neutral surfaces.** Cobalt marks actions and emphasis. Color does not simulate system state or monitoring UI.
+5. **Mobile is composed, not compressed.** Navigation, portrait, case studies, approach flow, and capability groups receive explicit mobile layouts.
+6. **Motion is nonessential.** Content never depends on animation. Reduced motion disables smooth scrolling and transitions.
 
 ## Tokens
 
-Canonical tokens live at the top of `styles.css`.
+Canonical values live at the beginning of `styles.css`.
 
-- `--paper`, `--paper-deep`, `--surface`, `--surface-strong`: page and content hierarchy.
-- `--ink`, `--ink-soft`, `--ink-faint`: primary, supporting, and metadata text.
-- `--accent`, `--accent-soft`: links, focus, active states, and system emphasis.
-- `--success`, `--success-soft`: validated state and authoritative evidence.
-- `--warning-soft`: financial risk and high-consequence behavior.
-- `--line`, `--line-strong`: architecture, dividers, and boundaries.
-- `--dark-panel`, `--dark-panel-raised`, `--dark-text`, `--dark-muted`: fixed technical surfaces that retain contrast in both themes.
+### Color
 
-The typography uses local system fonts only. Headings use tight tracking and compact leading; body text uses relaxed leading; small labels are kept at readable sizes and never carry the only instance of essential information.
+| Token | Value | Purpose |
+| --- | --- | --- |
+| `--bg` | `#f7f7f5` | Warm neutral page background. |
+| `--surface` | `#ffffff` | Cards and full-width proof/approach surfaces. |
+| `--surface-subtle` | `#f1f2ef` | Quiet scenario labels. |
+| `--text` | `#111214` | Primary copy and headings. |
+| `--text-secondary` | `#5b5e63` | Supporting copy. |
+| `--text-muted` | `#62656a` | Metadata with WCAG AA contrast at small sizes. |
+| `--border` | `rgba(17, 18, 20, 0.11)` | Structural separation. |
+| `--accent` | `#315cf6` | Primary action and emphasis. |
+| `--accent-hover` | `#2449d8` | Interactive hover state. |
+| `--soft-accent` | `#edf1ff` | Restrained callout surface. |
 
-## Page components
+There are no dark tokens, alternate palettes, `data-theme` selectors, or color-scheme preference branches.
 
-- **Header:** name, Senior Test Engineer label, five concise navigation links, theme control, and keyboard-safe mobile menu.
-- **Hero:** name, role, outcome-led headline, system-level statement, two internal CTAs, profiles, portrait, and four domain signals.
-- **Proof bar:** three verified proof groups, with 39h → 2h and approximately 95% combined instead of duplicated.
-- **Outcome map:** BUILD, STABILIZE, PROTECT, and ACCELERATE.
-- **Quality-system architecture:** seven layers from business risk to CI/CD, plus an eight-stage feature-branch delivery model.
-- **BPMN/Camunda:** generalized workflow path and eight synchronized test oracles.
-- **Fintech correctness:** six-state correctness chain, invariant checklist, callback replay example, and risk priorities.
-- **Selected work:** five generalized case studies with native `<details>` breakdowns.
-- **AI-augmented QA:** accelerated analysis beside explicit sources of truth.
-- **Capability map:** seven engineering-domain groups.
-- **Experience:** delivery history plus a concise engineering perspective.
-- **Contact:** one primary CTA and direct professional channels.
+### Typography
 
-## Responsive behavior
+The site uses a local system-first stack: Inter when installed, then SF Pro, Segoe UI Variable, Segoe UI, Helvetica, and Arial. No remote font request is made.
 
-Structural transitions occur at 1100, 900, 720, 430, and 360px. Diagrams become full-width stacks rather than horizontally scrolling canvases. Capability groups remain compact two-column cards where readable and become one column at the smallest width.
+- Hero: `clamp(3.5rem, 6.4vw, 5.9rem)` desktop; 44–56px mobile.
+- Section heading: `clamp(2.4rem, 4.5vw, 4rem)` desktop; 32–42px mobile.
+- Body: 17px desktop, 16px mobile.
+- Supporting content: approximately 12–16px according to hierarchy.
+- Labels: 11–12px, bold, high contrast, and never the only source of essential meaning.
 
-Automated overflow coverage runs at 320, 375, 390, 430, 768, 1024, 1280, 1440, and 1920px. Focused browser-engine smoke coverage also verifies the 390px layout.
+Headings use restrained weight, compact leading, and tight tracking. Paragraph widths remain bounded for readable scanning.
 
-## Accessibility rules
+### Spacing and shape
 
-- One H1 followed by logical H2/H3 progression.
-- Semantic landmarks, section labels, figures, captions, ordered flows, and native disclosures.
-- Skip link, visible focus, 44px primary control targets, and keyboard-operable navigation.
-- Decorative marks hidden from assistive technology.
-- Meaning never depends on color, shape, or motion alone.
-- Content is visible without the enhancement script.
-- Mobile navigation remains available without JavaScript; JavaScript converts it into a controlled menu.
-- `prefers-reduced-motion` removes smooth scrolling and transition duration.
-- Light and dark themes are scanned with axe using WCAG 2.0/2.1/2.2 A and AA tags.
+- Major desktop section space: 96–128px.
+- Major tablet space: 88px.
+- Major mobile space: 76px.
+- Internal section gaps: 32–64px.
+- Card gaps: 16–24px.
+- Radii: 10px controls, 18px cards, 24px portrait/contact.
+- Shadows: limited to the compact open mobile-navigation panel.
 
-## Content integrity
+No section uses viewport-height sizing or arbitrary minimum height.
 
-Only supplied or previously verified professional facts are public. Senior Test Engineer, BPMN/Camunda, fintech workflows, automation-from-zero, feature-branch quality, deterministic dependencies, and AI-augmented QA come from the supplied professional brief. Existing quantitative results remain unchanged. Public copy excludes employer/client identities, private endpoints, credentials, production data, and proprietary implementation details.
+## Components
+
+- **Header:** 64px desktop and 60px mobile, small AS mark, restrained links, icon-only accessible mobile trigger, and opaque scrolled state.
+- **Hero:** outcome-led copy, two CTAs, two concise proof signals, professional context, and a supporting real portrait without overlays.
+- **Proof:** four factual evidence groups in a typographic strip rather than dashboard widgets.
+- **How I Help:** four cards organized by Problem, What I do, and Outcome.
+- **Selected Work:** one featured and two supporting cases, each with metric, scannable decision model, optional scenarios, and native disclosure.
+- **Quality Approach:** a five-step semantic flow that becomes a collision-free vertical sequence on small screens.
+- **Experience + Capabilities:** compact two-column composition with a timeline, four grouped capability domains, and one supporting AI-assisted practice.
+- **Contact:** one pale accent panel, direct email CTA, professional profiles, and reasons to connect.
+- **Footer:** one compact identity row with no oversized back-to-top control.
+
+## Accessibility contract
+
+- One H1 and logical H2/H3/H4 progression.
+- Semantic landmarks, lists, definition lists, native disclosures, and descriptive link labels.
+- Skip link, 44px interactive targets, visible focus, Escape handling, and focus return for mobile navigation.
+- Sufficient text contrast at every size and on every surface.
+- Meaning does not depend on color, shape, motion, or JavaScript.
+- Mobile navigation remains present without JavaScript; progressive enhancement converts it to a controlled popup.
+- `prefers-reduced-motion: reduce` removes smooth scrolling and transition duration.
+- Forced-colors rules preserve important borders and flow markers.
+
+## Responsive contract
+
+Automated geometry checks cover 375×667, 390×844, 430×932, 768×1024, 1024×768, and 1440×900. Tests enforce compact mobile-header height, no horizontal overflow, bounded section padding, restrained portrait height, collision-free approach content, nonduplicated list numbering, and visible internal-link targets below the sticky header.
