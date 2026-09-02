@@ -469,7 +469,11 @@ p { text-wrap: pretty; }
   background: var(--surface);
 }
 
-.case-study-featured { grid-column: 1 / -1; padding: clamp(1.75rem, 4vw, 3rem); }
+.case-study-featured { padding: clamp(1.75rem, 4vw, 3rem); }
+
+.case-study-featured .case-header { grid-template-columns: 1fr; gap: 1.25rem; }
+
+.case-study-featured .case-metric { width: fit-content; min-width: 170px; }
 
 .case-header {
   display: grid;
@@ -525,6 +529,23 @@ p { text-wrap: pretty; }
 }
 
 .case-scan dd { margin: 0; color: var(--text-secondary); font-size: 0.82rem; line-height: 1.6; }
+
+.case-six-grid {
+  display: grid;
+  margin-top: 2rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-block: 1px solid var(--border);
+}
+
+.case-six-grid > section { min-width: 0; padding: 1rem 0.9rem 1rem 0; }
+
+.case-six-grid > section:nth-child(even) { padding-inline: 0 0.9rem; border-left: 1px solid var(--border); }
+
+.case-six-grid > section:nth-child(n + 3) { border-top: 1px solid var(--border); }
+
+.case-six-grid h4 { margin-bottom: 0.4rem; color: var(--accent); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; }
+
+.case-six-grid p { margin: 0; color: var(--text-secondary); font-size: 0.74rem; line-height: 1.55; }
 
 .case-study:not(.case-study-featured) .case-header { grid-template-columns: 1fr; gap: 1.25rem; }
 
@@ -947,6 +968,9 @@ p { text-wrap: pretty; }
   .case-scan, .case-study:not(.case-study-featured) .case-scan { grid-template-columns: 1fr; }
   .case-scan > div, .case-study:not(.case-study-featured) .case-scan > div { padding: 1rem 0; }
   .case-scan > div + div, .case-study:not(.case-study-featured) .case-scan > div + div { border-top: 1px solid var(--border); border-left: 0; }
+  .case-six-grid { grid-template-columns: 1fr; }
+  .case-six-grid > section, .case-six-grid > section:nth-child(even) { padding: 1rem 0; border-left: 0; }
+  .case-six-grid > section + section { border-top: 1px solid var(--border); }
   .case-detail-content { grid-template-columns: 1fr; }
   .approach-flow { margin-top: 2.5rem; }
   .approach-principle { padding: 1.35rem; }

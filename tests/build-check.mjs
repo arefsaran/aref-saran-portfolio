@@ -52,6 +52,7 @@ for (const requiredCopy of ['Senior Test Engineer', 'FinTech QA Automation', 'AI
 const majorAreas = [...html.matchAll(/<section[^>]*class="[^"]*\bmajor-area\b[^"]*"/g)];
 if (majorAreas.length !== 7) throw new Error(`Expected seven major portfolio areas, found ${majorAreas.length}.`);
 if ((html.match(/class="case-study(?:\s|"|$)/g) ?? []).length !== 4) throw new Error('Expected exactly four primary case studies.');
+if ((html.match(/class="case-six-grid"/g) ?? []).length !== 1 || (html.match(/class="case-six-grid"[\s\S]*?<section>/)?.[0] ?? '').length === 0) throw new Error('Expected the regression case to use the six-part breakdown.');
 
 const removedThemeTokens = ['data-theme=', 'data-theme-source', 'data-theme-toggle', 'theme-toggle', 'theme-init.js', 'aref-theme', 'prefers-color-scheme: dark'];
 for (const token of removedThemeTokens) {

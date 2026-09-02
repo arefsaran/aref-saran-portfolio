@@ -91,6 +91,14 @@ const portfolio = {
         { label: 'Decision', text: 'Segment suites by purpose, isolate test data, and introduce safe parallelism before adding concurrency.' },
         { label: 'Outcome', text: 'Feedback fell to approximately two hours, about 95% shorter, while failures remained diagnosable.' }
       ],
+      parts: [
+        { title: 'Context', body: '2,300+ API and integration checks protected transaction-heavy workflows.' },
+        { title: 'Challenge', body: 'A complete regression took approximately 39 hours and delayed release decisions.' },
+        { title: 'Architecture', body: 'Feature → Steps → API / UI / DB adapters → services and libraries.' },
+        { title: 'Separation', body: 'Business verdicts stayed separate from HTTP, SQL, selectors, sessions, and fixtures.' },
+        { title: 'Execution', body: 'Suite segmentation and safe parallel execution reduced the feedback cycle.' },
+        { title: 'Outcome', body: 'Regression feedback reached approximately two hours—about 95% shorter—with diagnosable failures.' }
+      ],
       details: {
         Context: 'More than 2,300 API and integration checks protected transaction-heavy workflows.',
         Risk: 'Late feedback pushed meaningful evidence away from the engineering decision that needed it.',

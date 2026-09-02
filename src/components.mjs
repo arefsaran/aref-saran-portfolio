@@ -92,9 +92,9 @@ const CaseStudy = (study, index) => `
       </div>
       <div class="case-metric"><strong>${escapeHtml(study.metric.value)}</strong><span>${escapeHtml(study.metric.label)}</span></div>
     </header>
-    <dl class="case-scan">
+    ${study.parts ? `<div class="case-six-grid" aria-label="Six-part engineering breakdown">${list(study.parts, (part) => `<section><h4>${escapeHtml(part.title)}</h4><p>${escapeHtml(part.body)}</p></section>`)}</div>` : `<dl class="case-scan">
       ${list(study.scan, (item) => `<div><dt>${escapeHtml(item.label)}</dt><dd>${escapeHtml(item.text)}</dd></div>`)}
-    </dl>
+    </dl>`}
     ${study.scenarios ? `<ul class="scenario-list" aria-label="Representative scenarios">${list(study.scenarios, (scenario) => `<li>${escapeHtml(scenario)}</li>`)}</ul>` : ''}
     <details class="case-detail">
       <summary><span>View engineering breakdown</span><i aria-hidden="true"></i></summary>

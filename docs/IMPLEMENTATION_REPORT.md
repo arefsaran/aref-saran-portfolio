@@ -52,7 +52,7 @@ System-first local fonts, 44–56px mobile hero type, up to 94px desktop hero ty
 
 ### Components
 
-Compact header, text-led hero, typographic proof strip, four problem/action/outcome service cards, one featured plus three supporting case studies, native disclosures, five-step quality approach, compact experience/capability columns, integrated AI practice note, contact panel, and minimal footer.
+Compact header, text-led hero, typographic proof strip, four problem/action/outcome service cards, four responsive case-study cards, a six-part regression breakdown, native disclosures, five-step quality approach, compact experience/capability columns, integrated AI practice note, contact panel, and minimal footer.
 
 ## Information architecture
 

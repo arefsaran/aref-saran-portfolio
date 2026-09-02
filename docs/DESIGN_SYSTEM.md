@@ -72,7 +72,7 @@ No section uses viewport-height sizing or arbitrary minimum height.
 - **Hero:** outcome-led copy, two CTAs, two concise proof signals, professional context, and a supporting real portrait without overlays.
 - **Proof:** four factual evidence groups in a typographic strip rather than dashboard widgets.
 - **How I Help:** four cards organized by Problem, What I do, and Outcome.
-- **Selected Work:** one featured and two supporting cases, each with metric, scannable decision model, optional scenarios, and native disclosure.
+- **Selected Work:** four responsive cases, with the regression case condensed into a six-part engineering grid plus metric, optional scenarios, and native disclosure.
 - **Quality Approach:** a five-step semantic flow that becomes a collision-free vertical sequence on small screens.
 - **Experience + Capabilities:** compact two-column composition with a timeline, four grouped capability domains, and one supporting AI-assisted practice.
 - **Contact:** one pale accent panel, direct email CTA, professional profiles, and reasons to connect.

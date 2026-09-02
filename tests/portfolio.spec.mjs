@@ -49,6 +49,7 @@ test.describe('portfolio experience', () => {
     await expect(page.getByRole('heading', { name: 'Have a quality problem worth solving?' })).toBeVisible();
     await expect(page.locator('.service-card')).toHaveCount(4);
     await expect(page.locator('.case-study')).toHaveCount(4);
+    await expect(page.locator('.case-six-grid > section')).toHaveCount(6);
     await expect(page.locator('.approach-flow > li')).toHaveCount(5);
     await expect(page.getByText('BPMN / Camunda', { exact: true })).toBeVisible();
     await expect(page.getByRole('heading', { name: 'AI-Assisted Quality Engineering', exact: true })).toBeVisible();
@@ -211,6 +212,17 @@ test.describe('portfolio experience', () => {
       await expect(page.locator('.layer-index, .architecture-layer, .boundary-nodes')).toHaveCount(0);
     });
   }
+
+  test('keeps the regression case compact at desktop while preserving six visible parts', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/#work');
+    const layout = await page.locator('.case-study-featured').evaluate((card) => ({
+      gridColumn: getComputedStyle(card).gridColumn,
+      parts: card.querySelectorAll('.case-six-grid > section').length
+    }));
+    expect(layout.gridColumn).toBe('auto');
+    expect(layout.parts).toBe(6);
+  });
 
   test('keeps all content immediately available with reduced motion', async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
