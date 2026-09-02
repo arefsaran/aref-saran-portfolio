@@ -1,18 +1,18 @@
 const portfolio = {
   site: {
     url: 'https://arefsaran.ir/',
-    title: 'Aref Saran — Senior Test Engineer',
-    description: 'Aref Saran is a Senior Test Engineer who builds test automation and quality systems for complex fintech, API, integration, and BPMN/Camunda workflows.',
-    socialDescription: 'Senior Test Engineer making complex software safer to change, faster to validate, and easier to trust.',
+    title: 'Aref Saran — Senior Test Engineer | FinTech QA Automation & AI-Assisted Quality Engineering',
+    description: 'Aref Saran is a Senior Test Engineer specializing in fintech QA automation, financial workflow testing, Robot Framework architecture, and AI-assisted quality engineering.',
+    socialDescription: 'FinTech QA automation and AI-assisted quality engineering for systems where correctness matters.',
     socialImage: 'og-card-senior.jpg',
     language: 'en',
-    lastModified: '2026-08-25',
+    lastModified: '2026-09-02',
     themeColor: '#f7f7f5'
   },
   profile: {
     name: 'Aref Saran',
     role: 'Senior Test Engineer',
-    specialization: 'Test Automation & Quality Systems',
+    specialization: 'FinTech QA Automation · AI-Assisted Quality Engineering',
     location: 'Tehran',
     portrait: {
       webp: 'assets/aref-saran-profile.webp',
@@ -36,13 +36,13 @@ const portfolio = {
     { label: 'Contact', href: '#contact' }
   ],
   hero: {
-    eyebrow: 'Quality Engineer · Automation · Complex Systems',
+    eyebrow: 'Senior Test Engineer · FinTech QA Automation',
     roleLine: 'Aref Saran · Senior Test Engineer',
-    headline: 'I engineer confidence into complex software.',
-    lead: 'I help teams make critical systems safer to change, faster to validate, and easier to trust through automation architecture, risk-based quality engineering, and reliable delivery evidence.',
+    headline: 'Quality engineering for systems where correctness matters.',
+    lead: 'I design fintech automation and workflow evidence across APIs, UI, databases, providers, and BPMN processes—with AI-assisted analysis that stays grounded in source code, contracts, and test results.',
     primaryCta: { label: 'View selected work', href: '#work' },
     secondaryCta: { label: 'Contact me', href: '#contact' },
-    context: 'Fintech · BPMN / Camunda · API & integration',
+    context: 'FinTech · Robot Framework · BPMN / Camunda · API & integration',
     availability: 'Based in Tehran · Working globally'
   },
   proof: [
@@ -82,7 +82,7 @@ const portfolio = {
       id: 'regression-architecture',
       category: 'Automation architecture',
       title: '39 hours became a two-hour signal.',
-      summary: 'A 2,300+ check API and integration suite needed faster release feedback without sacrificing isolation, diagnostics, or intent.',
+      summary: 'A 2,300+ check API and integration suite needed a layered design and faster release feedback without sacrificing isolation, diagnostics, or intent.',
       metric: { value: '39h → 2h', label: 'regression feedback' },
       scan: [
         { label: 'Problem', text: 'A complete regression took approximately 39 hours—too late for routine release decisions.' },
@@ -93,9 +93,31 @@ const portfolio = {
         Context: 'More than 2,300 API and integration checks protected transaction-heavy workflows.',
         Risk: 'Late feedback pushed meaningful evidence away from the engineering decision that needed it.',
         Constraints: 'The suite still needed deterministic data, readable failures, safe reruns, and a comprehensive validation layer.',
-        Approach: 'Separate smoke, targeted regression, and nightly intent; make execution boundaries independent; parallelize only safe suites.',
+        Approach: 'Use Feature → Steps → API / UI / DB adapters → services and libraries; keep business verdicts separate from HTTP, SQL, selector, session, and fixture mechanics. Separate smoke, targeted regression, and nightly intent; parallelize only safe suites.',
+        Architecture: 'Reusable Robot Framework resources and adapters expose business-level actions while service libraries own protocol and integration mechanics.',
         Verification: 'Keep failures observable, avoid hiding instability behind retries, and retain deliberate comprehensive coverage.',
         Lesson: 'Fast feedback stays trustworthy when isolation, observability, and suite purpose are designed together.'
+      }
+    },
+    {
+      id: 'repository-qa-agents',
+      category: 'AI-Assisted Quality Engineering',
+      title: 'Repository-specific QA agents, grounded in the code.',
+      summary: 'A QA agent workflow turns repository knowledge, explicit policies, reusable skills, and evaluation suites into safer engineering assistance.',
+      metric: { value: 'Source-grounded', label: 'review and triage' },
+      scan: [
+        { label: 'Problem', text: 'Generic AI advice can miss local contracts, invent unknown behavior, or expose secrets and personal data.' },
+        { label: 'Decision', text: 'Constrain assistance with explicit agent policies, repository knowledge packs, reusable QA skills, evaluations, and fail-closed handling of unknown contracts.' },
+        { label: 'Outcome', text: 'Source-grounded support for Robot Framework merge-request review, CI failure triage, testability analysis, and automation design.' }
+      ],
+      scenarios: ['MR review', 'CI triage', 'Frontend testability', 'Contract tracing', 'Secret / PII safety'],
+      details: {
+        Context: 'The workflow supports test engineering tasks across backend, frontend, BPMN, database, and automation layers.',
+        Policy: 'The agent follows repository-specific instructions and distinguishes verified source evidence from unknown contracts.',
+        Knowledge: 'A compact knowledge pack records architecture, test conventions, domain vocabulary, quality gates, and safe evidence boundaries.',
+        Skills: 'Reusable skills cover source analysis, test-architecture review, Robot Framework implementation assistance, MR review, and CI triage.',
+        Evaluation: 'Evaluation suites and lessons make regressions visible and turn useful corrections into future workflow improvements.',
+        Safety: 'Fail closed when evidence is missing, avoid secrets and PII, and keep a human engineer responsible for the final decision.'
       }
     },
     {
@@ -158,20 +180,30 @@ const portfolio = {
   },
   experience: [
     {
-      period: '2023 — Present',
-      scope: 'Fintech quality engineering',
+      period: 'Jun 2026 — Present',
+      employer: 'Azkivam',
+      scope: 'FinTech QA automation',
+      role: 'Senior Test Engineer',
+      outcome: 'Design and evolve Robot Framework automation for high-risk credit and purchase journeys; trace API, workflow, database, and financial-state evidence; use repository-specific QA agents for source-grounded analysis, MR review, and CI failure triage.'
+    },
+    {
+      period: '2023 — Jun 2026',
+      employer: 'Digipay',
+      scope: 'FinTech and banking transaction quality',
       role: 'Software Test Engineer',
-      outcome: 'Automation architecture, API and integration coverage, BPMN workflow validation, performance testing, quality gates, and deterministic evidence across complex credit and banking workflows.'
+      outcome: 'Owned QA for credit and banking transaction workflows with approximately 2,300 Robot Framework API/integration tests; reduced regression execution from approximately 39 hours to approximately 2 hours through parallel execution and suite segmentation. Covered purchase, refund, settlement, billing, coupon, and credit-management workflows with E2E smoke, k6, mocks, service virtualization, idempotency checks, and GitLab CI quality gates.'
     },
     {
       period: '2021 — 2023',
+      employer: 'Tiara Ecommerce',
       scope: 'E-commerce quality',
       role: 'Software Test Engineer',
       outcome: 'Quality coverage connected storefront setup, checkout, payments, orders, responsive UI, provider integrations, and release readiness.'
     },
     {
       period: '2017 — 2022',
-      scope: 'Lorestan University',
+      employer: 'Lorestan University',
+      scope: 'Education',
       role: 'B.Sc. in Computer Engineering',
       outcome: 'The technical foundation behind a career built around systems thinking, careful investigation, and dependable software.'
     }
@@ -186,8 +218,8 @@ const portfolio = {
       items: ['Robot Framework', 'Python', 'JavaScript', 'Playwright', 'Service Virtualization', 'Mock Servers']
     },
     {
-      title: 'Systems',
-      items: ['BPMN / Camunda', 'MySQL', 'MongoDB', 'Redis', 'API Integrations', 'Financial Workflows']
+      title: 'Systems & oracles',
+      items: ['BPMN / Camunda', 'MySQL', 'MongoDB', 'Redis', 'Financial-state validation', 'Replay & idempotency']
     },
     {
       title: 'Delivery',
@@ -195,9 +227,9 @@ const portfolio = {
     }
   ],
   aiPractice: {
-    title: 'AI-assisted engineering workflow',
-    body: 'AI accelerates repository analysis, test design, failure investigation, and review. Engineering judgment—and evidence from source code, contracts, deterministic tests, databases, and runtime behavior—remains the decision layer.',
-    items: ['Repository analysis', 'Test-design assistance', 'Failure investigation', 'Code review support']
+    title: 'AI-Assisted Quality Engineering',
+    body: 'I design and use repository-specific QA agents with explicit policies, knowledge packs, reusable skills, evaluation suites, lessons, and source-grounded analysis. OpenAI Codex helps with automation design, Robot Framework merge-request review, CI failure triage, frontend testability, and test-architecture analysis; unknown contracts fail closed and secret/PII safety remains mandatory.',
+    items: ['Repository knowledge packs', 'Reusable QA skills', 'Evaluation suites & lessons', 'MR review & CI triage', 'Contract tracing across layers', 'Secret / PII safety']
   },
   perspective: 'I am most useful where software has meaningful state, external dependencies, and a real cost to getting the answer wrong.',
   contact: {
@@ -205,7 +237,7 @@ const portfolio = {
     body: 'Let’s talk about making a complex system easier to validate and safer to change.',
     reasons: ['Quality Engineering roles', 'Automation architecture', 'Fintech & workflow testing', 'API & integration strategy', 'CI quality gates', 'Performance engineering'],
     primaryLabel: 'Email Aref',
-    resumeNote: 'A current public résumé is available by email.'
+    resumeNote: 'The latest verified résumé is available by email; no unverified public file is published.'
   },
   footerStatement: 'Quality engineering for complex software systems.'
 };

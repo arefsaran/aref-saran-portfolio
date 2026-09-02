@@ -16,7 +16,7 @@ The homepage has seven major areas:
 6. Experience + Capabilities
 7. Contact
 
-Three generalized case studies provide scannable problem, decision, and outcome summaries. Native `<details>` disclosures preserve deeper technical evidence without turning the default page into documentation.
+Four generalized case studies provide scannable problem, decision, and outcome summaries: Robot Framework regression architecture, repository-specific QA agents, deterministic provider testing, and fintech workflow correctness. Native `<details>` disclosures preserve deeper technical evidence without turning the default page into documentation.
 
 ## Local setup
 
@@ -45,7 +45,7 @@ npm run quality       # complete quality gate
 
 ## Source architecture
 
-- `content/portfolio.mjs` — factual source of truth for profile, proof, services, three case studies, quality approach, experience, capabilities, AI-assisted practice, and contact content.
+- `content/portfolio.mjs` — factual source of truth for profile, proof, services, four case studies, quality approach, experience, capabilities, AI-assisted practice, and contact content.
 - `src/components.mjs` — pure semantic HTML render functions for the header, seven major areas, and footer.
 - `src/render-page.mjs` — document shell, metadata, JSON-LD, and component composition.
 - `src/html.mjs` — output escaping and small rendering helpers.
@@ -94,7 +94,7 @@ If deployment events show only the upstream parent image, the platform is bypass
 
 `.gitlab-ci.yml` installs the supported browsers and runs the full quality gate. Nginx retains CSP, HSTS, MIME-sniffing, frame, referrer, permissions, COOP, and CORP protections.
 
-Professional claims are restricted to supplied, verified material. Employer and client identifiers, private endpoints, credentials, production data, and proprietary implementation details are excluded. The résumé remains available by email until a verified public file is supplied.
+Professional claims are restricted to supplied, verified material. Azkivam is shown as the current employer, with Digipay and Tiara Ecommerce as previous employers. Private endpoints, credentials, production data, and proprietary implementation details are excluded. The latest verified résumé remains available by email until a verified public file is supplied.
 
 ## Documentation
 

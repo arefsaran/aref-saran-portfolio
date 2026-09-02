@@ -8,7 +8,7 @@ const structuredData = {
       '@type': 'WebSite',
       '@id': `${portfolio.site.url}#website`,
       url: portfolio.site.url,
-      name: `${portfolio.profile.name} — ${portfolio.profile.role}`,
+      name: portfolio.site.title,
       description: portfolio.site.description,
       inLanguage: portfolio.site.language
     },
@@ -34,7 +34,7 @@ const structuredData = {
       email: `mailto:${portfolio.profile.email}`,
       sameAs: portfolio.profile.socialLinks.map((link) => link.href),
       alumniOf: { '@type': 'CollegeOrUniversity', name: portfolio.profile.education },
-      knowsAbout: ['Software quality engineering', 'Test automation architecture', 'Robot Framework', 'API testing', 'Integration testing', 'BPMN testing', 'Camunda testing', 'Fintech quality engineering', 'Performance testing', 'GitLab CI']
+      knowsAbout: ['Software quality engineering', 'FinTech QA automation', 'AI-assisted quality engineering', 'Repository-specific QA agents', 'Test automation architecture', 'Robot Framework', 'API testing', 'Integration testing', 'BPMN testing', 'Camunda testing', 'Financial-state validation', 'Replay and idempotency testing', 'Service virtualization', 'Performance testing', 'GitLab CI']
     }
   ]
 };
@@ -58,7 +58,7 @@ export const renderPage = () => `<!doctype html>
   <meta property="og:title" content="${portfolio.site.title}">
   <meta property="og:description" content="${portfolio.site.socialDescription}">
   <meta property="og:url" content="${portfolio.site.url}">
-  <meta property="og:site_name" content="Aref Saran — Senior Test Engineer">
+  <meta property="og:site_name" content="${portfolio.site.title}">
   <meta property="og:image" content="${new URL(portfolio.site.socialImage, portfolio.site.url).href}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">

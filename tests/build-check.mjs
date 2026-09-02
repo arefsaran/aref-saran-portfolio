@@ -45,13 +45,13 @@ if (!html.includes(`content="${portfolio.site.title}"`) || !html.includes(`conte
 if (!sitemap.includes(`<loc>${portfolio.site.url}</loc>`) || !sitemap.includes(`<lastmod>${portfolio.site.lastModified}</lastmod>`)) throw new Error('Sitemap does not match the site content model.');
 if (!robots.includes(new URL('sitemap.xml', portfolio.site.url).href)) throw new Error('robots.txt does not advertise the canonical sitemap.');
 
-for (const requiredCopy of ['Senior Test Engineer', 'I engineer confidence into complex software.', '39 hours became a two-hour signal.', 'From risk to a release decision.']) {
+for (const requiredCopy of ['Senior Test Engineer', 'FinTech QA Automation', 'AI-Assisted Quality Engineering', 'Robot Framework', 'Azkivam', 'Digipay', 'Tiara Ecommerce', '39 hours became a two-hour signal.', 'From risk to a release decision.']) {
   if (!html.includes(requiredCopy)) throw new Error(`Required positioning is missing: ${requiredCopy}`);
 }
 
 const majorAreas = [...html.matchAll(/<section[^>]*class="[^"]*\bmajor-area\b[^"]*"/g)];
 if (majorAreas.length !== 7) throw new Error(`Expected seven major portfolio areas, found ${majorAreas.length}.`);
-if ((html.match(/class="case-study(?:\s|"|$)/g) ?? []).length !== 3) throw new Error('Expected exactly three primary case studies.');
+if ((html.match(/class="case-study(?:\s|"|$)/g) ?? []).length !== 4) throw new Error('Expected exactly four primary case studies.');
 
 const removedThemeTokens = ['data-theme=', 'data-theme-source', 'data-theme-toggle', 'theme-toggle', 'theme-init.js', 'aref-theme', 'prefers-color-scheme: dark'];
 for (const token of removedThemeTokens) {
@@ -71,4 +71,4 @@ const overBudget = Object.entries(budgets)
 if (overBudget.length) throw new Error(`Production asset budget exceeded: ${overBudget.join(', ')}`);
 
 new Function(javascript);
-process.stdout.write(`Production build verified: ${requiredFiles.length} required files, seven major areas, three case studies, ${ids.length} unique ids, structured data, Docker inputs, links, scripts, and asset budgets.\n`);
+process.stdout.write(`Production build verified: ${requiredFiles.length} required files, seven major areas, four case studies, ${ids.length} unique ids, structured data, Docker inputs, links, scripts, and asset budgets.\n`);

@@ -1,5 +1,9 @@
 # Portfolio Audit — 2026-08-25
 
+## Content update — 2026-09-02
+
+The portfolio now positions Aref as a Senior Test Engineer specializing in FinTech QA Automation and AI-Assisted Quality Engineering. Employment dates are month-level only: Azkivam (Jun 2026 — Present), Digipay (2023 — Jun 2026), and Tiara Ecommerce (2021 — 2023). The AI material describes repository-specific QA agents, source grounding, evaluation, fail-closed behavior, and secret/PII safety as an engineering workflow rather than an AI/ML title. No downloadable résumé was added because a verified current source file was not present in the repository; the contact path explicitly offers the latest verified résumé by email.
+
 ## Baseline
 
 The repository entered the redesign as a clean `main` branch synchronized with `origin/main`. `npm ci` completed with zero reported vulnerabilities, and the original `npm run quality` baseline passed 28 browser/build checks across Chrome, Firefox, WebKit, and Edge.

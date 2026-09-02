@@ -144,7 +144,7 @@ export const ExperienceCapabilities = ({ experience, capabilities, aiPractice, p
         <ol class="timeline">
           ${list(experience, (item) => `<li>
             <p class="timeline-period">${escapeHtml(item.period)}</p>
-            <div><span>${escapeHtml(item.scope)}</span><h4>${escapeHtml(item.role)}</h4><p>${escapeHtml(item.outcome)}</p></div>
+            <div><span>${escapeHtml(item.employer)} · ${escapeHtml(item.scope)}</span><h4>${escapeHtml(item.role)}</h4><p>${escapeHtml(item.outcome)}</p></div>
           </li>`)}
         </ol>
       </div>

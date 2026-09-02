@@ -24,8 +24,8 @@ test.describe('portfolio experience', () => {
 
     await page.goto('/');
 
-    await expect(page).toHaveTitle('Aref Saran — Senior Test Engineer');
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText('I engineer confidence into complex software.');
+    await expect(page).toHaveTitle('Aref Saran — Senior Test Engineer | FinTech QA Automation & AI-Assisted Quality Engineering');
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Quality engineering for systems where correctness matters.');
     await expect(page.getByText('Aref Saran · Senior Test Engineer')).toBeVisible();
     await expect(page.getByText('2,300+', { exact: true }).first()).toBeVisible();
     await expect(page.locator('main > .major-area')).toHaveCount(7);
@@ -46,10 +46,12 @@ test.describe('portfolio experience', () => {
     await expect(page.getByRole('heading', { name: 'Systems thinking, built through delivery.' })).toBeVisible();
     await expect(page.getByRole('heading', { name: 'Have a quality problem worth solving?' })).toBeVisible();
     await expect(page.locator('.service-card')).toHaveCount(4);
-    await expect(page.locator('.case-study')).toHaveCount(3);
+    await expect(page.locator('.case-study')).toHaveCount(4);
     await expect(page.locator('.approach-flow > li')).toHaveCount(5);
     await expect(page.getByText('BPMN / Camunda', { exact: true })).toBeVisible();
-    await expect(page.getByText('AI-assisted engineering workflow', { exact: true })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'AI-Assisted Quality Engineering', exact: true })).toBeVisible();
+    await expect(page.getByText('Azkivam · FinTech QA automation', { exact: true })).toBeVisible();
+    await expect(page.getByText('Digipay · FinTech and banking transaction quality', { exact: true })).toBeVisible();
   });
 
   test('connects every internal link and the primary call to action to a visible target', async ({ page }) => {

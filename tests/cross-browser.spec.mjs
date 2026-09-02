@@ -6,12 +6,12 @@ test.describe('cross-browser smoke', () => {
     page.on('pageerror', (error) => errors.push(error.message));
     await page.goto('/');
 
-    await expect(page).toHaveTitle('Aref Saran — Senior Test Engineer');
+    await expect(page).toHaveTitle('Aref Saran — Senior Test Engineer | FinTech QA Automation & AI-Assisted Quality Engineering');
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'I engineer confidence into complex software.' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Quality engineering for systems where correctness matters.' })).toBeVisible();
     await expect(page.getByRole('heading', { name: '39 hours became a two-hour signal.' })).toBeVisible();
     await expect(page.getByRole('heading', { name: 'From risk to a release decision.' })).toBeVisible();
-    await expect(page.locator('.case-study')).toHaveCount(3);
+    await expect(page.locator('.case-study')).toHaveCount(4);
     expect(errors).toEqual([]);
   });
 
