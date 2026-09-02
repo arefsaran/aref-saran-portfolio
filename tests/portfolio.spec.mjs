@@ -27,6 +27,8 @@ test.describe('portfolio experience', () => {
     await expect(page).toHaveTitle('Aref Saran — Senior Test Engineer | FinTech QA Automation & AI-Assisted Quality Engineering');
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Quality engineering for systems where correctness matters.');
     await expect(page.getByText('Aref Saran · Senior Test Engineer')).toBeVisible();
+    await expect(page.locator('.hero-ai-signal')).toHaveAccessibleName('AI-Assisted Quality Engineering');
+    await expect(page.getByText('OpenAI Codex + repository-specific QA agents', { exact: true })).toBeVisible();
     await expect(page.getByText('2,300+', { exact: true }).first()).toBeVisible();
     await expect(page.locator('main > .major-area')).toHaveCount(7);
     await expect(page.locator('.portrait img')).toHaveJSProperty('complete', true);

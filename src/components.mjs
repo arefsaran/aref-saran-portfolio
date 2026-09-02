@@ -23,6 +23,10 @@ export const Hero = ({ profile, hero, proof }) => `
       <p class="hero-identity">${escapeHtml(hero.roleLine)}</p>
       <h1 id="hero-title">${escapeHtml(hero.headline)}</h1>
       <p class="hero-lead">${escapeHtml(hero.lead)}</p>
+      <div class="hero-ai-signal" aria-label="${escapeHtml(hero.aiLabel)}">
+        <strong>${escapeHtml(hero.aiLabel)}</strong>
+        <span>${escapeHtml(hero.aiSignal)}</span>
+      </div>
       <div class="hero-actions">
         <a class="button button-primary" href="${escapeHtml(hero.primaryCta.href)}">${escapeHtml(hero.primaryCta.label)} <span aria-hidden="true">↓</span></a>
         <a class="button button-secondary" href="${escapeHtml(hero.secondaryCta.href)}">${escapeHtml(hero.secondaryCta.label)}</a>
@@ -79,7 +83,7 @@ export const HowIHelp = ({ services }) => `
   </section>`;
 
 const CaseStudy = (study, index) => `
-  <article class="case-study${index === 0 ? ' case-study-featured' : ''}" id="${escapeHtml(study.id)}">
+  <article class="case-study${index === 0 ? ' case-study-featured' : ''}${study.id === 'repository-qa-agents' ? ' case-study-ai' : ''}" id="${escapeHtml(study.id)}">
     <header class="case-header">
       <div>
         <p class="eyebrow">${escapeHtml(study.category)}</p>
@@ -155,6 +159,7 @@ export const ExperienceCapabilities = ({ experience, capabilities, aiPractice, p
         </div>
         <aside class="ai-practice" aria-labelledby="ai-practice-title">
           <h4 id="ai-practice-title">${escapeHtml(aiPractice.title)}</h4>
+          <p class="ai-practice-tools">${escapeHtml(aiPractice.tools)}</p>
           <p>${escapeHtml(aiPractice.body)}</p>
           <ul>${list(aiPractice.items, (item) => `<li>${escapeHtml(item)}</li>`)}</ul>
         </aside>

@@ -305,6 +305,22 @@ p { text-wrap: pretty; }
   line-height: 1.72;
 }
 
+.hero-ai-signal {
+  display: flex;
+  max-width: 620px;
+  margin-top: 1.25rem;
+  padding: 0.8rem 1rem;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  border-left: 3px solid var(--accent);
+  background: var(--soft-accent);
+}
+
+.hero-ai-signal strong { color: var(--text); font-size: 0.78rem; letter-spacing: 0.01em; }
+
+.hero-ai-signal span { color: var(--accent); font-size: 0.76rem; font-weight: 720; }
+
 .hero-actions { display: flex; margin-top: 2rem; flex-wrap: wrap; gap: 0.75rem; }
 
 .hero-evidence {
@@ -599,6 +615,13 @@ p { text-wrap: pretty; }
 
 .case-study:not(.case-study-featured) .case-detail-content { grid-template-columns: 1fr; }
 
+.case-study-ai {
+  border-color: rgba(49, 92, 246, 0.32);
+  background: var(--soft-accent);
+}
+
+.case-study-ai .case-header h3 { color: var(--accent); }
+
 .confidentiality-note {
   max-width: 720px;
   margin: 1.5rem 0 0;
@@ -735,14 +758,19 @@ p { text-wrap: pretty; }
 .ai-practice {
   margin-top: 1.5rem;
   padding: 1.35rem 1.5rem;
-  border-left: 3px solid var(--accent);
+  border: 1px solid rgba(49, 92, 246, 0.25);
+  border-left: 5px solid var(--accent);
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   background: var(--soft-accent);
 }
 
-.ai-practice h4 { font-size: 1rem; }
+.ai-practice h4 { color: var(--accent); font-size: clamp(1.1rem, 2vw, 1.35rem); }
+
+.ai-practice-tools { margin: 0.45rem 0 0; color: var(--text); font-size: 0.72rem; font-weight: 760; letter-spacing: 0.04em; text-transform: uppercase; }
 
 .ai-practice p { margin: 0.7rem 0 0.9rem; color: var(--text-secondary); font-size: 0.76rem; line-height: 1.6; }
+
+.ai-practice .ai-practice-tools + p { margin-top: 0.8rem; }
 
 .contact-section { padding-top: calc(var(--section-space) - 1rem); }
 

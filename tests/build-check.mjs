@@ -45,7 +45,7 @@ if (!html.includes(`content="${portfolio.site.title}"`) || !html.includes(`conte
 if (!sitemap.includes(`<loc>${portfolio.site.url}</loc>`) || !sitemap.includes(`<lastmod>${portfolio.site.lastModified}</lastmod>`)) throw new Error('Sitemap does not match the site content model.');
 if (!robots.includes(new URL('sitemap.xml', portfolio.site.url).href)) throw new Error('robots.txt does not advertise the canonical sitemap.');
 
-for (const requiredCopy of ['Senior Test Engineer', 'FinTech QA Automation', 'AI-Assisted Quality Engineering', 'Robot Framework', 'Azkivam', 'Digipay', 'Tiara Ecommerce', '39 hours became a two-hour signal.', 'From risk to a release decision.']) {
+for (const requiredCopy of ['Senior Test Engineer', 'FinTech QA Automation', 'AI-Assisted Quality Engineering', 'OpenAI Codex', 'repository-specific QA agents', 'Robot Framework', 'Azkivam', 'Digipay', 'Tiara Ecommerce', '39 hours became a two-hour signal.', 'From risk to a release decision.']) {
   if (!html.includes(requiredCopy)) throw new Error(`Required positioning is missing: ${requiredCopy}`);
 }
 

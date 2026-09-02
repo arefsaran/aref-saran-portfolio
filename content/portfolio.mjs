@@ -40,6 +40,8 @@ const portfolio = {
     roleLine: 'Aref Saran · Senior Test Engineer',
     headline: 'Quality engineering for systems where correctness matters.',
     lead: 'I design fintech automation and workflow evidence across APIs, UI, databases, providers, and BPMN processes—with AI-assisted analysis that stays grounded in source code, contracts, and test results.',
+    aiLabel: 'AI-Assisted Quality Engineering',
+    aiSignal: 'OpenAI Codex + repository-specific QA agents',
     primaryCta: { label: 'View selected work', href: '#work' },
     secondaryCta: { label: 'Contact me', href: '#contact' },
     context: 'FinTech · Robot Framework · BPMN / Camunda · API & integration',
@@ -228,6 +230,7 @@ const portfolio = {
   ],
   aiPractice: {
     title: 'AI-Assisted Quality Engineering',
+    tools: 'OpenAI Codex · repository-specific QA agents',
     body: 'I design and use repository-specific QA agents with explicit policies, knowledge packs, reusable skills, evaluation suites, lessons, and source-grounded analysis. OpenAI Codex helps with automation design, Robot Framework merge-request review, CI failure triage, frontend testability, and test-architecture analysis; unknown contracts fail closed and secret/PII safety remains mandatory.',
     items: ['Repository knowledge packs', 'Reusable QA skills', 'Evaluation suites & lessons', 'MR review & CI triage', 'Contract tracing across layers', 'Secret / PII safety']
   },
