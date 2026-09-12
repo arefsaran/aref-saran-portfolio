@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fbf8f4">
+  <meta name="description" content="<%= settings.defaultSeoDescription %>">
+  <meta name="author" content="<%= settings.authorName %>">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://arefsaran.ir/">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="./assets/aref-saran-profile.webp" as="image" type="image/webp">
+  <link rel="stylesheet" href="./styles.css">
+  <script defer src="./script.js"></script>
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="<%= settings.siteTitle %>">
+  <meta property="og:description" content="<%= settings.defaultSeoDescription %>">
+  <meta property="og:url" content="https://arefsaran.ir/">
+  <meta property="og:image" content="<%= settings.defaultOgImage.startsWith('http') ? settings.defaultOgImage : baseUrl + settings.defaultOgImage %>">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Aref Saran — engineering confidence into every release">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<%= settings.siteTitle %>">
+  <meta name="twitter:description" content="<%= settings.defaultSeoDescription %>">
+  <meta name="twitter:image" content="<%= settings.defaultOgImage.startsWith('http') ? settings.defaultOgImage : baseUrl + settings.defaultOgImage %>">
+
+  <title><%= settings.siteTitle %></title>
+
+  <script type="application/ld+json"><%- jsonLd({
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: settings.authorName,
+    url: baseUrl,
+    image: baseUrl + "/assets/aref-saran-profile.png",
+    jobTitle: "Test Engineer",
+    email: `mailto:${settings.publicEmail}`,
+    sameAs: [settings.linkedinUrl, settings.githubUrl].filter(Boolean),
+    alumniOf: { "@type": "CollegeOrUniversity", name: "Lorestan University" },
+    knowsAbout: ["Software testing","Test automation","Robot Framework","API testing","Performance testing","Fintech quality engineering"]
+  }) %></script>
+</head>
+<body>
+  <script>document.documentElement.classList.add('js');</script>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" data-testid="site-header">
+    <div class="nav-shell">
+      <a class="brand" href="#top" aria-label="Aref Saran, home">
+        <span class="brand-mark" aria-hidden="true">AS</span>
+        <span class="brand-copy"><strong>Aref Saran</strong><small>Test Engineer</small></span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
+        <span>Menu</span>
+        <i aria-hidden="true"></i>
+      </button>
+
+      <nav id="primary-nav" class="primary-nav" aria-label="Primary navigation">
+        <a href="#expertise">Engineering</a>
+        <a href="/case-studies">Case studies</a>
+        <a href="/articles">Articles</a>
+        <a href="/videos">Videos</a>
+        <a href="<%= settings.learningGermanUrl %>" target="_blank" rel="noopener noreferrer">German learning ↗</a>
+        <a class="nav-contact" href="#contact">Contact <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-orb hero-orb-one" aria-hidden="true"></div>
+      <div class="hero-orb hero-orb-two" aria-hidden="true"></div>
+
+      <div class="hero-copy" data-reveal="up">
+        <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> Test Engineer · FinTech quality systems</p>
+        <h1 id="hero-title">Engineering <em>quality systems</em> for complex software.</h1>
+        <p class="hero-lead">
+          I design maintainable test automation, API and integration coverage, CI quality gates, and performance tests for transaction-heavy software.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button button-primary" href="/case-studies">View engineering work <span aria-hidden="true">↘</span></a>
+          <a class="button button-secondary" href="/articles">Read engineering notes <span aria-hidden="true">↗</span></a>
+        </div>
+
+        <div class="hero-proof" aria-label="Professional profiles and availability">
+          <span class="availability"><i aria-hidden="true"></i> <%= settings.opportunityText %></span>
+          <a href="<%= settings.linkedinUrl %>" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile, opens in a new tab">LinkedIn ↗</a>
+          <a href="<%= settings.githubUrl %>" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile, opens in a new tab">GitHub ↗</a>
+          <% if (settings.cvUrl) { %><a href="<%= settings.cvUrl %>" target="_blank" rel="noopener noreferrer" aria-label="Public CV, opens in a new tab">CV ↗</a><% } %>
+        </div>
+      </div>
+
+      <div class="hero-visual" data-reveal="scale">
+        <div class="portrait-halo" aria-hidden="true"></div>
+        <figure class="portrait-card">
+          <picture>
+            <source srcset="./assets/aref-saran-profile.webp" type="image/webp">
+            <img src="./assets/aref-saran-profile.png" alt="Portrait of Aref Saran" width="735" height="861">
+          </picture>
+          <figcaption>Test Engineering · Germany-focused career path</figcaption>
+        </figure>
+
+        <aside class="quality-card" aria-label="Automated quality summary">
+          <div class="console-topline">
+            <span><i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i></span>
+            <small>release-check.yml</small>
+          </div>
+          <div class="console-title">
+            <span>Quality signal</span>
+            <strong><i aria-hidden="true"></i> Healthy</strong>
+          </div>
+          <ul>
+            <li><span>API contracts</span><b>Passed</b></li>
+            <li><span>Critical journeys</span><b>Passed</b></li>
+            <li><span>Performance budget</span><b>96 / 100</b></li>
+          </ul>
+          <div class="console-progress" aria-hidden="true"><span></span></div>
+        </aside>
+
+        <div class="speed-badge" aria-hidden="true"><strong>95%</strong><span>faster<br>feedback</span></div>
+      </div>
+    </section>
+
+    <div class="signal-strip" aria-label="Core specialties">
+      <span class="sr-only">API testing, automation architecture, CI quality gates, fintech workflows, performance engineering.</span>
+      <div class="signal-track" aria-hidden="true">
+        <span>API testing</span><i>✦</i><span>Automation architecture</span><i>✦</i><span>CI quality gates</span><i>✦</i><span>Fintech workflows</span><i>✦</i><span>Performance engineering</span><i>✦</i>
+        <span>API testing</span><i>✦</i><span>Automation architecture</span><i>✦</i><span>CI quality gates</span><i>✦</i><span>Fintech workflows</span><i>✦</i><span>Performance engineering</span><i>✦</i>
+      </div>
+    </div>
+
+    <section class="section impact-section" aria-labelledby="impact-title">
+      <div class="section-heading" data-reveal="up">
+        <div>
+          <p class="section-kicker">Proof, not promises</p>
+          <h2 id="impact-title">Quality you can measure.</h2>
+        </div>
+        <p>Useful testing creates a shorter path from uncertainty to a confident decision. These are the outcomes behind the tooling.</p>
+      </div>
+
+      <div class="impact-grid" data-reveal="up">
+        <article class="metric-card metric-lilac">
+          <span class="metric-label">Coverage at scale</span>
+          <strong><span data-count="2300" data-suffix="+">2,300+</span></strong>
+          <p>API and integration tests designed, built, and maintained.</p>
+          <div class="metric-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </article>
+        <article class="metric-card metric-mint">
+          <span class="metric-label">Regression speed</span>
+          <strong>39h <small>to</small> 2h</strong>
+          <p>A focused 95% reduction through parallel, execution-safe suites.</p>
+          <div class="metric-line" aria-hidden="true"><span></span></div>
+        </article>
+        <article class="metric-card metric-peach">
+          <span class="metric-label">Hands-on practice</span>
+          <strong><span data-count="5" data-suffix="+">5+</span> <small>years</small></strong>
+          <p>Building quality into fintech and e-commerce delivery.</p>
+        </article>
+        <article class="metric-card metric-sky">
+          <span class="metric-label">Balanced confidence</span>
+          <strong><span data-count="4">4</span> <small>layers</small></strong>
+          <p>API, integration, end-to-end, and performance coverage.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section expertise-section" id="expertise" aria-labelledby="expertise-title">
+      <div class="section-heading" data-reveal="up">
+        <div>
+          <p class="section-kicker">01 / Expertise</p>
+          <h2 id="expertise-title">Testing is a design discipline.</h2>
+        </div>
+        <p>I connect product risk, system behavior, automation architecture, and delivery feedback—so every check earns its place.</p>
+      </div>
+
+      <div class="expertise-grid">
+        <article class="expertise-card lavender-card" data-reveal="up">
+          <div class="card-top"><span>01</span><i aria-hidden="true">↗</i></div>
+          <h3>Automation architecture</h3>
+          <p>Maintainable Robot Framework suites with clean separation across business journeys, reusable steps, API clients, validators, and data.</p>
+          <ul aria-label="Related skills"><li>Robot Framework</li><li>Python</li><li>Test design</li></ul>
+        </article>
+        <article class="expertise-card mint-card" data-reveal="up">
+          <div class="card-top"><span>02</span><i aria-hidden="true">↗</i></div>
+          <h3>Fintech workflow validation</h3>
+          <p>Risk-based coverage for purchase, refund, settlement, billing, coupon, credit-management, and banking integrations.</p>
+          <ul aria-label="Related skills"><li>Risk analysis</li><li>Idempotency</li><li>State checks</li></ul>
+        </article>
+        <article class="expertise-card peach-card" data-reveal="up">
+          <div class="card-top"><span>03</span><i aria-hidden="true">↗</i></div>
+          <h3>API &amp; integration testing</h3>
+          <p>Positive, negative, boundary, contract, idempotency, and failure-path validation across critical service boundaries.</p>
+          <ul aria-label="Related skills"><li>API contracts</li><li>Mock servers</li><li>Postman</li></ul>
+        </article>
+        <article class="expertise-card butter-card" data-reveal="up">
+          <div class="card-top"><span>04</span><i aria-hidden="true">↗</i></div>
+          <h3>Delivery quality gates</h3>
+          <p>Fast smoke checks for merge requests, targeted post-deployment regression, nightly suites, and actionable evidence in CI.</p>
+          <ul aria-label="Related skills"><li>GitLab CI</li><li>Docker</li><li>k6</li></ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="lab-section" id="lab" aria-labelledby="lab-title">
+      <div class="section lab-inner">
+        <div class="lab-copy" data-reveal="up">
+          <p class="section-kicker">02 / Automation lab</p>
+          <h2 id="lab-title">See a quality gate think.</h2>
+          <p>This small simulation mirrors how I shape release feedback: critical checks first, readable evidence throughout, and one unambiguous signal at the end.</p>
+          <button class="button lab-button" id="run-suite" type="button" data-testid="run-suite">
+            <span class="play-mark" aria-hidden="true">▶</span>
+            <span class="button-label">Run the demo suite</span>
+          </button>
+          <p class="lab-note">No systems are contacted. This is an interactive UI demonstration.</p>
+        </div>
+
+        <div class="lab-console" data-testid="lab-console" data-run-state="idle" data-reveal="scale">
+          <div class="lab-console-head">
+            <div><span class="terminal-mark" aria-hidden="true">AS</span><p><strong>release-confidence</strong><small>critical-path suite</small></p></div>
+            <span class="suite-state"><i aria-hidden="true"></i><b data-testid="suite-state">Ready</b></span>
+          </div>
+
+          <div class="progress-wrap">
+            <div class="progress-label"><span>Pipeline progress</span><b class="progress-value">0%</b></div>
+            <div class="progress-track" role="progressbar" aria-label="Demo suite progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-progress="0">
+              <span class="progress-fill"></span>
+            </div>
+          </div>
+
+          <ol class="pipeline" aria-label="Automated test pipeline" data-testid="pipeline">
+            <li data-stage="prepare" data-state="pending"><span class="stage-index">01</span><div><strong>Prepare</strong><small>Test data &amp; environment</small></div><b>Waiting</b></li>
+            <li data-stage="contract" data-state="pending"><span class="stage-index">02</span><div><strong>Contract</strong><small>API schema &amp; boundaries</small></div><b>Waiting</b></li>
+            <li data-stage="journey" data-state="pending"><span class="stage-index">03</span><div><strong>Journey</strong><small>Critical financial flows</small></div><b>Waiting</b></li>
+            <li data-stage="signal" data-state="pending"><span class="stage-index">04</span><div><strong>Signal</strong><small>Evidence &amp; release gate</small></div><b>Waiting</b></li>
+          </ol>
+
+          <div class="lab-result" aria-live="polite" aria-atomic="true">
+            <div class="result-icon" aria-hidden="true">✓</div>
+            <p><span>Release signal</span><strong data-testid="result-summary">Ready to run</strong></p>
+            <small class="result-time">—</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section work-section" id="work" aria-labelledby="work-title">
+      <div class="section-heading" data-reveal="up">
+        <div>
+          <p class="section-kicker">03 / Selected work</p>
+          <h2 id="work-title">Complex problems. Clear outcomes.</h2>
+        </div>
+        <p>Generalized case studies that show how I reason about scale, instability, and product risk without exposing confidential systems.</p>
+      </div>
+
+      <div class="case-grid">
+        <article class="case-card case-featured" data-reveal="up">
+          <div class="case-number">01 <span>Automation at scale</span></div>
+          <div class="case-main">
+            <p class="case-eyebrow">Regression architecture</p>
+            <h3>Turning a 39-hour regression cycle into a two-hour signal.</h3>
+            <p>A large API and integration suite had become too slow for useful release feedback. I introduced parallel execution, safe suite boundaries, and smoke/regression/nightly segmentation while preserving diagnostic evidence.</p>
+            <ul class="tag-list" aria-label="Case study topics"><li>Parallel execution</li><li>Suite segmentation</li><li>CI feedback</li></ul>
+          </div>
+          <div class="case-impact"><span>Outcome</span><strong>≈95%</strong><p>less execution time across 2,300+ checks.</p></div>
+        </article>
+
+        <article class="case-card" data-reveal="up">
+          <div class="case-number">02 <span>Deterministic testing</span></div>
+          <div class="case-main">
+            <p class="case-eyebrow">Service virtualization</p>
+            <h3>Making external-provider failures repeatable.</h3>
+            <p>Mock servers controlled success, timeout, retry, invalid-response, and partial-failure conditions—making critical paths reliable without depending on unpredictable third parties.</p>
+            <ul class="tag-list" aria-label="Case study topics"><li>Mock servers</li><li>Failure paths</li><li>Repeatability</li></ul>
+          </div>
+          <div class="case-symbol" aria-hidden="true"><span>if</span><b>then</b><i>✓</i></div>
+        </article>
+
+        <article class="case-card" data-reveal="up">
+          <div class="case-number">03 <span>Risk-based quality</span></div>
+          <div class="case-main">
+            <p class="case-eyebrow">Financial journeys</p>
+            <h3>Protecting the moments where mistakes matter most.</h3>
+            <p>Risk-based API and end-to-end coverage combined negative paths, boundary conditions, state validation, and idempotency checks across purchase, refund, settlement, and credit flows.</p>
+            <ul class="tag-list" aria-label="Case study topics"><li>Idempotency</li><li>State validation</li><li>Risk coverage</li></ul>
+          </div>
+          <div class="case-symbol shield-symbol" aria-hidden="true"><span>risk</span><b>covered</b><i>◎</i></div>
+        </article>
+      </div>
+
+      <p class="confidentiality-note">Client identifiers, private endpoints, credentials, production data, and proprietary implementation details are intentionally excluded.</p>
+    </section>
+
+    <section class="capability-section" aria-labelledby="capability-title">
+      <div class="section capability-inner">
+        <div class="capability-heading" data-reveal="up">
+          <p class="section-kicker">Capability map</p>
+          <h2 id="capability-title">A practical toolkit, shaped by risk.</h2>
+        </div>
+        <div class="skill-cloud" data-reveal="up" aria-label="Professional capabilities">
+          <span class="skill-xl lavender-card">Robot Framework</span>
+          <span class="skill-lg mint-card">API testing</span>
+          <span class="skill-md peach-card">Python</span>
+          <span class="skill-lg sky-card">Performance · k6</span>
+          <span class="skill-md butter-card">GitLab CI</span>
+          <span class="skill-sm pink-card">Docker</span>
+          <span class="skill-md lavender-card">Integration testing</span>
+          <span class="skill-sm mint-card">MySQL</span>
+          <span class="skill-lg peach-card">Risk-based testing</span>
+          <span class="skill-sm sky-card">MongoDB</span>
+          <span class="skill-md butter-card">Service virtualization</span>
+          <span class="skill-sm pink-card">Redis</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section experience-section" id="experience" aria-labelledby="experience-title">
+      <div class="section-heading" data-reveal="up">
+        <div>
+          <p class="section-kicker">04 / Experience</p>
+          <h2 id="experience-title">Built through real delivery.</h2>
+        </div>
+        <p>Five-plus years working close to product, engineering, and delivery teams across transaction-heavy software.</p>
+      </div>
+
+      <div class="timeline">
+        <article data-reveal="up">
+          <div class="timeline-marker"><span></span></div>
+          <p class="timeline-period">2023 — Present</p>
+          <div class="timeline-copy">
+            <span>Fintech quality engineering</span>
+            <h3>Software Test Engineer</h3>
+            <p>Automation architecture, API and integration coverage, performance testing, quality gates, and deterministic testing across complex credit and banking workflows.</p>
+          </div>
+        </article>
+        <article data-reveal="up">
+          <div class="timeline-marker"><span></span></div>
+          <p class="timeline-period">2021 — 2023</p>
+          <div class="timeline-copy">
+            <span>Tiara Ecommerce</span>
+            <h3>Software Test Engineer</h3>
+            <p>Quality coverage for storefront setup, checkout, payments, orders, responsive UI, third-party integrations, and release readiness.</p>
+          </div>
+        </article>
+        <article data-reveal="up">
+          <div class="timeline-marker"><span></span></div>
+          <p class="timeline-period">2017 — 2022</p>
+          <div class="timeline-copy">
+            <span>Lorestan University</span>
+            <h3>B.Sc. in Computer Engineering</h3>
+            <p>The technical foundation behind a career built around systems thinking, careful investigation, and dependable software.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+
+    <section class="section publishing-section" id="articles" aria-labelledby="publishing-title">
+      <div class="section-heading" data-reveal="up">
+        <div>
+          <p class="section-kicker">05 / Engineering notes</p>
+          <h2 id="publishing-title">Long-form evidence, not content noise.</h2>
+        </div>
+        <p>Technical articles connect engineering decisions, failure modes, implementation details, and lessons learned. LinkedIn carries the short version; this site keeps the canonical article.</p>
+      </div>
+      <% if (articles && articles.length) { %>
+        <div class="publishing-grid">
+          <% articles.forEach((article) => { %>
+            <article class="publishing-card" data-reveal="up">
+              <p class="case-eyebrow"><%= article.series || 'Test Engineering Note' %></p>
+              <h3><a href="/articles/<%= article.slug %>"><%= article.title %></a></h3>
+              <p><%= article.excerpt %></p>
+              <a class="text-link" href="/articles/<%= article.slug %>">Read article →</a>
+            </article>
+          <% }) %>
+        </div>
+      <% } else { %>
+        <div class="publishing-empty" data-reveal="up">
+          <strong>Engineering notes are being prepared.</strong>
+          <p>The publishing system is ready for long-form Test Engineering articles and their LinkedIn summaries.</p>
+          <a class="text-link" href="/articles">Open articles →</a>
+        </div>
+      <% } %>
+    </section>
+
+    <section class="section germany-section" aria-labelledby="germany-title">
+      <div class="germany-card" data-reveal="up">
+        <div>
+          <p class="section-kicker">Germany journey</p>
+          <h2 id="germany-title">Professional German, built alongside Test Engineering.</h2>
+          <p>My German-learning platform is a separate workspace for structured language practice. It supports the career objective without replacing the engineering focus of arefsaran.ir.</p>
+        </div>
+        <a class="button button-primary" href="<%= settings.learningGermanUrl %>" target="_blank" rel="noopener noreferrer">German Learning Journey ↗</a>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contact" aria-labelledby="contact-title" data-reveal="scale">
+      <div class="contact-orb" aria-hidden="true"></div>
+      <p class="section-kicker">06 / Contact</p>
+      <h2 id="contact-title">Let’s make the next release feel <em>lighter.</em></h2>
+      <p>For conversations about software testing, automation architecture, fintech quality, and engineering collaboration.</p>
+      <div class="contact-actions">
+        <a class="button button-dark" href="mailto:<%= settings.publicEmail %>"><%= settings.publicEmail %> <span aria-hidden="true">↗</span></a>
+        <nav class="contact-links" aria-label="Social profiles">
+          <a href="<%= settings.linkedinUrl %>" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile, opens in a new tab">LinkedIn ↗</a>
+          <a href="<%= settings.githubUrl %>" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile, opens in a new tab">GitHub ↗</a>
+        </nav>
+      </div>
+      <p class="cv-note">A current public résumé is available by email.</p>
+    </section>
+  </main>
+
+  <footer>
+    <a class="footer-brand" href="#top"><span aria-hidden="true">AS</span> Aref Saran</a>
+    <p>© 2026 · Designed with care, tested with purpose.</p>
+    <a href="#top">Back to top ↑</a>
+  </footer>
+
+  <button class="scroll-top" type="button" aria-label="Back to top" title="Back to top">↑</button>
+</body>
+</html>

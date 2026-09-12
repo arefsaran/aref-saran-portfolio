@@ -1,0 +1,4 @@
+<%- include('../partials/site-head', { title, description, canonical: baseUrl + '/videos', ogImage: null, article: null, preview: false }) %>
+<section class="content-hero"><p class="eyebrow">Technical videos</p><h1>YouTube will extend the engineering notes.</h1><p>Long-form videos are linked here only after they actually exist.</p></section>
+<% if(items.length){ %><div class="content-grid"><% items.forEach(item=> { %><article class="content-card"><p class="case-eyebrow"><%= item.series || item.topic || 'Video' %></p><h2><%= item.title %></h2><p><%= item.description %></p><% if(item.youtubeUrl){ %><a class="text-link" target="_blank" rel="noopener noreferrer" href="<%= item.youtubeUrl %>">Watch on YouTube ↗</a><% } %></article><% }) %></div><% } else { %><div class="empty-state"><strong>No videos published yet.</strong><p>This page intentionally shows a real empty state rather than fake content.</p></div><% } %>
+<%- include('../partials/site-foot') %>

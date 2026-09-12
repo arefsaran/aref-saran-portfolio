@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#fbf8f4">
+  <meta name="description" content="<%= description || 'Aref Saran — Test Engineer' %>">
+  <meta name="author" content="<%= settings.authorName %>">
+  <meta name="robots" content="<%= preview ? 'noindex,nofollow' : 'index,follow' %>">
+  <% if (canonical) { %><link rel="canonical" href="<%= canonical %>"><% } %>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/site.css">
+  <meta property="og:type" content="<%= article ? 'article' : 'website' %>">
+  <meta property="og:title" content="<%= title %> — <%= settings.authorName %>">
+  <meta property="og:description" content="<%= description || '' %>">
+  <meta property="og:url" content="<%= canonical || baseUrl + currentPath %>">
+  <meta property="og:image" content="<%= ogImage ? (ogImage.startsWith('http') ? ogImage : baseUrl + ogImage) : (settings.defaultOgImage.startsWith('http') ? settings.defaultOgImage : baseUrl + settings.defaultOgImage) %>">
+  <meta name="twitter:card" content="summary_large_image">
+  <title><%= title %> — <%= settings.authorName %></title>
+  <% if (article) { %><script type="application/ld+json"><%- jsonLd({"@context":"https://schema.org","@type":"Article",headline:article.title,description:article.excerpt,datePublished:article.publishedAt || undefined,dateModified:article.updatedAt || undefined,author:{"@type":"Person",name:settings.authorName,url:baseUrl},mainEntityOfPage:canonical || baseUrl + currentPath}) %></script><% } %>
+</head>
+<body class="content-body">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="content-header">
+  <a class="brand" href="/"><span class="brand-mark" aria-hidden="true">AS</span><span class="brand-copy"><strong><%= settings.authorName %></strong><small>Test Engineer</small></span></a>
+  <nav aria-label="Primary navigation">
+    <a href="/case-studies">Case studies</a><a href="/articles">Articles</a><a href="/projects">Projects</a><a href="/videos">Videos</a><a href="<%= settings.learningGermanUrl %>" target="_blank" rel="noopener noreferrer">German learning ↗</a><a href="mailto:<%= settings.publicEmail %>">Contact</a>
+  </nav>
+</header>
+<main id="main" class="content-main">

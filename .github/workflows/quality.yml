@@ -28,7 +28,7 @@ jobs:
         run: npm run format:check && npm run lint
       - name: Build production output
         run: npm run build
-      - name: Run portfolio quality suite
-        run: npm test
+      - name: Run unit and browser quality suites
+        run: npm run verify
       - name: Build production image
         run: docker build -t aref-saran-portfolio .

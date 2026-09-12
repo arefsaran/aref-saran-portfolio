@@ -3,6 +3,10 @@
 .vscode/
 .idea/
 node_modules/
-dist/
 playwright-report/
 test-results/
+.env
+uploads/*
+!uploads/.gitkeep
+uploads-test/
+backups/

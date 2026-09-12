@@ -1,103 +1,268 @@
-# Aref Saran — Senior Test Engineer Portfolio
+# arefsaran.ir — Test Engineering Portfolio + Publishing CMS
 
-Production portfolio for [arefsaran.ir](https://arefsaran.ir/). It presents Aref Saran as a Senior Test Engineer who builds automation and quality systems for complex fintech, API, integration, and BPMN/Camunda workflows.
+`arefsaran.ir` is Aref Saran's Test Engineering portfolio and canonical technical publishing platform. The public site focuses on engineering evidence; the private `/admin` area manages articles, LinkedIn derivatives, case studies, projects, videos, media, and content export.
 
-The implementation is intentionally static. Structured JavaScript content is rendered to semantic HTML at build time, a single light-first CSS system provides the complete responsive presentation, and a small progressive-enhancement script handles only mobile navigation, sticky-header state, and active navigation. The public page has no framework runtime, API, database, CMS, analytics, remote font, or third-party request.
+## Architecture decision
 
-## Product structure
+The original repository was a static Nginx site. The new admin/CMS requirement is a real application requirement, so the public design is preserved while the runtime changes to **Node.js + Express + EJS + MongoDB**.
 
-The homepage has seven major areas:
+Why MongoDB here:
 
-1. Hero
-2. Proof
-3. How I Help
-4. Selected Work
-5. Quality Engineering Approach
-6. Experience + Capabilities
-7. Contact
+- the related `learninggerman.ir` project already uses MongoDB operationally;
+- article documents contain nested metadata, revisions, LinkedIn fields, and relations;
+- MongoDB avoids adding a native SQLite dependency to the existing JavaScript deployment;
+- `connect-mongo` stores authenticated sessions server-side;
+- the application remains portable to a managed MongoDB service or a Docker volume.
 
-Four generalized case studies provide scannable problem, decision, and outcome summaries: Robot Framework regression architecture, repository-specific QA agents, deterministic provider testing, and fintech workflow correctness. Native `<details>` disclosures preserve deeper technical evidence without turning the default page into documentation.
+## Public information architecture
 
-## Local setup
+- `/` — Test Engineering homepage
+- `/articles` — canonical long-form engineering articles
+- `/articles/:slug` — server-rendered article with SEO/social metadata
+- `/case-studies` — generalized engineering case studies
+- `/projects` — public/experimental/planned engineering projects
+- `/videos` — real published video entries or a truthful empty state
+- `https://learninggerman.ir` — secondary German-learning journey
 
-Requirements: Node.js 24+ and npm. Chrome, Playwright Firefox, and Playwright WebKit are required for the complete browser suite; local Windows runs also use Edge when available.
+## Admin CMS
+
+- `/admin/login`
+- `/admin`
+- `/admin/articles`
+- `/admin/articles/new`
+- `/admin/articles/:id`
+- `/admin/media`
+- `/admin/taxonomy`
+- `/admin/case-studies`
+- `/admin/projects`
+- `/admin/videos`
+- `/admin/export/content.json`
+
+### Article workflow
+
+`draft → scheduled → published → archived`
+
+A background scheduler checks once per minute and publishes due scheduled articles while the application process is running.
+
+Each article supports:
+
+- title, slug, subtitle, excerpt, Markdown body;
+- cover image, tags, series, featured state, language;
+- publication and scheduled timestamps;
+- SEO title, meta description, canonical URL, OG image;
+- LinkedIn hook, summary, key points, CTA, hashtags, status, post URL/date;
+- optional German summary;
+- private internal notes;
+- up to 20 previous text revisions;
+- safe public Markdown rendering;
+- private admin preview;
+- JSON and Markdown export.
+
+### LinkedIn workflow
+
+The website remains canonical:
+
+`Article → deterministic LinkedIn draft → review/edit → copy → publish manually`
+
+Direct LinkedIn OAuth/publishing is intentionally not enabled in v1. This avoids unnecessary token/API complexity and keeps AI/automation from publishing unreviewed content.
+
+## Security controls
+
+- server-side admin authorization;
+- bcrypt password hashing;
+- Mongo-backed sessions;
+- HttpOnly, SameSite cookies; Secure cookies in production;
+- session regeneration after successful sign-in;
+- CSRF protection via Lusca;
+- login rate limiting;
+- Helmet security headers and CSP;
+- Markdown/HTML sanitization;
+- `javascript:` URL removal;
+- upload MIME allowlist plus image magic-byte verification;
+- no SVG upload support;
+- upload size limit;
+- private previews require an authenticated admin session;
+- admin pages use `noindex`;
+- no secrets in the repository.
+
+## Environment
+
+Copy `.env.example` to `.env`:
 
 ```bash
-npm ci
-npx playwright install chromium firefox webkit
-npm run serve
+cp .env.example .env
 ```
 
-Open `http://127.0.0.1:4173`.
+Required production values:
 
-## Commands
+```dotenv
+NODE_ENV=production
+PORT=4173
+BASE_URL=https://arefsaran.ir
+MONGODB_URI=mongodb://...
+SESSION_SECRET=<at-least-32-random-characters>
+ADMIN_EMAIL=arefsaran@gmail.com
+ADMIN_PASSWORD=<temporary-bootstrap-password>
+UPLOAD_DIR=/app/uploads
+MAX_UPLOAD_MB=5
+TRUST_PROXY=1
+```
+
+`ADMIN_PASSWORD` is used only by the admin bootstrap script. After creating/updating the admin, remove it from the runtime environment if your deployment platform permits that separation.
+
+## Install
 
 ```bash
-npm run format:check  # final-newline and trailing-whitespace checks
-npm run lint          # JavaScript syntax validation
-npm run build         # generate and validate dist/
-npm run test:chromium # detailed interaction, responsive, performance, and axe checks
-npm test              # Chrome plus Firefox/WebKit/Edge smoke coverage
-npm run quality       # complete quality gate
+npm install
 ```
 
-`npm run build` recreates `dist/` from allow-listed source files. Do not edit generated files in `dist/` directly.
+## Create the admin
 
-## Source architecture
-
-- `content/portfolio.mjs` — factual source of truth for profile, proof, services, four case studies, quality approach, experience, capabilities, AI-assisted practice, and contact content.
-- `src/components.mjs` — pure semantic HTML render functions for the header, seven major areas, and footer.
-- `src/render-page.mjs` — document shell, metadata, JSON-LD, and component composition.
-- `src/html.mjs` — output escaping and small rendering helpers.
-- `styles.css` — single-theme editorial design system, component layouts, intentional breakpoints, focus states, and reduced-motion handling.
-- `script.js` — progressive enhancement for the compact mobile menu, sticky-header state, and active navigation.
-- `scripts/build.mjs` — deterministic production artifact generation.
-- `tests/build-check.mjs` — production manifest, Docker input, link, section-count, metadata, JSON-LD, theme-removal, script, sitemap, and asset-budget verification.
-- `tests/portfolio.spec.mjs` — detailed Chrome behavior, keyboard access, target viewport geometry, spacing, collision, accessibility, performance, and semantic coverage.
-- `tests/cross-browser.spec.mjs` — focused Chromium/Chrome, Firefox, WebKit, and Edge smoke coverage.
-- `Dockerfile` and `nginx.conf` — multi-stage derived production image, hardened portfolio serving, and the existing V2Ray WebSocket proxy.
-
-Copy changes belong in `content/portfolio.mjs`. Structural changes belong in `src/components.mjs` and `src/render-page.mjs`. Run `npm run quality` before publishing.
-
-## Production architecture
-
-The production image preserves the existing same-domain portfolio and VPN routing:
-
-```text
-Darkube ingress
-    |
-    v
-Nginx :80
-   | \
-   |  \ VPN WebSocket path
-   |   \
-Portfolio  ->  V2Ray internal port
-```
-
-The Dockerfile builds the portfolio and derives from `alphacodinghub/v2ray-nginx:latest`. The parent supplies V2Ray, Nginx, Supervisor, `/entrypoint.sh`, and runtime substitution for `LISTENING_PORT`, `CLIENT_ID`, `CLIENT_ALTERID`, and `CLIENT_WSPATH`. The inherited entrypoint and Supervisor command are intentionally not overridden.
-
-Generated files are copied to `/opt/portfolio`. Darkube must build this repository’s Dockerfile, expose container port `80`, and keep the four existing runtime values in deployment secrets/environment configuration. Do not commit those values.
+Ensure MongoDB is reachable, then:
 
 ```bash
-docker build -t aref-saran-portfolio .
-docker run --rm -p 8080:80 \
-  -e LISTENING_PORT=3456 \
-  -e CLIENT_ID=11111111-1111-4111-8111-111111111111 \
-  -e CLIENT_ALTERID=64 \
-  -e CLIENT_WSPATH=/__portfolio_vpn_ws_test__ \
-  aref-saran-portfolio
+npm run admin:create
 ```
 
-If deployment events show only the upstream parent image, the platform is bypassing this repository’s Dockerfile and the portfolio artifact will not be present.
+The command hashes the password before storage and upserts the configured admin email.
 
-## CI, security, and privacy
+To migrate the three generalized case studies already present in the original static portfolio into CMS-managed records:
 
-`.gitlab-ci.yml` installs the supported browsers and runs the full quality gate. Nginx retains CSP, HSTS, MIME-sniffing, frame, referrer, permissions, COOP, and CORP protections.
+```bash
+npm run seed:portfolio
+```
 
-Professional claims are restricted to supplied, verified material. Azkivam is shown as the current employer, with Digipay and Tiara Ecommerce as previous employers. Private endpoints, credentials, production data, and proprietary implementation details are excluded. The latest verified résumé remains available by email until a verified public file is supplied.
+The seed is idempotent by slug and does not create fake articles, projects, or videos.
 
-## Documentation
+## Run locally
 
-- [Portfolio audit](docs/PORTFOLIO_AUDIT.md)
-- [Design system](docs/DESIGN_SYSTEM.md)
-- [Implementation report](docs/IMPLEMENTATION_REPORT.md)
+Start MongoDB, then:
+
+```bash
+npm start
+```
+
+Open:
+
+- Public site: `http://127.0.0.1:4173`
+- Admin: `http://127.0.0.1:4173/admin/login`
+
+## Docker Compose
+
+```bash
+export SESSION_SECRET='replace-with-a-long-random-secret'
+docker compose up --build -d
+export ADMIN_PASSWORD='replace-with-a-strong-bootstrap-password'
+docker compose exec -e ADMIN_PASSWORD="$ADMIN_PASSWORD" web npm run admin:create
+```
+
+Persistent volumes:
+
+- `mongo-data` — MongoDB documents and sessions
+- `uploads` — uploaded article/media images
+
+## Backups
+
+Back up **both** MongoDB and uploaded media.
+
+Mongo example:
+
+```bash
+mongodump --uri "$MONGODB_URI" --archive=arefsaran-$(date +%F).archive --gzip
+```
+
+Restore example:
+
+```bash
+mongorestore --uri "$MONGODB_URI" --archive=arefsaran-YYYY-MM-DD.archive --gzip --drop
+```
+
+Also copy the persistent upload volume/object-storage bucket. A database backup without uploaded images is incomplete.
+
+Admin content can additionally be exported from:
+
+`/admin/export/content.json`
+
+Each article can be exported individually as Markdown.
+
+## Testing
+
+Unit tests:
+
+```bash
+npm test
+```
+
+Browser tests:
+
+```bash
+npm run test:e2e
+```
+
+The Playwright test server uses `mongodb-memory-server` and seeds a test-only admin/article. Browser tests cover:
+
+- Germany-focused Test Engineering homepage positioning;
+- exact `https://learninggerman.ir` link;
+- public article rendering;
+- responsive overflow checks;
+- automated WCAG A/AA scanning;
+- anonymous admin rejection;
+- admin sign-in;
+- article creation/persistence/private preview/publication;
+- stored-XSS sanitization;
+- deterministic LinkedIn draft generation.
+
+Quality commands:
+
+```bash
+npm run lint
+npm run format:check
+npm run verify
+```
+
+## Content safety checklist
+
+Before publishing company-derived Test Engineering material, verify:
+
+- no production URLs;
+- no credentials/tokens;
+- no customer data;
+- no private database schema;
+- no proprietary business rule that should remain confidential;
+- no internal screenshot;
+- synthetic/anonymized example data;
+- numerical metrics are verified and permitted to publish;
+- employer attribution is permitted.
+
+## learninggerman.ir integration
+
+`arefsaran.ir` links to `https://learninggerman.ir` as a secondary Germany-career journey. The provided `learninggerman.ir` repository has also been updated with a reciprocal `https://arefsaran.ir` Test Engineering portfolio link.
+
+The relationship is intentionally asymmetric:
+
+`arefsaran.ir → engineering identity → German learning → learninggerman.ir`
+
+The German platform does not replace the engineering portfolio.
+
+## Deployment notes
+
+The previous Docker image was Nginx-only. That runtime cannot host authenticated CMS routes, MongoDB sessions, Markdown publication, or media uploads. The new Dockerfile runs the Node application on port `4173`.
+
+For Hamravesh/Darkube or another container host:
+
+1. build the repository Dockerfile;
+2. expose application port `4173`;
+3. attach/provide a persistent MongoDB service;
+4. provide persistent storage for `/app/uploads` or replace local upload storage with object storage;
+5. set `BASE_URL=https://arefsaran.ir`;
+6. use a strong `SESSION_SECRET`;
+7. set `TRUST_PROXY=1` when HTTPS terminates at the platform proxy;
+8. run `npm run admin:create` once against production MongoDB;
+9. verify `/health`;
+10. verify `/admin` redirects anonymous users to `/admin/login`;
+11. publish a draft article and verify private preview before public publication;
+12. verify `robots.txt`, `/sitemap.xml`, article OG metadata, and the German-learning link.
+
+## Important remaining production decision
+
+Local filesystem uploads require a persistent volume. If the production platform does not guarantee persistent writable storage, move media to S3-compatible object storage before relying on uploads. Do not deploy local uploads on ephemeral container storage.

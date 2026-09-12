@@ -1,26 +1,51 @@
 {
   "name": "aref-saran-portfolio",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "private": true,
-  "description": "Aref Saran's static quality engineering portfolio",
+  "description": "Aref Saran Test Engineering portfolio and publishing CMS",
   "type": "module",
+  "main": "server.js",
   "engines": {
-    "node": ">=24"
+    "node": ">=22 <25"
   },
   "scripts": {
-    "build": "node scripts/build.mjs && node tests/build-check.mjs",
-    "serve": "npm run build && node tests/server.mjs",
-    "format:check": "node tests/format-check.mjs",
-    "lint": "node --check script.js && node --check content/portfolio.mjs && node --check src/html.mjs && node --check src/components.mjs && node --check src/render-page.mjs && node --check scripts/build.mjs && node --check playwright.config.mjs && node --check tests/build-check.mjs && node --check tests/format-check.mjs && node --check tests/portfolio.spec.mjs && node --check tests/cross-browser.spec.mjs",
-    "test": "playwright test",
-    "test:chromium": "playwright test --project=chromium",
-    "test:cross-browser": "playwright test tests/cross-browser.spec.mjs",
-    "test:headed": "playwright test --headed",
-    "test:report": "playwright show-report",
-    "quality": "npm run format:check && npm run lint && npm run build && npm test"
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --test tests/unit/*.test.js",
+    "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed",
+    "build": "node --check server.js && node --check src/app.js",
+    "lint": "eslint src server.js scripts tests/unit tests/*.mjs",
+    "format:check": "node scripts/check-format.js",
+    "admin:create": "node scripts/create-admin.js",
+    "verify": "npm run test && npm run lint && npm run format:check && npm run test:e2e",
+    "seed:portfolio": "node scripts/seed-existing-content.js",
+    "format": "prettier --write \"src/**/*.js\" \"scripts/**/*.js\" \"tests/**/*.{js,mjs}\" public/admin.js server.js package.json README.md VERIFICATION.md"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-mongo": "^5.0.0",
+    "dotenv": "^16.6.1",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-rate-limit": "^8.0.1",
+    "express-session": "^1.18.1",
+    "helmet": "^8.1.0",
+    "lusca": "^1.7.0",
+    "marked": "^15.0.12",
+    "mongoose": "^8.16.5",
+    "multer": "^2.0.2",
+    "sanitize-html": "^2.17.0",
+    "highlight.js": "^11.11.1"
   },
   "devDependencies": {
-    "@axe-core/playwright": "^4.12.1",
-    "@playwright/test": "^1.62.1"
+    "@axe-core/playwright": "^4.10.2",
+    "@playwright/test": "^1.54.1",
+    "eslint": "^9.31.0",
+    "prettier": "^3.6.2",
+    "mongodb-memory-server": "^10.1.4"
+  },
+  "overrides": {
+    "qs": "6.16.0"
   }
 }

@@ -1,19 +1,19 @@
-FROM node:24-alpine AS build
-WORKDIR /site
-COPY content ./content
+FROM node:22-alpine AS deps
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev --no-audit --no-fund
+
+FROM node:22-alpine
+ENV NODE_ENV=production
+WORKDIR /app
+RUN addgroup -S app && adduser -S app -G app
+COPY --from=deps /app/node_modules ./node_modules
+COPY package.json package-lock.json server.js ./
 COPY src ./src
+COPY public ./public
 COPY scripts ./scripts
-COPY assets ./assets
-COPY styles.css script.js favicon.svg robots.txt sitemap.xml og-card-senior.jpg ./
-RUN node scripts/build.mjs
-
-FROM alphacodinghub/v2ray-nginx:latest
-
-RUN mkdir -p /opt/portfolio
-
-COPY --from=build /site/dist/ /opt/portfolio/
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-EXPOSE 80
-HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
-  CMD wget -q -O /dev/null http://127.0.0.1/ || exit 1
+RUN mkdir -p /app/uploads && chown -R app:app /app
+USER app
+EXPOSE 4173
+HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 CMD wget -q -O /dev/null http://127.0.0.1:4173/ready || exit 1
+CMD ["node", "server.js"]

@@ -1,0 +1,35 @@
+services:
+  mongo:
+    image: mongo:8
+    restart: unless-stopped
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+  web:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      mongo:
+        condition: service_healthy
+    ports:
+      - "4173:4173"
+    environment:
+      NODE_ENV: production
+      PORT: 4173
+      BASE_URL: ${BASE_URL:-https://arefsaran.ir}
+      MONGODB_URI: mongodb://mongo:27017/arefsaran
+      SESSION_SECRET: ${SESSION_SECRET}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-arefsaran@gmail.com}
+      TRUST_PROXY: ${TRUST_PROXY:-1}
+      ADMIN_TIMEZONE: ${ADMIN_TIMEZONE:-Asia/Tehran}
+      UPLOAD_DIR: /app/uploads
+    volumes:
+      - uploads:/app/uploads
+volumes:
+  mongo-data:
+  uploads:
