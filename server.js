@@ -24,12 +24,26 @@ const scheduler = setInterval(async () => {
 }, 60_000);
 scheduler.unref();
 
+let shuttingDown = false;
 async function shutdown(signal) {
+  if (shuttingDown) return;
+  shuttingDown = true;
   console.log(`${signal} received; shutting down`);
   clearInterval(scheduler);
-  await new Promise((resolve) => server.close(resolve));
-  await mongoose.disconnect();
-  process.exit(0);
+  const timeout = setTimeout(() => {
+    console.error('Graceful shutdown timed out');
+    process.exit(1);
+  }, 10_000);
+  timeout.unref();
+  try {
+    await new Promise((resolve, reject) => server.close((error) => error ? reject(error) : resolve()));
+    await mongoose.disconnect();
+    globalThis.clearTimeout(timeout);
+    process.exit(0);
+  } catch (error) {
+    console.error('Graceful shutdown failed', error);
+    process.exit(1);
+  }
 }
 
 process.on('SIGTERM', () => shutdown('SIGTERM'));

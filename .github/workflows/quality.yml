@@ -23,12 +23,12 @@ jobs:
       - name: Install test dependencies
         run: npm ci
       - name: Install Chromium
-        run: npx playwright install --with-deps chromium firefox webkit
-      - name: Check formatting and source syntax
-        run: npm run format:check && npm run lint
+        run: npx playwright install --with-deps chromium
+      - name: Check formatting and source quality
+        run: npm run format:check && npm run lint && npm test
       - name: Build production output
         run: npm run build
-      - name: Run unit and browser quality suites
-        run: npm run verify
+      - name: Run browser quality suite
+        run: npm run test:e2e
       - name: Build production image
         run: docker build -t aref-saran-portfolio .

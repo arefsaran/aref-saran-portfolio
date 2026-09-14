@@ -4,7 +4,7 @@ export function safeHttpUrl(value = '', { allowRelative = false } = {}) {
   if (allowRelative && input.startsWith('/') && !input.startsWith('//')) return input;
   try {
     const url = new URL(input);
-    return ['http:', 'https:'].includes(url.protocol) ? url.toString() : '';
+    return ['http:', 'https:'].includes(url.protocol) && !url.username && !url.password ? url.toString() : '';
   } catch {
     return '';
   }

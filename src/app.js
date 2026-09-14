@@ -50,9 +50,14 @@ export function createApp(config) {
   });
 
   app.get('/health', (_req, res) => res.json({ status: 'ok' }));
-  app.get('/ready', (_req, res) => {
-    const ready = mongoose.connection.readyState === 1;
-    res.status(ready ? 200 : 503).json({ ready });
+  app.get('/ready', async (_req, res) => {
+    try {
+      if (mongoose.connection.readyState !== 1) throw new Error('MongoDB is disconnected');
+      await mongoose.connection.db.admin().ping({ timeoutMS: 2000 });
+      res.json({ ready: true });
+    } catch {
+      res.status(503).json({ ready: false });
+    }
   });
 
   app.use(express.static(path.join(root, 'public'), { maxAge: config.mode === 'production' ? '7d' : 0 }));

@@ -216,7 +216,7 @@ router.post('/articles/:id', async (req, res, next) => {
       const message = payload.status === 'scheduled' && !payload.scheduledAt ? 'Scheduled articles require a schedule date.' : 'Title, slug, excerpt and article body are required.';
       return res.status(422).render('admin/article-edit', { title: `Edit · ${payload.title || 'Article'}`, article: { ...article.toObject(), ...payload }, linkedinDraft: buildLinkedInDraft(payload, req.app.locals.baseUrl), readingTime: estimateReadingTime(payload.body), error: message, ...choices });
     }
-    if (article.slug !== payload.slug && article.status === 'published' && !article.oldSlugs.includes(article.slug)) article.oldSlugs.push(article.slug);
+    if (article.slug !== payload.slug && article.publishedAt && !article.oldSlugs.includes(article.slug)) article.oldSlugs.push(article.slug);
     await ensureArticleSlugAvailable(payload.slug, article._id);
     article.oldSlugs = article.oldSlugs.filter((slug) => slug !== payload.slug);
     article.revisions.push({ title: article.title, excerpt: article.excerpt, body: article.body, savedAt: new Date() });
@@ -285,7 +285,7 @@ router.post('/articles/:id/duplicate', async (req, res, next) => {
     const base = makeSlug(`${source.slug}-copy`);
     let slug = base;
     let suffix = 2;
-    while (await Article.exists({ slug })) slug = `${base}-${suffix++}`;
+    while (await Article.exists({ $or: [{ slug }, { oldSlugs: slug }] })) slug = `${base}-${suffix++}`;
     const duplicate = await Article.create({
       title: `${source.title} — Copy`, slug, subtitle: source.subtitle, excerpt: source.excerpt, body: source.body,
       coverImage: source.coverImage, tags: source.tags, series: source.series, status: 'draft', featured: false,
