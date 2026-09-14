@@ -17,7 +17,7 @@ services:
       mongo:
         condition: service_healthy
     ports:
-      - "4173:4173"
+      - "127.0.0.1:4173:4173"
     environment:
       NODE_ENV: production
       PORT: 4173

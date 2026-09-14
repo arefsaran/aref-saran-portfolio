@@ -6,6 +6,7 @@ test('safeHttpUrl rejects executable schemes and supports internal media paths',
   assert.equal(safeHttpUrl('javascript:alert(1)'), '');
   assert.equal(safeHttpUrl('/uploads/image.webp', { allowRelative: true }), '/uploads/image.webp');
   assert.equal(safeHttpUrl('//evil.example', { allowRelative: true }), '');
+  assert.equal(safeHttpUrl('https://user:password@example.com/private'), '');
   assert.match(safeHttpUrl('https://example.com/path'), /^https:\/\/example\.com\/path/);
 });
 

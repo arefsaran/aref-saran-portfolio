@@ -11,6 +11,14 @@ async function login(page) {
 test('anonymous user cannot access admin', async ({ page }) => {
   await page.goto('/admin/articles');
   await expect(page).toHaveURL(/\/admin\/login$/);
+
+  const csrf = await page.locator('input[name="_csrf"]').inputValue();
+  const write = await page.request.post('/admin/articles', {
+    form: { _csrf: csrf, title: 'Unauthorized', slug: 'unauthorized', excerpt: 'No', body: 'No' },
+    maxRedirects: 0,
+  });
+  expect(write.status()).toBe(302);
+  expect(write.headers().location).toBe('/admin/login');
 });
 
 test('login rotates the session, CSRF protects writes, and logout invalidates reuse', async ({ page }) => {
@@ -27,6 +35,11 @@ test('login rotates the session, CSRF protects writes, and logout invalidates re
     form: { title: 'No CSRF', slug: 'no-csrf', excerpt: 'Rejected', body: 'Rejected' },
   });
   expect(rejected.status()).toBe(403);
+
+  const invalid = await page.request.post('/admin/articles', {
+    form: { _csrf: 'invalid', title: 'Bad CSRF', slug: 'bad-csrf', excerpt: 'Rejected', body: 'Rejected' },
+  });
+  expect(invalid.status()).toBe(403);
 
   const staleCookie = `${authenticated.name}=${authenticated.value}`;
   const csrf = await page.locator('input[name="_csrf"]').first().inputValue();

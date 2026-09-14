@@ -37,3 +37,15 @@ test('configuration rejects an invalid IANA timezone', () => {
   assert.notEqual(result.status, 0);
   assert.match(result.stderr, /ADMIN_TIMEZONE/);
 });
+
+test('production configuration rejects ambiguous integers, proxy values, and non-origin base URLs', () => {
+  for (const overrides of [
+    { PORT: '4173junk' },
+    { MAX_UPLOAD_MB: '5.5' },
+    { TRUST_PROXY: 'true' },
+    { BASE_URL: 'https://arefsaran.ir/admin' },
+    { BASE_URL: 'https://arefsaran.ir?preview=1' },
+  ]) {
+    assert.notEqual(loadProductionConfig(overrides).status, 0);
+  }
+});
