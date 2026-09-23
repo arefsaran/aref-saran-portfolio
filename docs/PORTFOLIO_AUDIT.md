@@ -1,8 +1,29 @@
 # Portfolio Audit — 2026-08-25
 
+## Repositioning audit — 2026-09-23
+
+The Express/EJS/MongoDB CMS, authenticated admin, Markdown rendering, article records, old-slug redirects, projects, case studies, media, sitemap generation, security controls, and deployment configuration remain appropriate and are retained. The verified résumé supplied on 2026-09-23 is now the canonical source and sole public résumé. No language, visa, residence, certification, or line-management claim was added.
+
+| Current content | Current location | Status | New location | Action |
+| --- | --- | --- | --- | --- |
+| Generic “Test Engineer” identity | Homepage, metadata, settings | Conflicts with supplied positioning | Homepage and metadata | REWRITE |
+| Current Azkivam title shown as Senior Test Engineer | Homepage/docs | Conflicts with explicit employment-title rule | Homepage and `/experience` | REWRITE as “QA Engineer · QA Engineering Chapter Lead” |
+| Verified scale and runtime metrics | Homepage | Supported | Homepage and `/experience` | KEEP |
+| FinTech case-study evidence | Homepage and `/case-studies` | Supported | Homepage, `/projects`, `/expertise` | MIGRATE |
+| Published articles and CMS workflow | `/articles`, `/articles/:slug`, `/admin` | Valid | Same canonical URLs; “Writing” label | KEEP |
+| Old article slugs | Article records | Valid SEO infrastructure | 301 to current `/articles/:slug` | KEEP |
+| Generic videos navigation | Public navigation | Not central to target role | Existing `/videos` route remains reachable | ARCHIVE from primary navigation |
+| German-learning project | Public navigation | Secondary context | Existing external URL remains in settings | ARCHIVE from primary navigation |
+| Playful gradients, fake release console, demo suite | Homepage | Conflicts with restrained senior-engineering direction | None | DELETE from public composition |
+| Experience and capability fragments | Homepage | Too compressed | `/experience` and `/expertise` | MIGRATE and REWRITE |
+| Contact details | Homepage/settings | Current public channels | `/contact` and homepage | KEEP |
+| Latest verified résumé | Supplied 2026-09-23 | Canonical source | `/resume/Aref_Saran_QA_Engineer.pdf` | KEEP as sole public résumé |
+
+The resulting primary navigation is Home, Experience, Expertise, Projects, Writing, About, and Contact. Existing `/articles` URLs remain canonical; `/writing` aliases redirect permanently to them to prevent duplicate content and SEO breakage.
+
 ## Content update — 2026-09-02
 
-The portfolio now positions Aref as a Senior Test Engineer specializing in FinTech QA Automation and AI-Assisted Quality Engineering. Employment dates are month-level only: Azkivam (Jun 2026 — Present), Digipay (2023 — Jun 2026), and Tiara Ecommerce (2021 — 2023). The AI material describes repository-specific QA agents, source grounding, evaluation, fail-closed behavior, and secret/PII safety as an engineering workflow rather than an AI/ML title. No downloadable résumé was added because a verified current source file was not present in the repository; the contact path explicitly offers the latest verified résumé by email.
+The portfolio positions Aref as a Senior QA / Test Automation Engineer specializing in FinTech, credit, and payments. Employment dates are month-level only: Azkivam (Jun 2026 — Present), Digipay (2023 — Jun 2026), and Tiara Ecommerce (2021 — 2023). The Azkivam employment title is “QA Engineer · QA Engineering Chapter Lead”; leadership is described as technical standards, mentoring, automation architecture, testability, and cross-team quality practice. The verified 2026-09-23 résumé is the sole public download.
 
 ## Baseline
 

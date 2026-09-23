@@ -65,7 +65,7 @@ test('admin can create, persist, preview and publish an article', async ({ page 
   const preview = page.getByRole('link', { name: 'Preview' });
   const [previewPage] = await Promise.all([page.waitForEvent('popup'), preview.click()]);
   await expect(previewPage.getByText('Private preview.')).toBeVisible();
-  await expect(previewPage.locator('script')).not.toContainText('alert(1)');
+  expect((await previewPage.locator('script').allTextContents()).join('\n')).not.toContain('alert(1)');
   await previewPage.close();
   await page.locator('#status').selectOption('published');
   await page.getByRole('button', { name: 'Save article' }).click();

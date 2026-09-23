@@ -7,6 +7,9 @@ import { renderMarkdown, estimateReadingTime } from '../utils/markdown.js';
 import { homepageContent } from '../services/content.js';
 
 const router = express.Router();
+const escapeXml = (value = '') => String(value).replace(/[<>&'\"]/g, (character) => ({
+  '<': '&lt;', '>': '&gt;', '&': '&amp;', "'": '&apos;', '"': '&quot;',
+}[character]));
 
 router.get('/', async (req, res, next) => {
   try {
@@ -14,6 +17,36 @@ router.get('/', async (req, res, next) => {
     res.render('home', { layout: false, ...content });
   } catch (error) { next(error); }
 });
+
+const profilePages = {
+  experience: {
+    title: 'Experience',
+    description: 'Aref Saran’s QA Engineering experience across FinTech, credit, payments and e-commerce.',
+  },
+  expertise: {
+    title: 'Expertise',
+    description: 'QA and Test Automation expertise across financial workflows, APIs, integrations, data, CI/CD and performance.',
+  },
+  about: {
+    title: 'About',
+    description: 'About Aref Saran, a Senior QA and Test Automation Engineer specializing in FinTech, credit and payments.',
+  },
+  contact: {
+    title: 'Contact',
+    description: 'Contact Aref Saran about Senior QA and Test Automation opportunities in Germany and Europe.',
+  },
+};
+
+Object.entries(profilePages).forEach(([page, metadata]) => {
+  router.get(`/${page}`, (_req, res) => res.render('profile', {
+    page,
+    ...metadata,
+    canonical: `${res.app.locals.baseUrl}/${page}`,
+  }));
+});
+
+router.get('/writing', (_req, res) => res.redirect(301, '/articles'));
+router.get('/writing/:slug', (req, res) => res.redirect(301, `/articles/${encodeURIComponent(req.params.slug)}`));
 
 router.get('/articles', async (req, res, next) => {
   try {
@@ -78,6 +111,18 @@ router.get('/api/public/articles', async (_req, res, next) => {
   } catch (error) { next(error); }
 });
 
+router.get('/rss.xml', async (_req, res, next) => {
+  try {
+    const articles = await Article.find({ status: 'published' }).sort({ publishedAt: -1 }).limit(50).lean();
+    const base = res.app.locals.baseUrl;
+    const items = articles.map((article) => {
+      const url = `${base}/articles/${encodeURIComponent(article.slug)}`;
+      return `<item><title>${escapeXml(article.title)}</title><link>${escapeXml(url)}</link><guid>${escapeXml(url)}</guid><description>${escapeXml(article.excerpt)}</description>${article.publishedAt ? `<pubDate>${new Date(article.publishedAt).toUTCString()}</pubDate>` : ''}</item>`;
+    }).join('');
+    res.type('application/rss+xml').send(`<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>Aref Saran — QA Engineering Writing</title><link>${escapeXml(base)}/articles</link><description>Technical writing on FinTech quality engineering, test automation, APIs, CI/CD and performance.</description>${items}</channel></rss>`);
+  } catch (error) { next(error); }
+});
+
 router.get('/sitemap.xml', async (_req, res, next) => {
   try {
     const [articles, cases, projects] = await Promise.all([
@@ -87,7 +132,7 @@ router.get('/sitemap.xml', async (_req, res, next) => {
     ]);
     const base = res.app.locals.baseUrl;
     const urls = [
-      ['', new Date()], ['/articles', new Date()], ['/case-studies', new Date()], ['/projects', new Date()], ['/videos', new Date()],
+      ['', new Date()], ['/experience', new Date()], ['/expertise', new Date()], ['/about', new Date()], ['/contact', new Date()], ['/articles', new Date()], ['/rss.xml', new Date()], ['/case-studies', new Date()], ['/projects', new Date()], ['/videos', new Date()],
       ...articles.map((a) => [`/articles/${a.slug}`, a.updatedAt]),
       ...cases.map((a) => [`/case-studies#${a.slug}`, a.updatedAt]),
       ...projects.map((a) => [`/projects#${a.slug}`, a.updatedAt]),

@@ -63,12 +63,12 @@ export const renderPage = () => `<!doctype html>
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:type" content="image/jpeg">
-  <meta property="og:image:alt" content="Aref Saran, Senior Test Engineer — engineering confidence into complex software">
+  <meta property="og:image:alt" content="Aref Saran, Senior QA and Test Automation Engineer — FinTech, credit and payments">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${portfolio.site.title}">
   <meta name="twitter:description" content="${portfolio.site.socialDescription}">
   <meta name="twitter:image" content="${new URL(portfolio.site.socialImage, portfolio.site.url).href}">
-  <meta name="twitter:image:alt" content="Aref Saran, Senior Test Engineer — engineering confidence into complex software">
+  <meta name="twitter:image:alt" content="Aref Saran, Senior QA and Test Automation Engineer — FinTech, credit and payments">
   <title>${portfolio.site.title}</title>
   <script type="application/ld+json">${JSON.stringify(structuredData)}</script>
 </head>

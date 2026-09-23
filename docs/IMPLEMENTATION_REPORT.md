@@ -2,13 +2,13 @@
 
 ## Content update — 2026-09-02
 
-The current content model keeps the light editorial presentation and adds the supplied career update: Azkivam is the current Senior Test Engineer role, Digipay is dated 2023 — Jun 2026, and Tiara Ecommerce is dated 2021 — 2023. Digipay’s approximately 2,300 Robot Framework API/integration tests and approximately 39-hour to approximately two-hour regression improvement remain explicit. Selected Work now includes a repository-specific QA-agent case study covering policies, knowledge packs, reusable skills, evaluations, source grounding, fail-closed handling, MR review, CI triage, cross-layer contract tracing, and secret/PII safety. A verified current résumé source was not present, so the public page continues to offer it by email instead of publishing an unverified download.
+The content model uses the verified résumé supplied on 2026-09-23: Azkivam is shown with the factual title “QA Engineer · QA Engineering Chapter Lead,” Digipay is dated 2023 — Jun 2026, and Tiara Ecommerce is dated 2021 — 2023. Digipay’s approximately 2,300 Robot Framework API/integration tests and approximately 39-hour to approximately two-hour regression improvement remain explicit. Selected Work includes a repository-specific QA-agent case study covering source grounding, fail-closed handling, review, CI triage, cross-layer contract tracing, and secret/PII safety. The supplied PDF is the sole public résumé download.
 
 ## Summary
 
 The rejected dashboard/documentation presentation was replaced with a contemporary, light-first personal engineering portfolio. The result leads with professional value, establishes verified proof immediately, makes four selected case studies the technical center, and keeps deeper engineering detail optional.
 
-Aref remains positioned as a Senior Test Engineer with Test Automation & Quality Systems specialization. Fintech correctness, BPMN/Camunda workflow testing, deterministic dependencies, API/integration coverage, performance, delivery gates, and AI-assisted workflow remain visible without becoming standalone homepage chapters.
+Aref is positioned as a Senior QA / Test Automation Engineer specializing in FinTech, credit, and payments. Financial correctness, workflow testing, deterministic dependencies, API/integration coverage, performance, delivery gates, and technical QA leadership remain visible without overstating the official employment title.
 
 ## Architecture
 

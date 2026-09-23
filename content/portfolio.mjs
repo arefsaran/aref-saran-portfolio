@@ -1,9 +1,9 @@
 const portfolio = {
   site: {
     url: 'https://arefsaran.ir/',
-    title: 'Aref Saran — Senior Test Engineer | FinTech QA Automation & AI-Assisted Quality Engineering',
-    description: 'Aref Saran is a Senior Test Engineer specializing in fintech QA automation, financial workflow testing, Robot Framework architecture, and AI-assisted quality engineering.',
-    socialDescription: 'FinTech QA automation and AI-assisted quality engineering for systems where correctness matters.',
+    title: 'Aref Saran — Senior QA / Test Automation Engineer | FinTech, Credit & Payments',
+    description: 'Aref Saran is a Senior QA and Test Automation Engineer specializing in FinTech, credit, payments, API and integration testing, and quality engineering.',
+    socialDescription: 'QA and test automation for FinTech systems where financial correctness matters.',
     socialImage: 'og-card-senior.jpg',
     language: 'en',
     lastModified: '2026-09-02',
@@ -11,15 +11,15 @@ const portfolio = {
   },
   profile: {
     name: 'Aref Saran',
-    role: 'Senior Test Engineer',
-    specialization: 'FinTech QA Automation · AI-Assisted Quality Engineering',
+    role: 'Senior QA / Test Automation Engineer',
+    specialization: 'FinTech · Credit · Payments',
     location: 'Tehran',
     portrait: {
       webp: 'assets/aref-saran-profile.webp',
       fallback: 'assets/aref-saran-profile.png',
       width: 735,
       height: 861,
-      alt: 'Portrait of Aref Saran, Senior Test Engineer'
+      alt: 'Portrait of Aref Saran, Senior QA and Test Automation Engineer'
     },
     email: 'arefsaran@gmail.com',
     education: 'Lorestan University',
@@ -36,8 +36,8 @@ const portfolio = {
     { label: 'Contact', href: '#contact' }
   ],
   hero: {
-    eyebrow: 'Senior Test Engineer · FinTech QA Automation',
-    roleLine: 'Aref Saran · Senior Test Engineer',
+    eyebrow: 'Senior QA / Test Automation Engineer · FinTech, Credit & Payments',
+    roleLine: 'Aref Saran · Senior QA / Test Automation Engineer',
     headline: 'Quality engineering for systems where correctness matters.',
     lead: 'I design fintech automation and workflow evidence across APIs, UI, databases, providers, and BPMN processes—with AI-assisted analysis that stays grounded in source code, contracts, and test results.',
     aiLabel: 'AI-Assisted Quality Engineering',
@@ -193,7 +193,7 @@ const portfolio = {
       period: 'Jun 2026 — Present',
       employer: 'Azkivam',
       scope: 'FinTech QA automation',
-      role: 'Senior Test Engineer',
+      role: 'QA Engineer · QA Engineering Chapter Lead',
       outcome: 'Design and evolve Robot Framework automation for high-risk credit and purchase journeys; trace API, workflow, database, and financial-state evidence; use repository-specific QA agents for source-grounded analysis, MR review, and CI failure triage.'
     },
     {
@@ -248,7 +248,7 @@ const portfolio = {
     body: 'Let’s talk about making a complex system easier to validate and safer to change.',
     reasons: ['Quality Engineering roles', 'Automation architecture', 'Fintech & workflow testing', 'API & integration strategy', 'CI quality gates', 'Performance engineering'],
     primaryLabel: 'Email Aref',
-    resumeNote: 'The latest verified résumé is available by email; no unverified public file is published.'
+    resumeNote: 'Download the latest verified résumé from the portfolio.'
   },
   footerStatement: 'Quality engineering for complex software systems.'
 };
