@@ -68,7 +68,7 @@ test('mobile presentation loads its visual system and exposes navigation', async
   await page.goto('/');
   await expect(page.locator('.hero-portrait img')).toBeVisible();
   const background = await page.locator('body').evaluate((element) => element.ownerDocument.defaultView.getComputedStyle(element).backgroundColor);
-  expect(background).toBe('rgb(244, 241, 232)');
+  expect(background).toBe('rgb(246, 245, 241)');
   const menu = page.getByRole('button', { name: 'Menu' });
   await menu.click();
   await expect(menu).toHaveAttribute('aria-expanded', 'true');

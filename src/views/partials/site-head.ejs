@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#f4f1e8">
+  <meta name="theme-color" content="#f6f5f1">
   <meta name="description" content="<%= description || settings.defaultSeoDescription %>">
   <meta name="author" content="<%= settings.authorName %>">
   <meta name="robots" content="<%= preview ? 'noindex,nofollow' : 'index,follow' %>">
   <% if (canonical) { %><link rel="canonical" href="<%= canonical %>"><% } %>
   <link rel="alternate" type="application/rss+xml" title="Aref Saran — QA Engineering Writing" href="/rss.xml">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/styles.css?v=20260923">
   <script defer src="/script.js"></script>
   <meta property="og:type" content="<%= article ? 'article' : 'website' %>">
   <meta property="og:title" content="<%= title %> — <%= settings.authorName %>">
