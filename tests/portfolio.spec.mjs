@@ -62,3 +62,15 @@ test('public pages do not horizontally overflow common widths', async ({ page })
     expect(widths.scroll).toBeLessThanOrEqual(widths.client + 1);
   }
 });
+
+test('mobile presentation loads its visual system and exposes navigation', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto('/');
+  await expect(page.locator('.hero-portrait img')).toBeVisible();
+  const background = await page.locator('body').evaluate((element) => element.ownerDocument.defaultView.getComputedStyle(element).backgroundColor);
+  expect(background).toBe('rgb(244, 241, 232)');
+  const menu = page.getByRole('button', { name: 'Menu' });
+  await menu.click();
+  await expect(menu).toHaveAttribute('aria-expanded', 'true');
+  await expect(page.getByRole('navigation', { name: 'Primary navigation' }).getByRole('link', { name: 'Experience' })).toBeVisible();
+});
