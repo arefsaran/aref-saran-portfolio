@@ -19,7 +19,7 @@
   <meta property="og:image" content="<%= ogImage ? (ogImage.startsWith('http') ? ogImage : baseUrl + ogImage) : (settings.defaultOgImage.startsWith('http') ? settings.defaultOgImage : baseUrl + settings.defaultOgImage) %>">
   <meta name="twitter:card" content="summary_large_image">
   <title><%= title %> — <%= settings.authorName %></title>
-  <% if (article) { %><script type="application/ld+json"><%- jsonLd({"@context":"https://schema.org","@type":"BlogPosting",headline:article.title,description:article.excerpt,datePublished:article.publishedAt || undefined,dateModified:article.updatedAt || undefined,author:{"@type":"Person",name:settings.authorName,url:baseUrl},mainEntityOfPage:canonical || baseUrl + currentPath}) %></script><% } %>
+  <% if (article && !preview) { %><script type="application/ld+json"><%- jsonLd({"@context":"https://schema.org","@type":"BlogPosting",headline:article.title,description:article.excerpt,datePublished:article.publishedAt || undefined,dateModified:article.updatedAt || undefined,author:{"@type":"Person",name:settings.authorName,url:baseUrl},mainEntityOfPage:canonical || baseUrl + currentPath}) %></script><% } %>
 </head>
 <body class="content-body">
 <a class="skip-link" href="#main">Skip to content</a>

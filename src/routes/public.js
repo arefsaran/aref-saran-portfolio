@@ -54,7 +54,7 @@ router.get('/articles', async (req, res, next) => {
     if (req.query.series) query.series = req.query.series;
     if (req.query.tag) query.tags = req.query.tag;
     if (req.query.q) query.$text = { $search: String(req.query.q) };
-    const articles = await Article.find(query).sort({ featured: -1, publishedAt: -1 }).lean();
+    const articles = await Article.find(query).sort({ publishedAt: -1, _id: -1 }).lean();
     const series = await Article.distinct('series', { status: 'published', series: { $nin: [null, ''] } });
     const tags = await Article.distinct('tags', { status: 'published' });
     res.render('articles/index', { title: 'Engineering Articles', description: 'Technical notes on software testing, automation architecture, API reliability, FinTech quality and performance engineering.', articles, series, tags, filters: req.query });

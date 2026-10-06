@@ -19,6 +19,8 @@ ADMIN_EMAIL=arefsaran@gmail.com
 
 `MONGODB_URI`, `SESSION_SECRET`, and `ADMIN_PASSWORD` are secrets. `ADMIN_PASSWORD` is needed only for `npm run admin:create`; remove it from the web environment afterward. Use `TRUST_PROXY=1` only behind exactly one controlled proxy that overwrites forwarding headers.
 
+The visible Article CMS v1 adds no new environment variables or database migration. Compose now passes through an explicitly configured `MONGODB_URI`; its local Mongo URI remains the default for local staging only. The tracked `nginx.conf` still serves the original static site and does not proxy Express. Before routing production traffic to this CMS, configure the live reverse proxy to forward `/admin`, `/articles`, and the other application paths to the Node service, and verify `/ready` over the intended deployment path. A code push alone cannot activate these server-rendered routes on a static-only host.
+
 ## Staging
 
 ```sh
