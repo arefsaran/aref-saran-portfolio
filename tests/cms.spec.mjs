@@ -64,16 +64,21 @@ test('admin can create, persist, preview and publish an article', async ({ page 
   const preview = page.getByRole('link', { name: 'Preview' });
   const [previewPage] = await Promise.all([page.waitForEvent('popup'), preview.click()]);
   await expect(previewPage.getByText('Private preview.')).toBeVisible();
+  expect((await previewPage.request.get(previewPage.url())).headers()['x-robots-tag']).toContain('noindex');
   expect((await previewPage.locator('script').allTextContents()).join('\n')).not.toContain('alert(1)');
   await previewPage.close();
   const slug = await page.getByLabel('Slug').inputValue();
   const draftResponse = await page.request.get(`/articles/${slug}`);
   expect(draftResponse.status()).toBe(404);
   expect((await (await page.request.get('/articles')).text())).not.toContain('Idempotency Testing in Financial APIs');
+  expect(await (await page.request.get('/sitemap.xml')).text()).not.toContain(`/articles/${slug}`);
   await page.getByRole('button', { name: 'Publish' }).click();
   const publicUrl = await page.getByLabel('Slug').inputValue();
   await page.goto(`/articles/${publicUrl}`);
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Idempotency Testing in Financial APIs');
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', new RegExp(`/articles/${slug}$`));
+  expect(await page.locator('script[type="application/ld+json"]').textContent()).toContain('BlogPosting');
+  expect(await (await page.request.get('/sitemap.xml')).text()).toContain(`/articles/${slug}`);
 });
 
 test('article can be edited, unpublished, republished and deleted', async ({ page }) => {
@@ -91,6 +96,8 @@ test('article can be edited, unpublished, republished and deleted', async ({ pag
   expect(await (await page.request.get(`/articles/${slug}`)).text()).toContain('Updated body');
   await page.getByRole('button', { name: 'Unpublish' }).click();
   expect((await page.request.get(`/articles/${slug}`)).status()).toBe(404);
+  expect(await (await page.request.get('/articles')).text()).not.toContain('Lifecycle article');
+  expect(await (await page.request.get('/sitemap.xml')).text()).not.toContain(`/articles/${slug}`);
   await page.getByRole('button', { name: 'Publish' }).click();
   expect(await page.locator('[data-published-at]').textContent()).toBe(firstPublished);
   expect((await page.request.get(`/articles/${slug}`)).status()).toBe(200);

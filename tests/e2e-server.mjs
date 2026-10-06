@@ -5,8 +5,16 @@ import { createApp } from '../src/app.js';
 import { Admin } from '../src/models/Admin.js';
 import { Article } from '../src/models/Article.js';
 
-const mongo = process.env.TEST_MONGO_URI ? null : await MongoMemoryServer.create();
-const mongoUri = process.env.TEST_MONGO_URI || mongo.getUri();
+const externalMongoUri = process.env.TEST_MONGO_URI;
+if (externalMongoUri) {
+  const uri = new URL(externalMongoUri);
+  if (uri.protocol !== 'mongodb:' || !['localhost', '127.0.0.1'].includes(uri.hostname)
+    || uri.username || uri.password || !/^\/arefsaran_.*_e2e\d*$/.test(uri.pathname)) {
+    throw new Error('TEST_MONGO_URI must point to a dedicated local e2e database.');
+  }
+}
+const mongo = externalMongoUri ? null : await MongoMemoryServer.create();
+const mongoUri = externalMongoUri || mongo.getUri();
 const port = Number(process.env.TEST_PORT || 4173);
 await mongoose.connect(mongoUri);
 await Admin.create({ email: 'admin@example.com', passwordHash: await bcrypt.hash('testing-password-123', 10) });
