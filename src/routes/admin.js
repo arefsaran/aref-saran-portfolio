@@ -45,18 +45,6 @@ function cleanList(value) {
     .filter((item, index, all) => all.findIndex((x) => x.toLowerCase() === item.toLowerCase()) === index);
 }
 
-function cleanIds(value) {
-  if (!value) return [];
-  const list = Array.isArray(value) ? value : [value];
-  return list.map((item) => String(item).trim()).filter((item) => /^[a-f0-9]{24}$/i.test(item));
-}
-
-function dateValue(value) {
-  if (!value) return undefined;
-  const date = new Date(value);
-  return Number.isNaN(date.valueOf()) ? undefined : date;
-}
-
 async function ensureArticleSlugAvailable(slug, articleId) {
   const collision = await Article.exists({
     ...(articleId ? { _id: { $ne: articleId } } : {}),
@@ -83,35 +71,27 @@ function articlePayload(body, existing) {
   return {
     title: String(body.title || '').trim(),
     slug: nextSlug,
-    subtitle: String(body.subtitle || '').trim(),
     excerpt: String(body.excerpt || '').trim(),
     body: String(body.body || ''),
-    coverImage: safeHttpUrl(body.coverImage, { allowRelative: true }),
     tags: cleanList(body.tags),
-    series: String(body.series || '').trim(),
-    status: ['draft', 'scheduled', 'published', 'archived'].includes(body.status) ? body.status : 'draft',
-    featured: body.featured === 'on' || body.featured === true,
-    publishedAt: dateValue(body.publishedAt),
-    scheduledAt: dateValue(body.scheduledAt),
-    canonicalUrl: safeHttpUrl(body.canonicalUrl),
     seoTitle: String(body.seoTitle || '').trim(),
     seoDescription: String(body.seoDescription || '').trim(),
-    ogImage: safeHttpUrl(body.ogImage, { allowRelative: true }),
-    linkedinHook: String(body.linkedinHook || '').trim(),
-    linkedinSummary: String(body.linkedinSummary || '').trim(),
-    linkedinKeyPoints: cleanList(body.linkedinKeyPoints),
-    linkedinCTA: String(body.linkedinCTA || '').trim(),
-    linkedinHashtags: cleanList(body.linkedinHashtags),
-    linkedinStatus: ['not_created', 'draft', 'ready', 'posted'].includes(body.linkedinStatus) ? body.linkedinStatus : 'not_created',
-    linkedinPostedAt: dateValue(body.linkedinPostedAt),
-    linkedinPostUrl: safeHttpUrl(body.linkedinPostUrl),
-    language: ['en', 'de', 'fa'].includes(body.language) ? body.language : 'en',
-    germanSummary: String(body.germanSummary || '').trim(),
-    internalNotes: String(body.internalNotes || '').trim(),
-    relatedCaseStudies: cleanIds(body.relatedCaseStudies),
-    relatedProjects: cleanIds(body.relatedProjects),
-    relatedVideos: cleanIds(body.relatedVideos),
   };
+}
+
+function dateValue(value) {
+  if (!value) return undefined;
+  const date = new Date(value);
+  return Number.isNaN(date.valueOf()) ? undefined : date;
+}
+
+function validArticlePayload(payload) {
+  return typeof payload.title === 'string' && payload.title.length > 0 && payload.title.length <= 200
+    && typeof payload.slug === 'string' && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(payload.slug) && payload.slug.length <= 200
+    && typeof payload.excerpt === 'string' && payload.excerpt.length > 0 && payload.excerpt.length <= 500
+    && typeof payload.body === 'string' && payload.body.trim().length > 0 && payload.body.length <= 200_000
+    && Array.isArray(payload.tags) && payload.tags.length <= 20 && payload.tags.every((tag) => typeof tag === 'string' && tag.length <= 40)
+    && (payload.seoTitle || '').length <= 120 && (payload.seoDescription || '').length <= 300;
 }
 
 router.get('/login', redirectIfAuthenticated, (req, res) => {
@@ -180,14 +160,13 @@ router.get('/articles/new', async (_req, res, next) => {
 router.post('/articles', async (req, res, next) => {
   try {
     const payload = articlePayload(req.body);
-    if (!payload.title || !payload.slug || !payload.excerpt || !payload.body || (payload.status === 'scheduled' && !payload.scheduledAt)) {
+    if (!validArticlePayload(payload)) {
       const choices = await contentChoices();
-      const message = payload.status === 'scheduled' && !payload.scheduledAt ? 'Scheduled articles require a schedule date.' : 'Title, slug, excerpt and article body are required.';
+      const message = 'Check the required fields and their length limits.';
       return res.status(422).render('admin/article-edit', { title: 'New article', article: { ...payload }, linkedinDraft: '', readingTime: estimateReadingTime(payload.body), error: message, ...choices });
     }
-    if (payload.status === 'published' && !payload.publishedAt) payload.publishedAt = new Date();
     await ensureArticleSlugAvailable(payload.slug);
-    const article = await Article.create(payload);
+    const article = await Article.create({ ...payload, status: 'draft' });
     res.redirect(`/admin/articles/${article._id}?saved=1`);
   } catch (error) {
     if (error?.code === 11000) {
@@ -211,9 +190,9 @@ router.post('/articles/:id', async (req, res, next) => {
     const article = await Article.findById(req.params.id);
     if (!article) return next();
     const payload = articlePayload(req.body, article);
-    if (!payload.title || !payload.slug || !payload.excerpt || !payload.body || (payload.status === 'scheduled' && !payload.scheduledAt)) {
+    if (!validArticlePayload(payload)) {
       const choices = await contentChoices();
-      const message = payload.status === 'scheduled' && !payload.scheduledAt ? 'Scheduled articles require a schedule date.' : 'Title, slug, excerpt and article body are required.';
+      const message = 'Check the required fields and their length limits.';
       return res.status(422).render('admin/article-edit', { title: `Edit · ${payload.title || 'Article'}`, article: { ...article.toObject(), ...payload }, linkedinDraft: buildLinkedInDraft(payload, req.app.locals.baseUrl), readingTime: estimateReadingTime(payload.body), error: message, ...choices });
     }
     if (article.slug !== payload.slug && article.publishedAt && !article.oldSlugs.includes(article.slug)) article.oldSlugs.push(article.slug);
@@ -222,7 +201,6 @@ router.post('/articles/:id', async (req, res, next) => {
     article.revisions.push({ title: article.title, excerpt: article.excerpt, body: article.body, savedAt: new Date() });
     if (article.revisions.length > 20) article.revisions = article.revisions.slice(-20);
     Object.assign(article, payload);
-    if (article.status === 'published' && !article.publishedAt) article.publishedAt = new Date();
     await article.save();
     res.redirect(`/admin/articles/${article._id}?saved=1`);
   } catch (error) {
@@ -233,6 +211,38 @@ router.post('/articles/:id', async (req, res, next) => {
     }
     next(error);
   }
+});
+
+router.post('/articles/:id/publish', async (req, res, next) => {
+  try {
+    const article = await Article.findById(req.params.id);
+    if (!article) return next();
+    if (!validArticlePayload(article)) return res.status(422).send('Complete the required fields before publishing.');
+    await ensureArticleSlugAvailable(article.slug, article._id);
+    article.status = 'published';
+    article.publishedAt ||= new Date();
+    await article.save();
+    res.redirect(`/admin/articles/${article._id}?saved=1`);
+  } catch (error) { next(error); }
+});
+
+router.post('/articles/:id/unpublish', async (req, res, next) => {
+  try {
+    const article = await Article.findById(req.params.id);
+    if (!article) return next();
+    article.status = 'draft';
+    await article.save();
+    res.redirect(`/admin/articles/${article._id}?saved=1`);
+  } catch (error) { next(error); }
+});
+
+router.post('/articles/:id/delete', async (req, res, next) => {
+  try {
+    if (req.body.confirm !== 'delete') return res.status(422).send('Deletion must be confirmed.');
+    const article = await Article.findByIdAndDelete(req.params.id);
+    if (!article) return next();
+    res.redirect('/admin/articles');
+  } catch (error) { next(error); }
 });
 
 router.get('/articles/:id/preview', async (req, res, next) => {

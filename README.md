@@ -1,5 +1,13 @@
 # arefsaran.ir — Test Engineering Portfolio + Publishing CMS
 
+## Article CMS v1
+
+The visible admin workflow is `/admin/login` → `/admin/articles` → Markdown editor → private preview → publish. New articles are always saved as drafts. Saving an existing article preserves its publication state; Publish and Unpublish are separate actions. The first publication date is retained on republication. Delete requires a confirmation dialog. Published articles appear at `/articles` and `/articles/:slug`; drafts are excluded from public queries, RSS, and the sitemap.
+
+Configure `MONGODB_URI`, `SESSION_SECRET`, `BASE_URL`, `NODE_ENV`, and proxy settings as described in `DEPLOYMENT.md`. Set `ADMIN_EMAIL` and a temporary `ADMIN_PASSWORD`, then run `npm run admin:create` against the intended database. Remove `ADMIN_PASSWORD` from the web runtime afterward. Local setup: `npm ci`, start MongoDB, create `.env` from `.env.example`, run `npm run admin:create`, then `npm run dev`. Open `/admin`, save a draft, preview it, publish it, and verify its public slug. The `articles` MongoDB collection retains the existing Mongoose schema and unique slug index; no migration or seed is required.
+
+Existing advanced records and routes remain for data compatibility, but the v1 editor does not expose scheduling, media management, or social derivatives.
+
 `arefsaran.ir` is Aref Saran's Test Engineering portfolio and canonical technical publishing platform. The public site focuses on engineering evidence; the private `/admin` area manages articles, LinkedIn derivatives, case studies, projects, videos, media, and content export.
 
 ## Architecture decision
